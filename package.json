@@ -1,0 +1,45 @@
+{
+  "name": "jeditor",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "simple-git-hooks",
+    "dev": "tsx scripts/dev.ts",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged",
+    "commit-msg": "npx commitlint --edit"
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md}": [
+      "prettier --write"
+    ],
+    "*.{test.ts}": [
+      "pnpm test",
+      "pnpm test:coverage"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@types/fs-extra": "^11.0.1",
+    "@types/node": "^18.11.18",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vitest/coverage-c8": "^0.28.5",
+    "@vitest/ui": "^0.28.5",
+    "execa": "^7.0.0",
+    "fs-extra": "^11.1.0",
+    "jsdom": "^21.1.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.4",
+    "simple-git-hooks": "^2.8.1",
+    "tsx": "^3.12.2",
+    "typescript": "^4.9.0",
+    "vite": "^4.0.0",
+    "vitest": "^0.28.5",
+    "vue": "^3.2.45"
+  }
+}
