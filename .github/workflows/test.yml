@@ -24,3 +24,6 @@ jobs:
 
       - name: Unit Test 🎨
         run: pnpm test
+
+      - name: Unit Test Coverage 📈
+        run: pnpm test:coverage

@@ -19,7 +19,7 @@
     "*.{json, md}": [
       "prettier --write"
     ],
-    "*.{test.ts}": [
+    "*.test.ts": [
       "pnpm test"
     ]
   },
