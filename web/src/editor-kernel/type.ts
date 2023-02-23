@@ -3,7 +3,7 @@ export interface PluginViewTrait {
 }
 
 export interface IPlugin extends PluginViewTrait {
-  pluginName: string
+  id: string
 }
 
 export interface EditorPluginTrait {

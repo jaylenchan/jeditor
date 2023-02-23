@@ -1,5 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps({
+  text: String,
+})
+</script>
 
-<template>Picture 图片插件</template>
+<template>
+  <div>图片插件： {{ text }}</div>
+</template>
 
 <style scoped></style>

@@ -5,7 +5,7 @@ import { TYPES } from '../../editor-kernel/type'
 @injectable()
 class Picture implements IPlugin {
   view: any = PictureView
-  pluginName = 'Picture'
+  id = 'Picture'
   jeditor: IEditor
 
   constructor(@inject(TYPES.JEditor) jeditor: IEditor) {

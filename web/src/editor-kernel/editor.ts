@@ -7,12 +7,17 @@ import { injectable } from 'inversify'
 @injectable()
 class JEditor implements EditorTrait, EditorPluginTrait {
   private pluginPool: Map<string, IPlugin> = new Map()
+  private app: ReturnType<typeof createApp>
+
+  constructor() {
+    this.app = createApp(App)
+  }
 
   usePlugin(plugin: IPlugin): IEditor {
-    if (!this.pluginPool.has(plugin.pluginName)) {
-      this.pluginPool.set(plugin.pluginName, plugin)
+    if (!this.pluginPool.has(plugin.id)) {
+      this.pluginPool.set(plugin.id, plugin)
     }
-    // console.warn(`<${plugin.pluginName}>插件已存在，无需重复注册！`)
+    // console.warn(`<${plugin.id}>插件已存在，无需重复注册！`)
     return this
   }
 
@@ -26,13 +31,13 @@ class JEditor implements EditorTrait, EditorPluginTrait {
   applyPlugins(): void {
     console.log('加载所有插件！')
     for (const plugin of this.pluginPool.values()) {
-      console.log(plugin)
+      this.app.component(plugin.id, plugin.view)
     }
   }
 
   run(): void {
     this.applyPlugins()
-    createApp(App).mount('#app')
+    this.app.mount('#app')
   }
 }
 
