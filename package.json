@@ -5,6 +5,7 @@
   "scripts": {
     "postinstall": "simple-git-hooks",
     "dev": "tsx scripts/dev.ts",
+    "web": "pnpm -r --filter web run dev",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
