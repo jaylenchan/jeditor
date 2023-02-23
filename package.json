@@ -13,12 +13,14 @@
     "commit-msg": "npx commitlint --edit"
   },
   "lint-staged": {
-    "*.{ts,js,json,md}": [
+    "*.{ts,js}": [
+      "prettier --parser=typescript --write"
+    ],
+    "*.{json, md}": [
       "prettier --write"
     ],
     "*.{test.ts}": [
-      "pnpm test",
-      "pnpm test:coverage"
+      "pnpm test"
     ]
   },
   "devDependencies": {
