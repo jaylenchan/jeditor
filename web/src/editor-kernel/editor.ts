@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import './view/style.css'
 import App from './view/App.vue'
 import { EditorPluginTrait, EditorTrait, IPlugin, IEditor } from './type'
 import { injectable } from 'inversify'

@@ -1,0 +1,88 @@
+$colors: (
+  brand: (
+    1: #e8fff3,
+    2: #b2f5d4,
+    3: #80eaba,
+    4: #52e0a4,
+    5: #28d592,
+    6: #00c881,
+    7: #00aa74,
+    8: #008c64,
+    9: #006c51,
+    10: #004d3c,
+  ),
+  warning: (
+    1: #fff3e8,
+    2: #fedcbf,
+    3: #fcc298,
+    4: #fea571,
+    5: #fc8748,
+    6: #fb6621,
+    7: #cc4812,
+    8: #a53109,
+    9: #781f03,
+    10: #4d0e00,
+  ),
+  error: (
+    1: #ffede8,
+    2: #ffd4c9,
+    3: #ffb8aa,
+    4: #ff9a8a,
+    5: #ff796b,
+    6: #ff584c,
+    7: #c7312d,
+    8: #a61919,
+    9: #79090d,
+    10: #4d0005,
+  ),
+  success: (
+    1: #e8fff3,
+    2: #b2f5d4,
+    3: #80eaba,
+    4: #52e0a4,
+    5: #28d592,
+    6: #00c881,
+    7: #00aa74,
+    8: #008c64,
+    9: #006c51,
+    10: #004d3c,
+  ),
+  gray: (
+    1: #f4f6f9,
+    2: #eceef3,
+    3: #dbdee4,
+    4: #ced2d9,
+    5: #bec2cc,
+    6: #a1a7b2,
+    7: #828a99,
+    8: #626773,
+    9: #303540,
+    10: #191d26,
+  ),
+  white: (
+    1: #ffffff,
+  ),
+  black: (
+    1: #000000,
+  ),
+);
+
+@function joinVarName($module, $type, $num) {
+  @return #{$module + '-' + $type + '-' + $num};
+}
+
+@function getCssVar($module, $type, $num) {
+  @return var(#{'--' + joinVarName($module, $type, $num)});
+}
+
+@mixin getColorVars() {
+  $module: '--color';
+  $curVar: '';
+  :root {
+    @each $type, $typeColors in $colors {
+      @each $num, $color in $typeColors {
+        #{joinVarName($module, $type, $num)}: $color;
+      }
+    }
+  }
+}

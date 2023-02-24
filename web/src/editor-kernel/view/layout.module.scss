@@ -1,0 +1,11 @@
+@use './reset.module.scss' as *;
+@use './var.module.scss' as *;
+
+.container {
+  height: 100%;
+  width: 100%;
+  .header {
+    background-color: getCssVar(color, brand, 2);
+    border-bottom: 1px solid getCssVar(color, gray, 1);
+  }
+}
