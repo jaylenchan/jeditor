@@ -1,0 +1,67 @@
+$unit: 'px';
+
+@function getVal($val) {
+  @return $val + $unit;
+}
+/// 宽高
+// height
+@mixin height($val) {
+  height: getVal($val);
+}
+
+// width
+@mixin width($val) {
+  width: getVal($val);
+}
+
+/// 外边距
+// margin
+@mixin margin($vals...) {
+  margin: getVal($val);
+}
+
+// margin-top
+@mixin marginTop($val) {
+  margin-top: getVal($val);
+}
+
+// margin-right
+@mixin marginRight($val) {
+  margin-right: getVal($val);
+}
+
+// margin-bottom
+@mixin marginBottom($val) {
+  margin-bottom: getVal($val);
+}
+
+// margin-left
+@mixin marginLeft($val) {
+  margin-left: getVal($val);
+}
+
+/// 内边距
+// padding
+@mixin padding($vals...) {
+  padding: getVal($val);
+}
+
+// padding-top
+@mixin paddingTop($val) {
+  padding-top: getVal($val);
+}
+
+// padding-right
+@mixin paddingRight($val) {
+  padding-right: getVal($val);
+}
+
+// padding-bottom
+@mixin paddingBottom($val) {
+  padding-bottom: getVal($val);
+}
+
+// padding-left
+@mixin paddingLeft($val) {
+  padding-left: getVal($val);
+}

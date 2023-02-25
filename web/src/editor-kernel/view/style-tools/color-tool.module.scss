@@ -1,3 +1,5 @@
+$namespace: 'je';
+
 $colors: (
   brand: (
     1: #e8fff3,
@@ -67,21 +69,36 @@ $colors: (
   ),
 );
 
-@function joinVarName($module, $type, $num) {
-  @return #{$module + '-' + $type + '-' + $num};
+/// 给定变量名成分，返回定制的变量名
+/// $list: button,border-color;
+/// genVarName($list) -> --je-button-border-color
+@function genVarName($list) {
+  $varName: '--' + $namespace;
+
+  @each $item in $list {
+    $varName: $varName + '-' + $item;
+  }
+
+  @return $varName;
 }
 
-@function getCssVar($module, $type, $num) {
-  @return var(#{'--' + joinVarName($module, $type, $num)});
+/// 给定颜色类型和数字，返回定制的color变量名
+/// $list: brand, 1
+/// genColorVarName(brand, 1) -> --je-color-brand-1
+@function genColorVarName($type, $num) {
+  @return genVarName(('color', $type, $num));
 }
 
-@mixin getColorVars() {
-  $module: '--color';
-  $curVar: '';
+@function getColor($type, $num) {
+  @return var(#{genColorVarName($type, $num)});
+}
+
+/// 给定$colors map，在:root中定义出相关的color var
+@mixin defineColorVars($colors) {
   :root {
     @each $type, $typeColors in $colors {
       @each $num, $color in $typeColors {
-        #{joinVarName($module, $type, $num)}: $color;
+        #{genColorVarName($type, $num)}: $color;
       }
     }
   }

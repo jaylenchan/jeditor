@@ -1,0 +1,29 @@
+// background
+@mixin bg($vals...) {
+  background: $vals;
+}
+
+// background-color
+@mixin bgColor($val) {
+  background-color: $val;
+}
+
+// background-image
+@mixin bgImage($val) {
+  background-image: $val;
+}
+
+// background-repeat
+@mixin bgRepeat($vals) {
+  background-repeat: $vals;
+}
+
+// background-attachment
+@mixin bgAttachment($val) {
+  background-attachment: $val;
+}
+
+// background-position
+@mixin backgroundPosition($vals) {
+  background-position: $vals;
+}

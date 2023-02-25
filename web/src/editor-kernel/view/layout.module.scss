@@ -1,11 +1,15 @@
-@use './reset.module.scss' as *;
-@use './var.module.scss' as *;
+@use 'style-tools/mod.module.scss' as *;
+@use 'prop-tools/mod.module.scss' as *;
+
+@include resetStyle($resetEls);
+@include resetOlderBrowsers();
+@include setFullPage($fullPageEls);
+@include defineColorVars($colors);
 
 .container {
-  height: 100%;
-  width: 100%;
+  @include setFullInContainer('.container');
   .header {
-    background-color: getCssVar(color, brand, 2);
-    border-bottom: 1px solid getCssVar(color, gray, 1);
+    @include bgColor(getColor(error, 1));
+    @include borderBottom(1px solid getColor(success, 4));
   }
 }

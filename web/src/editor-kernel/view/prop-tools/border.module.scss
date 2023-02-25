@@ -1,0 +1,9 @@
+// border
+@mixin border($vals...) {
+  border: $vals;
+}
+
+// border-bottom
+@mixin borderBottom($vals) {
+  border-bottom: $vals;
+}
