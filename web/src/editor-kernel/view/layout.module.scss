@@ -11,8 +11,8 @@
   @include full-in-father();
   .header {
     @include width(100%);
-    @include bg-color(getColor(gray, 1));
-    @include bd-bottom(1px solid getColor(gray, 3));
+    @include bg-color(getBackgroundColor(gray, primary));
+    @include bd-bottom(1px solid getBorderColor(gray, tertiary));
   }
 
   .bottom {

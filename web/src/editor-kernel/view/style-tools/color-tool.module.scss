@@ -1,8 +1,7 @@
 @use 'sass:map';
 
 $namespace: 'je';
-
-/// 颜色基础库
+// ================================= 基础颜色定义============================
 $colors: () !default;
 $colors: map.deep-merge(
   (
@@ -76,6 +75,40 @@ $colors: map.deep-merge(
   $colors
 );
 
+/// 给定$colors map，在:root中定义出相关的color var
+@mixin define-color-vars($colors) {
+  :root {
+    @each $type, $typeColors in $colors {
+      @each $num, $color in $typeColors {
+        #{genColorVarName($type, $num)}: $color;
+      }
+    }
+  }
+}
+/// 给定变量名成分，返回定制的变量名
+/// $list: button,border-color;
+/// genVarName($list) -> --je-button-border-color
+@function genVarName($list) {
+  $varName: '--' + $namespace;
+
+  @each $item in $list {
+    $varName: $varName + '-' + $item;
+  }
+
+  @return $varName;
+}
+/// 给定颜色类型和数字，返回定制的color变量名
+/// $list: brand, 1
+/// genColorVarName(brand, 1) -> --je-color-brand-1
+@function genColorVarName($type, $num) {
+  @return genVarName((color, $type, $num));
+}
+
+@function getColor($type, $num) {
+  @return var(#{genColorVarName($type, $num)});
+}
+
+// ================================= state颜色定义============================
 $types: brand, warning, error, success;
 $states: (
   normal: 6,
@@ -85,10 +118,41 @@ $states: (
   background: 1,
 );
 
+/// 扩展颜色状态：hover，active，disabeld
+@mixin extend-color-state($types, $states) {
+  :root {
+    @each $type in $types {
+      @each $state, $num in $states {
+        #{genVarName((color,$type,$state))}: map.get($colors, $type, $num);
+      }
+    }
+  }
+}
+
+@function getColorByState($colorType, $state) {
+  @return var(#{genVarName((color, $type, $state))});
+}
+
+@function getBrandState($state) {
+  @return getColorByState(brand, $state);
+}
+
+@function getWarningState($state) {
+  @return getColorByState(warning, $state);
+}
+
+@function getSuccessState($state) {
+  @return getColorByState(success, $state);
+}
+
+@function getErrorState($state) {
+  @return getColorByState(error, $state);
+}
+
+// ================================= prop颜色定义============================
 @function mapGetColors($color, $num) {
   @return map.get($colors, $color, $num);
 }
-
 $propColors: (
   background: (
     white: (
@@ -158,53 +222,6 @@ $propColors: (
     ),
   ),
 );
-
-/// 给定变量名成分，返回定制的变量名
-/// $list: button,border-color;
-/// genVarName($list) -> --je-button-border-color
-@function genVarName($list) {
-  $varName: '--' + $namespace;
-
-  @each $item in $list {
-    $varName: $varName + '-' + $item;
-  }
-
-  @return $varName;
-}
-
-/// 给定颜色类型和数字，返回定制的color变量名
-/// $list: brand, 1
-/// genColorVarName(brand, 1) -> --je-color-brand-1
-@function genColorVarName($type, $num) {
-  @return genVarName((color, $type, $num));
-}
-
-@function getColor($type, $num) {
-  @return var(#{genColorVarName($type, $num)});
-}
-
-/// 给定$colors map，在:root中定义出相关的color var
-@mixin define-color-vars($colors) {
-  :root {
-    @each $type, $typeColors in $colors {
-      @each $num, $color in $typeColors {
-        #{genColorVarName($type, $num)}: $color;
-      }
-    }
-  }
-}
-
-/// 扩展颜色状态：hover，active，disabeld
-@mixin extend-color-state($types, $states) {
-  :root {
-    @each $type in $types {
-      @each $state, $num in $states {
-        #{genVarName((color,$type,$state))}: map.get($colors, $type, $num);
-      }
-    }
-  }
-}
-
 /// 扩展颜色属性：border，background，text等统一颜色
 @mixin extend-color-prop($propColors) {
   :root {
@@ -216,4 +233,32 @@ $propColors: (
       }
     }
   }
+}
+
+@function getColorByProp($propType, $colorType, $level) {
+  @return var(#{genVarName((color, $propType, $colorType, $level))});
+}
+
+@function getBackgroundColor($colorType, $level) {
+  @return getColorByProp(background, $colorType, $level);
+}
+
+@function getTextColor($colorType, $level) {
+  @return getColorByProp(text, $colorType, $level);
+}
+
+@function getIconColor($colorType, $level) {
+  @return getColorByProp(icon, $colorType, $level);
+}
+
+@function getFillColor($colorType, $level) {
+  @return getColorByProp(fill, $colorType, $level);
+}
+
+@function getBorderColor($colorType, $level) {
+  @return getColorByProp(border, $colorType, $level);
+}
+
+@function getMaskColor($colorType, $level) {
+  @return getColorByProp(mask, $colorType, $level);
 }
