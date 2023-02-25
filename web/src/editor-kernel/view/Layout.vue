@@ -12,7 +12,9 @@ import layout from './layout.module.scss'
         <el-aside :class="layout.componentTool">Aside</el-aside>
       </el-col>
       <el-col :span="15">
-        <el-main :class="layout.whiteboard">Main</el-main>
+        <el-main :class="layout.whiteboard">
+          <Picture text="图片插件"></Picture>
+        </el-main>
       </el-col>
       <el-col :span="6">
         <el-aside :class="layout.propTool">Aside</el-aside>
