@@ -1,5 +1,5 @@
 @use 'style-tools/mod.module.scss' as *;
 
 .container {
-  @include setTextColor(getTextColor(brand, primary));
+  @include text-color(getTextColor(brand, primary));
 }

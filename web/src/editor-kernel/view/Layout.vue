@@ -9,15 +9,16 @@ import layout from './layout.module.scss'
     </el-row>
     <el-row :class="layout.bottom">
       <el-col :span="3">
-        <el-aside :class="layout.componentTool">Aside</el-aside>
+        <el-aside :class="layout.componentTool">ComponentTool</el-aside>
       </el-col>
       <el-col :span="15">
         <el-main :class="layout.whiteboard">
           <Picture text="图片插件"></Picture>
+          中央白板。。。。。
         </el-main>
       </el-col>
       <el-col :span="6">
-        <el-aside :class="layout.propTool">Aside</el-aside>
+        <el-aside :class="layout.propTool">PropTool</el-aside>
       </el-col>
     </el-row>
   </el-container>
