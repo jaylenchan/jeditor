@@ -1,10 +1,10 @@
 @use 'style-tools/mod.module.scss' as *;
-@use 'prop-tools/mod.module.scss' as *;
 
 @include reset-style($resetEls);
 @include reset-style-for-old-browser();
 @include full-page($fullPageEls);
 @include define-color-vars($colors);
+@include extend-color-state($types, $states);
 
 .container {
   @include full-in-father();
@@ -16,6 +16,7 @@
 
   .bottom {
     @include full-in-father();
+
     .componentTool {
       @include full-in-father();
       @include bg-color(getColor(gray, 1));
