@@ -5,6 +5,7 @@
 @include full-page($fullPageEls);
 @include define-color-vars($colors);
 @include extend-color-state($types, $states);
+@include extend-color-prop($propColors);
 
 .container {
   @include full-in-father();

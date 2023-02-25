@@ -85,6 +85,80 @@ $states: (
   background: 1,
 );
 
+@function mapGetColors($color, $num) {
+  @return map.get($colors, $color, $num);
+}
+
+$propColors: (
+  background: (
+    white: (
+      primary: mapGetColors(white, 1),
+    ),
+    gray: (
+      primary: mapGetColors(gray, 1),
+      secondary: mapGetColors(gray, 2),
+    ),
+    black: (
+      primary: mapGetColors(gray, 8),
+      secondary: mapGetColors(gray, 10),
+    ),
+  ),
+  text: (
+    gray: (
+      primary: mapGetColors(gray, 10),
+      secondary: mapGetColors(gray, 8),
+      tertiary: mapGetColors(gray, 6),
+      disabled: mapGetColors(gray, 4),
+    ),
+    white: (
+      primary: mapGetColors(white, 1),
+    ),
+    brand: (
+      primary: mapGetColors(brand, 8),
+    ),
+  ),
+  icon: (
+    gray: (
+      primary: mapGetColors(gray, 10),
+      secondary: mapGetColors(gray, 8),
+      tertiary: mapGetColors(gray, 6),
+      quaternary: mapGetColors(gray, 4),
+    ),
+    white: (
+      primary: mapGetColors(white, 1),
+    ),
+  ),
+  fill: (
+    white: (
+      primary: mapGetColors(white, 1),
+    ),
+    gray: (
+      primary: mapGetColors(gray, 1),
+      secondary: mapGetColors(gray, 2),
+      tertiary: mapGetColors(gray, 3),
+      quaternary: mapGetColors(gray, 4),
+    ),
+  ),
+  border: (
+    gray: (
+      primary: mapGetColors(gray, 1),
+      secondary: mapGetColors(gray, 2),
+      tertiary: mapGetColors(gray, 3),
+    ),
+    white: (
+      primary: mapGetColors(white, 1),
+    ),
+  ),
+  mask: (
+    black: (
+      primary: mapGetColors(black, 1),
+    ),
+    white: (
+      primary: mapGetColors(white, 1),
+    ),
+  ),
+);
+
 /// 给定变量名成分，返回定制的变量名
 /// $list: button,border-color;
 /// genVarName($list) -> --je-button-border-color
@@ -120,11 +194,25 @@ $states: (
   }
 }
 
+/// 扩展颜色状态：hover，active，disabeld
 @mixin extend-color-state($types, $states) {
   :root {
     @each $type in $types {
       @each $state, $num in $states {
         #{genVarName((color,$type,$state))}: map.get($colors, $type, $num);
+      }
+    }
+  }
+}
+
+/// 扩展颜色属性：border，background，text等统一颜色
+@mixin extend-color-prop($propColors) {
+  :root {
+    @each $type, $colors in $propColors {
+      @each $colorType, $colorLevels in $colors {
+        @each $level, $color in $colorLevels {
+          #{genVarName((color,$type,$colorType,$level))}: $color;
+        }
       }
     }
   }
