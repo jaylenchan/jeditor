@@ -94,7 +94,7 @@ $colors: (
 }
 
 /// 给定$colors map，在:root中定义出相关的color var
-@mixin defineColorVars($colors) {
+@mixin define-color-vars($colors) {
   :root {
     @each $type, $typeColors in $colors {
       @each $num, $color in $typeColors {

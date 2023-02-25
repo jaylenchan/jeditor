@@ -1,6 +1,6 @@
 $fullPageEls: html, body, '#app';
 
-@mixin setFullPage($selectors) {
+@mixin full-page($selectors) {
   :global {
     @each $selector in $selectors {
       #{$selector} {
@@ -11,9 +11,8 @@ $fullPageEls: html, body, '#app';
   }
 }
 
-@mixin setFullInContainer($selector) {
-  @at-root #{$selector} {
-    @debug $selector;
+@mixin full-in-father() {
+  @at-root & {
     width: 100%;
     height: 100%;
   }

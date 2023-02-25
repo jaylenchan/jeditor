@@ -1,5 +1,3 @@
-import './element.overrides.scss'
-import 'ress'
 import ElementPlus from 'element-plus'
 import { App } from 'vue'
 

@@ -1,15 +1,33 @@
 @use 'style-tools/mod.module.scss' as *;
 @use 'prop-tools/mod.module.scss' as *;
 
-@include resetStyle($resetEls);
-@include resetOlderBrowsers();
-@include setFullPage($fullPageEls);
-@include defineColorVars($colors);
+@include reset-style($resetEls);
+@include reset-style-for-old-browser();
+@include full-page($fullPageEls);
+@include define-color-vars($colors);
 
 .container {
-  @include setFullInContainer('.container');
+  @include full-in-father();
   .header {
-    @include bgColor(getColor(error, 1));
-    @include borderBottom(1px solid getColor(success, 4));
+    @include width(100%);
+    @include bg-color(getColor(gray, 1));
+    @include bd-bottom(1px solid getColor(gray, 3));
+  }
+
+  .bottom {
+    @include full-in-father();
+    .componentTool {
+      @include full-in-father();
+      @include bg-color(getColor(gray, 1));
+    }
+
+    .whiteboard {
+      @include full-in-father();
+    }
+
+    .propTool {
+      @include full-in-father();
+      @include bg-color(getColor(gray, 1));
+    }
   }
 }

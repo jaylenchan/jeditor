@@ -4,26 +4,26 @@
 }
 
 // background-color
-@mixin bgColor($val) {
+@mixin bg-color($val) {
   background-color: $val;
 }
 
 // background-image
-@mixin bgImage($val) {
+@mixin bg-img($val) {
   background-image: $val;
 }
 
 // background-repeat
-@mixin bgRepeat($vals) {
+@mixin bg-repeat($vals) {
   background-repeat: $vals;
 }
 
 // background-attachment
-@mixin bgAttachment($val) {
+@mixin bg-attach($val) {
   background-attachment: $val;
 }
 
 // background-position
-@mixin backgroundPosition($vals) {
+@mixin bg-pos($vals) {
   background-position: $vals;
 }

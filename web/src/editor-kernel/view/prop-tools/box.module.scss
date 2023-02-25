@@ -1,4 +1,4 @@
-$unit: 'px';
+$unit: px;
 
 @function getVal($val) {
   @return $val + $unit;
@@ -11,57 +11,61 @@ $unit: 'px';
 
 // width
 @mixin width($val) {
-  width: getVal($val);
+  @if $val == 100% {
+    width: 100%;
+  } @else {
+    width: getVal($val);
+  }
 }
 
 /// 外边距
 // margin
-@mixin margin($vals...) {
+@mixin mg($vals...) {
   margin: getVal($val);
 }
 
 // margin-top
-@mixin marginTop($val) {
+@mixin mg-top($val) {
   margin-top: getVal($val);
 }
 
 // margin-right
-@mixin marginRight($val) {
+@mixin mg-right($val) {
   margin-right: getVal($val);
 }
 
 // margin-bottom
-@mixin marginBottom($val) {
+@mixin mg-bottom($val) {
   margin-bottom: getVal($val);
 }
 
 // margin-left
-@mixin marginLeft($val) {
+@mixin mg-left($val) {
   margin-left: getVal($val);
 }
 
 /// 内边距
 // padding
-@mixin padding($vals...) {
+@mixin pd($vals...) {
   padding: getVal($val);
 }
 
 // padding-top
-@mixin paddingTop($val) {
+@mixin pd-top($val) {
   padding-top: getVal($val);
 }
 
 // padding-right
-@mixin paddingRight($val) {
+@mixin pd-right($val) {
   padding-right: getVal($val);
 }
 
 // padding-bottom
-@mixin paddingBottom($val) {
+@mixin pd-bottom($val) {
   padding-bottom: getVal($val);
 }
 
 // padding-left
-@mixin paddingLeft($val) {
+@mixin pd-left($val) {
   padding-left: getVal($val);
 }
