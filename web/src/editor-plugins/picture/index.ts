@@ -1,4 +1,4 @@
-import PictureView from './view/index.vue'
+import PictureView from './view/index.tsx'
 import { injectable, inject } from 'inversify'
 import type { IPlugin, IEditor } from '../../editor-kernel/type'
 import { TYPES } from '../../editor-kernel/type'

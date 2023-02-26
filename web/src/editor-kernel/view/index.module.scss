@@ -1,4 +1,4 @@
-@use 'style-tools/mod.module.scss' as *;
+@use 'style-tools/index.module.scss' as *;
 
 @include reset-style($resetEls);
 @include reset-style-for-old-browser();
@@ -18,18 +18,21 @@
   .bottom {
     @include full-in-father();
 
-    .componentTool {
+    .componentPanel {
       @include full-in-father();
-      @include bg-color(getColor(gray, 1));
+      @include bg-color(getBackgroundColor(gray, primary));
     }
 
     .whiteboard {
       @include full-in-father();
+      .board {
+        @include full-in-father();
+      }
     }
 
-    .propTool {
+    .propPanel {
       @include full-in-father();
-      @include bg-color(getColor(gray, 1));
+      @include bg-color(getBackgroundColor(gray, primary));
     }
   }
 }

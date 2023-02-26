@@ -14,11 +14,13 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     Components({
+      include: [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.[jt]sx$/],
       resolvers: [ElementPlusResolver()],
     }),
   ],
   resolve: {
     alias: {
+      src: resolve('.', 'src'),
       'style-tools': resolve('.', 'src/style-tools'),
     },
   },

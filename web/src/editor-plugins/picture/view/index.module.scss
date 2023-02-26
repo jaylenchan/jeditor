@@ -1,4 +1,4 @@
-@use 'style-tools/mod.module.scss' as *;
+@use 'style-tools/index.module.scss' as *;
 
 .container {
   @include text-color(getTextColor(brand, primary));
