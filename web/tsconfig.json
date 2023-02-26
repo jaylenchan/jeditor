@@ -13,7 +13,8 @@
     "baseUrl": ".",
     "paths": {
       "style-tools/*": ["src/style-tools/*"]
-    }
+    },
+    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "types": ["reflect-metadata"],
