@@ -7,10 +7,15 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     globals: true,
-    include: ['app/**/__tests__/*.test.ts', 'web/**/__tests__/*.test.ts'],
+    include: [
+      'app/**/__tests__/*.test.ts',
+      'web/**/__tests__/*.test.ts',
+      'cli/**/__tests__/*.test.ts',
+    ],
     environmentMatchGlobs: [
       ['app/**/__tests__/*.test.ts', 'node'],
       ['web/**/__tests__/*.test.ts', 'jsdom'],
+      ['cli/**/__tests__/*.test.ts', 'node'],
     ],
   },
 })
