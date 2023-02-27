@@ -1,6 +1,5 @@
 import { Command } from 'commander'
-import commands from './commands'
-import type { Commands } from './commands'
+import type { Commands } from '../commands'
 
 class JEditorCli extends Command {
   constructor() {
@@ -20,6 +19,3 @@ class JEditorCli extends Command {
 }
 
 export default JEditorCli
-
-const cli = new JEditorCli()
-cli.run(commands)

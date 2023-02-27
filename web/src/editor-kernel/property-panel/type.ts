@@ -1,3 +1,3 @@
 export interface IPropertyPanel {}
 
-class PropertyPanel implements IPropertyPanel {}
+export default class PropertyPanel implements IPropertyPanel {}

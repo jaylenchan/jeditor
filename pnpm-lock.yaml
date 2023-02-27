@@ -69,6 +69,7 @@ importers:
 
   web:
     specifiers:
+      '@jeditor/cli': workspace:^0.0.1
       '@vitejs/plugin-vue': ^4.0.0
       '@vitejs/plugin-vue-jsx': ^3.0.0
       '@vue/test-utils': ^2.3.0
@@ -89,6 +90,7 @@ importers:
       reflect-metadata: registry.npmmirror.com/reflect-metadata/0.1.13
       vue: registry.npmmirror.com/vue/3.2.47
     devDependencies:
+      '@jeditor/cli': link:../cli
       '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/4.0.0_vite@4.1.2+vue@3.2.47
       '@vitejs/plugin-vue-jsx': registry.npmmirror.com/@vitejs/plugin-vue-jsx/3.0.0_vite@4.1.2+vue@3.2.47
       '@vue/test-utils': registry.npmmirror.com/@vue/test-utils/2.3.0_vue@3.2.47
@@ -1662,7 +1664,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: registry.npmmirror.com/vite/4.1.2_sass@1.58.3
+      vite: registry.npmmirror.com/vite/4.1.2_@types+node@18.14.0
       vue: registry.npmmirror.com/vue/3.2.47
     dev: true
 

@@ -1,4 +1,4 @@
-import type JEditorCli from '../index'
+import type JEditorCli from '../cli'
 
 const introduce = (cli: JEditorCli) => {
   cli

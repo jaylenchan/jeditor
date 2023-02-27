@@ -1,15 +1,10 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "target": "ESNext",
-    "useDefineForClassFields": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
     "jsx": "preserve",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "style-tools/*": ["src/style-tools/*"]
