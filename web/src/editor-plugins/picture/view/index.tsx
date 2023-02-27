@@ -14,3 +14,5 @@ const Picture = defineComponent({
 })
 
 export default Picture
+
+export type IPicture = typeof Picture
