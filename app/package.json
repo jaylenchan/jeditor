@@ -2,7 +2,7 @@
   "name": "@jeditor/app",
   "version": "0.0.1",
   "scripts": {
-    "dev": "tsc && electron ./dist/main.js"
+    "dev": "tsc --noEmitOnError && electron ./dist/main.js"
   },
   "devDependencies": {
     "electron": "^23.1.0",

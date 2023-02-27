@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import checker from 'vite-plugin-checker'
 
 export default defineConfig({
   plugins: [
@@ -17,6 +18,9 @@ export default defineConfig({
       include: [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.[jt]sx$/],
       resolvers: [ElementPlusResolver()],
     }),
+    checker({
+      typescript: true,
+    }),
   ],
   resolve: {
     alias: {
@@ -25,4 +29,7 @@ export default defineConfig({
     },
   },
   base: './',
+  build: {
+    sourcemap: true,
+  },
 })
