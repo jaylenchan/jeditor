@@ -1,4 +1,4 @@
-import { EditorPlugin } from 'src/editor-plugins/type'
+import { EditorPlugin } from '@/editor-plugins/type'
 import { createApp } from 'vue'
 import type { App } from 'vue'
 import AppView from './view'

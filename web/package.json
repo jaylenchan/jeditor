@@ -12,7 +12,8 @@
     "element-plus": "^2.2.32",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13",
-    "vue": "^3.2.45"
+    "vue": "^3.2.45",
+    "@jeditor/style-tool": "workspace:^0.0.1"
   },
   "devDependencies": {
     "@jeditor/cli": "workspace:^0.0.1",

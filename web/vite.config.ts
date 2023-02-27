@@ -32,4 +32,11 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@jeditor/style-tool";`,
+      },
+    },
+  },
 })
