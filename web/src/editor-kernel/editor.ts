@@ -18,7 +18,7 @@ class JEditor extends Parent {
     this.app.mount('#app')
     const boardPlugin = this.pluginPool.get('Whiteboard')
     if (boardPlugin) {
-      this.initBoard(boardPlugin)
+      this.initBoard(boardPlugin, this.app)
     }
   }
 }
