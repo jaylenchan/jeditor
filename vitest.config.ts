@@ -7,6 +7,11 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     globals: true,
+    includeSource: [
+      'app/src/**/*.{js,ts}',
+      'web/src/**/*.{js,ts}',
+      'cli/src/**/*.{js,ts}',
+    ],
     include: [
       'app/**/__tests__/*.test.ts',
       'web/**/__tests__/*.test.ts',
