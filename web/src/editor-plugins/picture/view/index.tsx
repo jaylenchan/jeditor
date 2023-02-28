@@ -9,7 +9,7 @@ const Picture = defineComponent({
     },
   },
   setup({ text }) {
-    return () => <div class={style.container}>{text}</div>
+    return () => <div class={style.container}>图片插件：{text}</div>
   },
 })
 

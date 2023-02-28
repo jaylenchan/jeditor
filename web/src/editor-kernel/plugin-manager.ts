@@ -2,10 +2,8 @@ import { EditorPlugin } from '@/editor-plugins/type'
 import { createApp } from 'vue'
 import type { App } from 'vue'
 import AppView from './view'
-import { injectable } from 'inversify'
 
-@injectable()
-export default class pluginManager {
+class PluginManager {
   protected pluginPool: Map<string, EditorPlugin> = new Map()
   protected app: App = createApp(AppView)
 
@@ -30,3 +28,5 @@ export default class pluginManager {
     }
   }
 }
+
+export default PluginManager
