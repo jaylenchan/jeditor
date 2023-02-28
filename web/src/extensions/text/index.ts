@@ -1,16 +1,16 @@
 import View from './view'
 import { injectable, inject } from 'inversify'
-import { TYPES } from '@/editor-kernel/type'
+import { TYPES } from '@/core/type'
 import { EditorPlugin } from '../type'
-import type JEditor from '@/editor-kernel/editor'
+import type JEditor from '@/core/editor'
 import type { Component } from 'vue'
 
 @injectable()
-class Whiteboard implements EditorPlugin {
+class Text implements EditorPlugin {
   @inject(TYPES.JEditor)
   editor!: JEditor
-  type: string = 'Whiteboard'
+  type: string = 'Text'
   view: Component = View
 }
 
-export default Whiteboard
+export default Text

@@ -1,7 +1,7 @@
 import { decorate, injectable } from 'inversify'
 import { Mixin } from 'ts-mixer'
-import PluginManager from './plugin-manager'
-import BoardManager from './board-manager'
+import PluginManager from './pluginManager'
+import BoardManager from './boardManager'
 
 decorate(injectable(), PluginManager)
 decorate(injectable(), BoardManager)

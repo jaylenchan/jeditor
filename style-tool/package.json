@@ -1,5 +1,5 @@
 {
   "name": "@jeditor/style-tool",
   "version": "0.0.1",
-  "main": "index.module.scss"
+  "main": "index.scss"
 }

@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import { Container } from 'inversify'
-import { TYPES } from './editor-kernel/type'
-import JEditor from './editor-kernel/editor'
-import { Picuture, Text, Whiteboard } from './editor-plugins'
-import type { EditorPlugin } from './editor-plugins/type'
+import { TYPES } from './core/type'
+import JEditor from './core/editor'
+import { Picuture, Text, Whiteboard } from './extensions'
+import type { EditorPlugin } from './extensions/type'
 
 const container = new Container()
 container.bind<JEditor>(TYPES.JEditor).to(JEditor).inSingletonScope()

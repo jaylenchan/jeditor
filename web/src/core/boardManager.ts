@@ -1,4 +1,4 @@
-import { EditorPlugin } from '@/editor-plugins/type'
+import { EditorPlugin } from '@/extensions/type'
 import { h, render } from 'vue'
 import type { App } from 'vue'
 class BoardManager {

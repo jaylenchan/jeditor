@@ -1,4 +1,4 @@
-import type JEditor from '@/editor-kernel/editor'
+import type JEditor from '@/core/editor'
 import type { Component } from 'vue'
 
 export interface EditorPlugin {
