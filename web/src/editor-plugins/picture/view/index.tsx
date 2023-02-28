@@ -1,5 +1,4 @@
 import { defineComponent } from 'vue'
-import style from './index.module.scss'
 
 const Picture = defineComponent({
   props: {
@@ -9,7 +8,7 @@ const Picture = defineComponent({
     },
   },
   setup({ text }) {
-    return () => <div class={style.container}>图片插件：{text}</div>
+    return () => <div>图片插件：{text}</div>
   },
 })
 

@@ -1,16 +1,21 @@
 import { defineComponent, h, resolveComponent } from 'vue'
 import style from './index.module.scss'
+import Wrapper from '../../../common/wrapper'
 
 const WhiteboardView = defineComponent({
   setup() {
     const elements = [
       {
         type: 'Picture',
-        props: { text: '1' },
+        props: {
+          id: 'pic11',
+          text: '1',
+        },
       },
       {
         type: 'Text',
         props: {
+          id: 'tex11',
           text: '2',
         },
       },
@@ -19,9 +24,17 @@ const WhiteboardView = defineComponent({
     return () => (
       <div class={style.container}>
         {elements.map(el => {
-          return h(resolveComponent(el.type), { ...el.props })
+          return (
+            <Wrapper
+              id={el.props.id}
+              onSelected={id => {
+                console.log('selectedId', id)
+              }}
+            >
+              {h(resolveComponent(el.type), { ...el.props })}
+            </Wrapper>
+          )
         })}
-        渲染区域
       </div>
     )
   },
