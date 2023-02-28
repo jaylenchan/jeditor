@@ -5,6 +5,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import checker from 'vite-plugin-checker'
+import path from 'path'
 
 export default defineConfig({
   plugins: [
@@ -23,7 +24,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': 'src',
+      '@': path.resolve(__dirname, './src'),
     },
   },
   base: './',
