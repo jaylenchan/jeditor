@@ -24,8 +24,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      src: resolve('.', 'src'),
-      'style-tools': resolve('.', 'src/style-tools'),
+      '@': 'src',
     },
   },
   base: './',
