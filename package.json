@@ -18,8 +18,8 @@
     "commit-msg": "npx commitlint --edit"
   },
   "lint-staged": {
-    "*.{md,scss,html}": "prettier --write",
-    "*.{vue,ts,tsx,json}": [
+    "*.{md,scss,html,json}": "prettier --write",
+    "*.{vue,ts,tsx}": [
       "prettier --write",
       "eslint --fix"
     ],
