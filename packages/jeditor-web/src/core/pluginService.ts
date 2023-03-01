@@ -4,6 +4,7 @@ import type { App } from 'vue'
 import AppView from './view'
 
 class PluginService {
+
 	protected pluginPool: Map<string, EditorPlugin> = new Map()
 	protected app: App = createApp(AppView)
 
@@ -28,6 +29,7 @@ class PluginService {
 			this.app.component(plugin.type, plugin.view)
 		}
 	}
+
 }
 
 export default PluginService

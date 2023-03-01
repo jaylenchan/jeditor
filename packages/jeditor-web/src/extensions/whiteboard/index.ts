@@ -7,10 +7,12 @@ import type { Component } from 'vue'
 
 @injectable()
 class Whiteboard implements EditorPlugin {
+
 	@inject(TYPES.JEditor)
 	editor!: JEditor
 	type = 'Whiteboard'
 	view: Component = View
+
 }
 
 export default Whiteboard

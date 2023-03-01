@@ -16,4 +16,7 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['@typescript-eslint'],
+	rules: {
+		'padded-blocks': ['error', { classes: 'always' }],
+	},
 }

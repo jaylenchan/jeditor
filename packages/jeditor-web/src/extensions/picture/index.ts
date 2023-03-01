@@ -7,10 +7,12 @@ import type { Component } from 'vue'
 
 @injectable()
 class Picture implements EditorPlugin {
+
 	@inject(TYPES.JEditor)
 	editor!: JEditor
 	type = 'Picture'
 	view: Component = View
+
 }
 
 export default Picture

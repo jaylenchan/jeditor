@@ -9,6 +9,7 @@ const Parent = Mixin(PluginService, BoardService)
 decorate(injectable(), Parent)
 @injectable()
 class JEditor extends Parent {
+
 	constructor() {
 		super()
 	}
@@ -23,6 +24,7 @@ class JEditor extends Parent {
 			this.initBoard(boardPlugin, this.app)
 		}
 	}
+
 }
 
 export default JEditor
