@@ -1,14 +1,14 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES2020",
-    "baseUrl": ".",
-    "paths": {
-      "src/*": ["src/*"]
-    },
-    "outDir": "lib"
-  },
-  "include": ["src/**/*"],
-  "exclude": ["src/templates/**/*"]
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES2020",
+		"baseUrl": ".",
+		"paths": {
+			"src/*": ["src/*"]
+		},
+		"outDir": "lib"
+	},
+	"include": ["src/**/*"],
+	"exclude": ["src/templates/**/*"]
 }

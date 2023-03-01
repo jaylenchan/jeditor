@@ -14,7 +14,7 @@ container.bind<EditorPlugin>(TYPES.Text).to(Text).inSingletonScope()
 const editor = container.get<JEditor>(TYPES.JEditor)
 
 editor
-  .usePlugin(container.get(TYPES.Whiteboard))
-  .usePlugin(container.get(TYPES.Picture))
-  .usePlugin(container.get(TYPES.Text))
-  .run()
+	.usePlugin(container.get(TYPES.Whiteboard))
+	.usePlugin(container.get(TYPES.Picture))
+	.usePlugin(container.get(TYPES.Text))
+	.run()

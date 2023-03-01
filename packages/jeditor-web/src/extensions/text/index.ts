@@ -7,10 +7,10 @@ import type { Component } from 'vue'
 
 @injectable()
 class Text implements EditorPlugin {
-  @inject(TYPES.JEditor)
-  editor!: JEditor
-  type: string = 'Text'
-  view: Component = View
+	@inject(TYPES.JEditor)
+	editor!: JEditor
+	type = 'Text'
+	view: Component = View
 }
 
 export default Text

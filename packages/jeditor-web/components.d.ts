@@ -8,12 +8,12 @@ import '@vue/runtime-core'
 export {}
 
 declare module '@vue/runtime-core' {
-  export interface GlobalComponents {
-    ElAside: typeof import('element-plus/es')['ElAside']
-    ElCol: typeof import('element-plus/es')['ElCol']
-    ElContainer: typeof import('element-plus/es')['ElContainer']
-    ElHeader: typeof import('element-plus/es')['ElHeader']
-    ElMain: typeof import('element-plus/es')['ElMain']
-    ElRow: typeof import('element-plus/es')['ElRow']
-  }
+	export interface GlobalComponents {
+		ElAside: typeof import('element-plus/es')['ElAside']
+		ElCol: typeof import('element-plus/es')['ElCol']
+		ElContainer: typeof import('element-plus/es')['ElContainer']
+		ElHeader: typeof import('element-plus/es')['ElHeader']
+		ElMain: typeof import('element-plus/es')['ElMain']
+		ElRow: typeof import('element-plus/es')['ElRow']
+	}
 }

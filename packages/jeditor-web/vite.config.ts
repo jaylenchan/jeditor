@@ -8,36 +8,36 @@ import checker from 'vite-plugin-checker'
 import path from 'path'
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      include: [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.[jt]sx$/],
-      resolvers: [ElementPlusResolver()],
-    }),
-    checker({
-      typescript: true,
-    }),
-  ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      core: path.resolve(__dirname, './src/core'),
-      extensions: path.resolve(__dirname, './src/extensions'),
-    },
-  },
-  base: './',
-  build: {
-    sourcemap: true,
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "@jeditor/style-tool";`,
-      },
-    },
-  },
+	plugins: [
+		vue(),
+		vueJsx(),
+		AutoImport({
+			resolvers: [ElementPlusResolver()],
+		}),
+		Components({
+			include: [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.[jt]sx$/],
+			resolvers: [ElementPlusResolver()],
+		}),
+		checker({
+			typescript: true,
+		}),
+	],
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, './src'),
+			core: path.resolve(__dirname, './src/core'),
+			extensions: path.resolve(__dirname, './src/extensions'),
+		},
+	},
+	base: './',
+	build: {
+		sourcemap: true,
+	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: `@import "@jeditor/style-tool";`,
+			},
+		},
+	},
 })

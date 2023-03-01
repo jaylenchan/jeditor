@@ -7,22 +7,23 @@
     "dev": "tsx scripts/dev.ts",
     "web": "pnpm -r --filter @jeditor/web run dev",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "format": "prettier \"./**/*.{html,vue,ts,tsx,json,md}\" --check",
+    "format:fix": "pnpm run format --write",
+    "lint": "eslint . --ext .vue,.ts,.tsx,.json",
+    "lint:fix": "pnpm run lint --fix"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged",
     "commit-msg": "npx commitlint --edit"
   },
   "lint-staged": {
-    "*.{ts,js}": [
-      "prettier --parser=typescript --write"
+    "*.{md,scss,html}": "prettier --write",
+    "*.{vue,ts,tsx,json}": [
+      "prettier --write",
+      "eslint --fix"
     ],
-    "*.{json, md}": [
-      "prettier --write"
-    ],
-    "*.test.ts": [
-      "pnpm test"
-    ]
+    "*.test.ts": "pnpm test"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -30,9 +31,13 @@
     "@commitlint/config-conventional": "^17.4.4",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitest/coverage-c8": "^0.28.5",
     "@vitest/ui": "^0.28.5",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
     "execa": "^7.0.0",
     "fs-extra": "^11.1.0",
     "jsdom": "^21.1.0",
@@ -40,6 +45,7 @@
     "prettier": "^2.8.4",
     "simple-git-hooks": "^2.8.1",
     "ts-mixer": "^6.0.3",
+    "tslint-config-prettier": "^1.18.0",
     "tsx": "^3.12.2",
     "typescript": "^4.9.0",
     "vite": "^4.0.0",
