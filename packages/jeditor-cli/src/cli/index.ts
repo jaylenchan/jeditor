@@ -2,20 +2,20 @@ import { Command } from 'commander'
 import type { Commands } from '../commands'
 
 class JEditorCli extends Command {
-  constructor() {
-    super()
-  }
+	constructor() {
+		super()
+	}
 
-  useCommands(commands: Commands) {
-    commands.forEach(cmd => {
-      cmd(this)
-    })
-  }
+	public useCommands(commands: Commands) {
+		commands.forEach(cmd => {
+			cmd(this)
+		})
+	}
 
-  run(commands: Commands) {
-    this.useCommands(commands)
-    this.parse()
-  }
+	public run(commands: Commands) {
+		this.useCommands(commands)
+		this.parse()
+	}
 }
 
 export default JEditorCli
