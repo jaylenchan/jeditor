@@ -1,6 +1,7 @@
 import { EditorPlugin } from '@/extensions/type'
 import { h, render } from 'vue'
 import type { App } from 'vue'
+
 class BoardManager {
   initBoard(boardPlugin: EditorPlugin, app: App) {
     const boardView = boardPlugin.view

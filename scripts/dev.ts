@@ -3,8 +3,8 @@ import fs from 'fs-extra'
 import type { Options as ExecaOptions } from 'execa'
 import { execa } from 'execa'
 
-const web = (): string => path.resolve(__dirname, '..', 'web')
-const app = (): string => path.resolve(__dirname, '..', 'app')
+const web = (): string => path.resolve(__dirname, '../packages', 'jeditor-web')
+const app = (): string => path.resolve(__dirname, '../packages', 'jeditor-app')
 
 const isDirectory = (path: string) => fs.statSync(path).isDirectory()
 const pathExist = (path: string) => fs.pathExistsSync(path)

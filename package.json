@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "simple-git-hooks",
+    "postinstall": "simple-git-hooks && pnpm -r --filter @jeditor/cli run build",
     "dev": "tsx scripts/dev.ts",
-    "web": "pnpm -r --filter cli run build && pnpm -r --filter web run dev",
+    "web": "pnpm -r --filter @jeditor/web run dev",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },

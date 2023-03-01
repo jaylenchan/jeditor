@@ -11,7 +11,7 @@ class PluginManager {
     if (!this.pluginPool.has(plugin.type)) {
       this.pluginPool.set(plugin.type, plugin)
     }
-    // console.warn(`<${plugin.id}>插件已存在，无需重复注册！`)
+
     return this
   }
 
@@ -19,6 +19,7 @@ class PluginManager {
     for (const plugin of plugins) {
       this.usePlugin(plugin)
     }
+
     return this
   }
 

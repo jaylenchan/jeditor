@@ -7,20 +7,12 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     globals: true,
-    includeSource: [
-      'app/src/**/*.{js,ts}',
-      'web/src/**/*.{js,ts}',
-      'cli/src/**/*.{js,ts}',
-    ],
-    include: [
-      'app/**/__tests__/*.test.ts',
-      'web/**/__tests__/*.test.ts',
-      'cli/**/__tests__/*.test.ts',
-    ],
+    includeSource: ['packages/**/src/**/*.ts'],
+    include: ['packages/**/__tests__/*.test.ts'],
     environmentMatchGlobs: [
-      ['app/**/__tests__/*.test.ts', 'node'],
-      ['web/**/__tests__/*.test.ts', 'jsdom'],
-      ['cli/**/__tests__/*.test.ts', 'node'],
+      ['packages/jeditor-app/**/__tests__/*.test.ts', 'node'],
+      ['packages/jeditor-cli/**/__tests__/*.test.ts', 'node'],
+      ['packages/jeditor-web/**/__tests__/*.test.ts', 'jsdom'],
     ],
   },
 })

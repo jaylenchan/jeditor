@@ -1,5 +1,2 @@
 packages:
-  - "app/**"
-  - "web/**"
-  - "cli/**"
-  - "style-tool/**"
+  - "packages/*"
