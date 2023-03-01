@@ -101,6 +101,12 @@
                 <mxCell id="qal3hGhkhZ6dcme3J2EV-39" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;## 选中元素到PropertyPanel激活 ##&lt;br&gt;1.当whiteboard中的plugin.view被用户选中，则在当前被选中的plugin.view对应的json数据。&lt;br&gt;&lt;br&gt;2. 将指定的json数据交给PropertyPanel,则PropertyPanel能够根据json中的type字段找到对应具体的plugin应该需要哪些component展示出来进行属性的编辑。&lt;br&gt;&lt;br&gt;3. 其中编辑属性需要用到的component可以预先建立一个componentPool进行component的存放。本质上PropertyPanel就是一张动态表单。&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;&quot;&gt;&lt;/div&gt;" style="text;strokeColor=#36393d;align=left;fillColor=#f9f7ed;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=#f5f4f4;fontSize=21;fontColor=#000000;" vertex="1" parent="1">
                     <mxGeometry x="260" y="380" width="370" height="220" as="geometry"/>
                 </mxCell>
+                <mxCell id="qal3hGhkhZ6dcme3J2EV-40" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;## 编辑PropertyPanel属性到元素渲染 ##&lt;br&gt;1.当元素相关属性被修改的时候，对应修改的是元素对应的json数据。&lt;br&gt;&lt;br&gt;2. 由于修改的是元素对应的json数据，元素又是通过json数据进行渲染的，则元素也会根据json数据的变化而重新进行渲染。&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;&quot;&gt;&lt;/div&gt;" style="text;strokeColor=#36393d;align=left;fillColor=#f9f7ed;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=#f5f4f4;fontSize=21;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="-130" y="690" width="370" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="qal3hGhkhZ6dcme3J2EV-41" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;## 用户交互改动元素属性到json数据改动 ##&lt;br&gt;1.除了通过属性面板进行元素属性的修改，还需要提供一种可交互的方式，允许用户直接对元素进行操作，进而改动元素的属性。&lt;br&gt;2. 不管是用户交互改动元素还是属性面板改动属性进而改动元素，主逻辑应该都是先改对应json数据，再渲染元素&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;&quot;&gt;&lt;/div&gt;" style="text;strokeColor=#36393d;align=left;fillColor=#f9f7ed;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=#f5f4f4;fontSize=21;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="260" y="690" width="370" height="180" as="geometry"/>
+                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
