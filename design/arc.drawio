@@ -107,6 +107,9 @@
                 <mxCell id="qal3hGhkhZ6dcme3J2EV-41" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;## 用户交互改动元素属性到json数据改动 ##&lt;br&gt;1.除了通过属性面板进行元素属性的修改，还需要提供一种可交互的方式，允许用户直接对元素进行操作，进而改动元素的属性。&lt;br&gt;2. 不管是用户交互改动元素还是属性面板改动属性进而改动元素，主逻辑应该都是先改对应json数据，再渲染元素&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;&quot;&gt;&lt;/div&gt;" style="text;strokeColor=#36393d;align=left;fillColor=#f9f7ed;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=#f5f4f4;fontSize=21;fontColor=#000000;" vertex="1" parent="1">
                     <mxGeometry x="260" y="690" width="370" height="180" as="geometry"/>
                 </mxCell>
+                <mxCell id="qal3hGhkhZ6dcme3J2EV-42" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;## 右键菜单 ##&lt;br&gt;1.右键菜单实现需要覆盖宿主环境自身的右键菜单，contextMenu出现的同时元素进入选中状态&lt;br&gt;&lt;br&gt;2. 包含功能：复制、剪切、粘贴、删除、锁定等常规功能&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;&quot;&gt;&lt;/div&gt;" style="text;strokeColor=#36393d;align=left;fillColor=#f9f7ed;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=#f5f4f4;fontSize=21;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="-130" y="920" width="350" height="160" as="geometry"/>
+                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
