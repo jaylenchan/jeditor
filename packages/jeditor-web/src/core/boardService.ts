@@ -4,6 +4,7 @@ import type { App } from 'vue'
 
 class BoardService {
 
+	/** 初始化whiteboard */
 	protected initBoard(boardPlugin: EditorPlugin, app: App): void {
 		const boardView = boardPlugin.view
 		const board = document.getElementById('board')
