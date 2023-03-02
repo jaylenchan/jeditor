@@ -1,7 +1,7 @@
-import { BoardElement, Border, Position } from 'common/elements/type'
+import { ElementModel, Border, Position } from 'core/type'
 import { createIdentifier } from 'common/utils/uuid'
 
-class TextModel implements BoardElement {
+class TextModel implements ElementModel {
 
 	public readonly id: string
 	public readonly type: string
@@ -27,4 +27,4 @@ class TextModel implements BoardElement {
 
 }
 
-export default new TextModel()
+export default TextModel

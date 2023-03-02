@@ -3,6 +3,7 @@ import JEditor from 'core/editor'
 import { TYPES } from 'core/type'
 import PluginService from 'core/pluginService'
 import BoardService from 'core/boardService'
+import ModelService from 'core/modelService'
 import { Text } from 'extensions/index'
 import type { EditorPlugin } from 'extensions/type'
 import Whiteboard from 'core/views/whiteboard'
@@ -17,6 +18,11 @@ container
 	.bind<BoardService>(TYPES.BoardService)
 	.to(BoardService)
 	.inSingletonScope()
+container
+	.bind<ModelService>(TYPES.ModelService)
+	.to(ModelService)
+	.inSingletonScope()
+
 container.bind<JEditor>(TYPES.JEditor).to(JEditor).inSingletonScope()
 container.bind<Whiteboard>(TYPES.Whiteboard).to(Whiteboard).inSingletonScope()
 container.bind<EditorPlugin>(TYPES.Text).to(Text).inSingletonScope()

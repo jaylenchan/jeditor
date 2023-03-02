@@ -1,3 +1,4 @@
+import ModelService from 'core/modelService'
 import PluginService from 'core/pluginService'
 import { TYPES } from 'core/type'
 import { inject, injectable } from 'common/utils/dependencyInject'
@@ -9,6 +10,7 @@ import type { App } from 'vue'
 class BoardService {
 
 	@inject(TYPES.PluginService) pluginService!: PluginService
+	@inject(TYPES.ModelService) modelService!: ModelService
 
 	/** 初始化whiteboard */
 	public initBoard(boardPlugin: EditorPlugin, app: App): void {
@@ -22,10 +24,9 @@ class BoardService {
 		}
 	}
 
-	public addElement(type: string) {
+	public addElement(type: string): void {
 		console.log('element add', type)
-		const plugin = this.pluginService.pluginPool.get(type)
-		console.log('plugin', plugin)
+		this.modelService.generateModel(type)
 	}
 
 }

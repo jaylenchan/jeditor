@@ -11,7 +11,7 @@ class PluginService {
 	public app: App = createApp(AppView)
 
 	/** 注册插件*/
-	public usePlugin(plugin: EditorPlugin) {
+	public usePlugin(plugin: EditorPlugin): PluginService {
 		if (!this.pluginPool.has(plugin.type)) {
 			this.pluginPool.set(plugin.type, plugin)
 		}
@@ -20,7 +20,7 @@ class PluginService {
 	}
 
 	/** 注册多个插件 */
-	public usePlugins(plugins: EditorPlugin[]) {
+	public usePlugins(plugins: EditorPlugin[]): PluginService {
 		for (const plugin of plugins) {
 			this.usePlugin(plugin)
 		}

@@ -1,19 +1,23 @@
 $fullPageEls: html, body, '#app';
 
 @mixin full-page($selectors) {
-  :global {
-    @each $selector in $selectors {
-      #{$selector} {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
+	:global {
+		@each $selector in $selectors {
+			#{$selector} {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
 }
 
 @mixin full-in-father() {
-  @at-root & {
-    width: 100%;
-    height: 100%;
-  }
+	@at-root & {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+@mixin position($val) {
+	position: $val;
 }
