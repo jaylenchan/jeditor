@@ -1,0 +1,36 @@
+@include reset-style($resetEls);
+@include reset-style-for-old-browser();
+@include full-page($fullPageEls);
+@include define-color-vars($colors);
+@include extend-color-state($types, $states);
+@include extend-color-prop($propColors);
+
+.container {
+	@include full-in-father();
+	.header {
+		@include width(100%);
+		@include bg-color(getBackgroundColor(gray, primary));
+		@include bd-bottom(1px solid getBorderColor(gray, tertiary));
+	}
+
+	.bottom {
+		@include full-in-father();
+
+		.componentPanel {
+			@include full-in-father();
+			@include bg-color(getBackgroundColor(gray, primary));
+		}
+
+		.whiteboard {
+			@include full-in-father();
+			.board {
+				@include full-in-father();
+			}
+		}
+
+		.propPanel {
+			@include full-in-father();
+			@include bg-color(getBackgroundColor(gray, primary));
+		}
+	}
+}

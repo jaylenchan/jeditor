@@ -1,17 +1,14 @@
 import View from './view'
-import { injectable, inject } from 'inversify'
-import { TYPES } from 'core/type'
+import { injectable } from 'inversify'
 import { EditorPlugin } from '../type'
-import type JEditor from 'core/editor'
-import type { Component } from 'vue'
+import Model from './model'
 
 @injectable()
 class Text implements EditorPlugin {
 
-	@inject(TYPES.JEditor)
-	editor!: JEditor
 	type = 'Text'
-	view: Component = View
+	view = View
+	model = Model
 
 }
 

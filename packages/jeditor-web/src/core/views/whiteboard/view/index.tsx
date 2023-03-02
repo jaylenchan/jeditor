@@ -5,13 +5,13 @@ import Wrapper from 'common/wrapper'
 const WhiteboardView = defineComponent({
 	setup() {
 		const elements = [
-			{
-				type: 'Picture',
-				props: {
-					id: 'pic11',
-					text: '1',
-				},
-			},
+			// {
+			// 	type: 'Picture',
+			// 	props: {
+			// 		id: 'pic11',
+			// 		text: '1',
+			// 	},
+			// },
 			{
 				type: 'Text',
 				props: {

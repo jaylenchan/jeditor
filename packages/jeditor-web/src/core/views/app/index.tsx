@@ -1,5 +1,8 @@
 import style from './index.module.scss'
 import { defineComponent } from 'vue'
+import container from 'src/dependency-inject.config'
+import BoardService from 'core/boardService'
+import { TYPES } from 'core/type'
 
 const App = defineComponent({
 	setup() {
@@ -10,7 +13,20 @@ const App = defineComponent({
 				</el-row>
 				<el-row class={style.bottom}>
 					<el-col span={3}>
-						<el-aside class={style.componentPanel}>组件面板</el-aside>
+						<el-aside class={style.componentPanel}>
+							<div>组件面板</div>
+							<el-button
+								type={'primary'}
+								onClick={() => {
+									const boardService = container.get<BoardService>(
+										TYPES.BoardService
+									)
+									boardService.addElement('Text')
+								}}
+							>
+								点击新增文本元素
+							</el-button>
+						</el-aside>
 					</el-col>
 					<el-col span={15}>
 						<el-main class={style.whiteboard} id="board"></el-main>

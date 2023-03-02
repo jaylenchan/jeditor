@@ -1,4 +1,4 @@
-import { injectable, decorate } from 'inversify'
+import { injectable, inject, decorate, Container } from 'inversify'
 import { Mixin } from 'ts-mixer'
 import { Class } from './type'
 
@@ -18,3 +18,5 @@ export function injectableInherit<T>(...inheritClasses: Class<unknown>[]) {
 		return newTarget as any
 	}
 }
+
+export { injectable, inject, Container }

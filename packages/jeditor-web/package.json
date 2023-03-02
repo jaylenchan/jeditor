@@ -9,14 +9,16 @@
     "create-plugin": "cd src/editor-plugins && npx jeditor-cli create template --plugin"
   },
   "dependencies": {
+    "@jeditor/style-tool": "workspace:^0.0.1",
     "element-plus": "^2.2.32",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13",
-    "vue": "^3.2.45",
-    "@jeditor/style-tool": "workspace:^0.0.1"
+    "uuid": "^9.0.0",
+    "vue": "^3.2.45"
   },
   "devDependencies": {
     "@jeditor/cli": "workspace:^0.0.1",
+    "@types/uuid": "^9.0.1",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "@vue/test-utils": "^2.3.0",

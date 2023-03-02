@@ -18,5 +18,6 @@ module.exports = {
 	plugins: ['@typescript-eslint'],
 	rules: {
 		'padded-blocks': ['error', { classes: 'always' }],
+		'@typescript-eslint/no-unused-vars': 'error',
 	},
 }

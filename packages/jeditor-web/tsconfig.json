@@ -9,7 +9,8 @@
 		"paths": {
 			"core/*": ["src/core/*"],
 			"extensions/*": ["src/extensions/*"],
-			"common/*": ["src/common/*"]
+			"common/*": ["src/common/*"],
+			"src/*": ["src/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

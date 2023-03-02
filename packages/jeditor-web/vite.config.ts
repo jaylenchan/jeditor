@@ -27,6 +27,7 @@ export default defineConfig({
 			core: path.resolve(__dirname, './src/core'),
 			extensions: path.resolve(__dirname, './src/extensions'),
 			common: path.resolve(__dirname, './src/common'),
+			src: path.resolve(__dirname, './src'),
 		},
 	},
 	base: './',

@@ -1,19 +1,24 @@
-import { injectableInherit } from 'common/utils/dependencyInject'
+import { EditorPlugin } from 'extensions/type'
+import { TYPES } from 'core/type'
+import { inject, injectable } from 'common/utils/dependencyInject'
 import PluginService from './pluginService'
 import BoardService from './boardService'
+import container from 'src/dependency-inject.config'
 
-interface JEditor extends PluginService, BoardService {}
-@injectableInherit(PluginService, BoardService)
+@injectable()
 class JEditor {
 
-	public run(appContainer: string): void {
-		this.app.mount(appContainer)
+	@inject(TYPES.PluginService) pluginService!: PluginService
+	@inject(TYPES.BoardService) boardService!: BoardService
 
-		this.applyPlugins()
+	public run(appContainer: string, plugins: EditorPlugin[]): void {
+		this.pluginService.usePlugin(container.get(TYPES.Whiteboard))
+		this.pluginService.usePlugins(plugins)
+		this.pluginService.applyPlugins(appContainer)
 
-		const boardPlugin = this.pluginPool.get('Whiteboard')
+		const boardPlugin = this.pluginService.pluginPool.get('Whiteboard')
 		if (boardPlugin) {
-			this.initBoard(boardPlugin, this.app)
+			this.boardService.initBoard(boardPlugin, this.pluginService.app)
 		}
 	}
 
