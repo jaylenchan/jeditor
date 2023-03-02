@@ -17,4 +17,4 @@ editor
 	.usePlugin(container.get(TYPES.Whiteboard))
 	.usePlugin(container.get(TYPES.Picture))
 	.usePlugin(container.get(TYPES.Text))
-	.run()
+	.run('#app')

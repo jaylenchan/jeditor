@@ -6,7 +6,7 @@ import { Class } from './type'
  * @description 一个实现多继承的injectable装饰器
  * @use injectableInherit(baseClass1, baseClass2,...more)
  */
-export function injectableInherit<T>(...inheritClasses: Class<unknown>[]) {
+export function injectableInherit<T>(...inheritClasses: Class<any>[]) {
 	return (target: Class<T>) => {
 		const newTarget = inheritClasses.reduce((newClass, curClass) => {
 			return Mixin(newClass, curClass)

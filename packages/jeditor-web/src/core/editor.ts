@@ -6,10 +6,10 @@ interface JEditor extends PluginService, BoardService {}
 @injectableInherit(PluginService, BoardService)
 class JEditor {
 
-	public run(): void {
-		this.applyPlugins()
+	public run(appContainer: string): void {
+		this.app.mount(appContainer)
 
-		this.app.mount('#app')
+		this.applyPlugins()
 
 		const boardPlugin = this.pluginPool.get('Whiteboard')
 		if (boardPlugin) {
