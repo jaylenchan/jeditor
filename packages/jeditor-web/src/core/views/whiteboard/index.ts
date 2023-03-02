@@ -1,12 +1,14 @@
 import View from './view'
-import { injectable } from 'inversify'
-import { EditorPlugin } from '../../../extensions/type'
+import Model from './model'
+import { injectable } from 'common/utils/dependencyInject'
+import { EditorPlugin } from 'extensions/type'
 
 @injectable()
 class Whiteboard implements EditorPlugin {
 
 	type = 'Whiteboard'
 	view = View
+	model = Model
 
 }
 

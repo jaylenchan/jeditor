@@ -14,15 +14,15 @@ class ModelService {
 	public modelIdPool: Map<string, Set<string>> = new Map()
 	public modelPool: Map<string, Map<string, ElementModel>> = new Map()
 
-	public generateModel(type: string): void {
+	public generateModel(type: string): ElementModel {
 		const plugin = this.pluginService.pluginPool.get(type)
+
 		if (plugin && plugin.model) {
 			const model = new plugin.model()
 			this.setModel(model)
-			console.log('Model', model)
-			console.log('modelpool', this.modelIdPool, this.modelPool)
-			console.log('modelIds', this.getModelIds(model.type))
-			console.log('models', this.getModel(model.type, model.id))
+			return model
+		} else {
+			throw new Error('unknown model type!')
 		}
 	}
 
@@ -56,7 +56,7 @@ class ModelService {
 		return model
 	}
 
-	public getModelIds(type?: string): ModelIds | null {
+	public getModelIds(type?: string): string[] | null {
 		if (!type) {
 			return null
 		} else {
@@ -64,11 +64,9 @@ class ModelService {
 
 			if (!ids) return null
 
-			const modelIds = {} as ModelIds
+			const modelIds = []
 			for (const id of ids) {
-				if (!modelIds[type]) modelIds[type] = []
-
-				modelIds[type].push(id)
+				modelIds.push(id)
 			}
 
 			return modelIds
