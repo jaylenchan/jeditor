@@ -7,9 +7,9 @@
 		"lib": ["ESNext", "DOM"],
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/*"],
 			"core/*": ["src/core/*"],
-			"extensions/*": ["src/extensions/*"]
+			"extensions/*": ["src/extensions/*"],
+			"common/*": ["src/common/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

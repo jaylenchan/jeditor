@@ -1,6 +1,6 @@
 import { defineComponent, h, resolveComponent } from 'vue'
 import style from './index.module.scss'
-import Wrapper from '@/common/wrapper'
+import Wrapper from 'common/wrapper'
 
 const WhiteboardView = defineComponent({
 	setup() {

@@ -1,10 +1,10 @@
-import { EditorPlugin } from '@/extensions/type'
+import { EditorPlugin } from 'extensions/type'
 import { h, render } from 'vue'
 import type { App } from 'vue'
 
 class BoardService {
 
-	public initBoard(boardPlugin: EditorPlugin, app: App): void {
+	protected initBoard(boardPlugin: EditorPlugin, app: App): void {
 		const boardView = boardPlugin.view
 		const board = document.getElementById('board')
 

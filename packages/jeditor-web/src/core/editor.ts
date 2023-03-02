@@ -1,18 +1,10 @@
-import { decorate, injectable } from 'inversify'
-import { Mixin } from 'ts-mixer'
+import { injectableInherit } from 'common/utils/dependencyInject'
 import PluginService from './pluginService'
 import BoardService from './boardService'
 
-decorate(injectable(), PluginService)
-decorate(injectable(), BoardService)
-const Parent = Mixin(PluginService, BoardService)
-decorate(injectable(), Parent)
-@injectable()
-class JEditor extends Parent {
-
-	constructor() {
-		super()
-	}
+interface JEditor extends PluginService, BoardService {}
+@injectableInherit(PluginService, BoardService)
+class JEditor {
 
 	public run(): void {
 		this.applyPlugins()
