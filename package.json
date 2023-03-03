@@ -38,6 +38,8 @@
     "@vitest/ui": "^0.28.5",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.5",
     "execa": "^7.0.0",
     "fs-extra": "^11.1.0",
     "jsdom": "^21.1.0",

@@ -9,6 +9,7 @@ import {
 import style from './index.module.scss'
 import Wrapper from 'common/wrapper'
 import { ElementModel, TYPES } from 'core/type'
+import BoardModel from 'core/views/whiteboard/model'
 import container from 'src/dependency-inject.config'
 import ModelService from 'core/modelService'
 import { ee } from 'common/utils/event'
@@ -16,27 +17,21 @@ import { ee } from 'common/utils/event'
 const WhiteboardView = defineComponent({
 	props: {
 		model: {
-			type: Object as PropType<
-				ElementModel & {
-					elements: { type: string; props: { [k: string]: string } }[]
-				}
-			>,
+			type: Object as PropType<BoardModel>,
 			required: true,
 		},
 	},
 	setup() {
-		const elements = reactive<
-			{ type: string; props: { [k: string]: string } }[]
-		>([])
+		const elements = reactive<ElementModel[]>([])
+
 		watchEffect(() => {
 			ee.on('modelChange', () => {
-				console.log('Modelchange')
 				const modelService = container.get<ModelService>(TYPES.ModelService)
-				const id = modelService.getModelIds('Whiteboard')![0]
-				const model = modelService.getModel('Whiteboard', id)
-				elements.length = 0
-				elements.push(...(model as any).elements)
-				console.log('model', model)
+				const boardModel = modelService.getBoardModel()
+				if (boardModel) {
+					elements.length = 0
+					elements.push(...boardModel.elements)
+				}
 			})
 		})
 
@@ -45,9 +40,9 @@ const WhiteboardView = defineComponent({
 				{elements.map(el => {
 					return (
 						<Wrapper
-							id={el.props.id}
+							id={el.id}
 							onSelected={id => {
-								console.log('selectedId', id)
+								id as string
 							}}
 						>
 							{h(resolveComponent(el.type), { ...el.props })}

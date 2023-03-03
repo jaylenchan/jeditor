@@ -4,7 +4,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import checker from 'vite-plugin-checker'
+import Checker from 'vite-plugin-checker'
 import path from 'path'
 
 export default defineConfig({
@@ -18,7 +18,7 @@ export default defineConfig({
 			include: [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.[jt]sx$/],
 			resolvers: [ElementPlusResolver()],
 		}),
-		checker({
+		Checker({
 			typescript: true,
 		}),
 	],

@@ -1,6 +1,7 @@
 import PluginService from 'core/pluginService'
 import { inject, injectable } from 'common/utils/dependencyInject'
 import { ElementModel, TYPES } from 'core/type'
+import type WhiteboardModel from 'core/views/whiteboard/model'
 
 interface ModelIds {
 	[k: string]: string[]
@@ -64,7 +65,7 @@ class ModelService {
 
 			if (!ids) return null
 
-			const modelIds = []
+			const modelIds: string[] = []
 			for (const id of ids) {
 				modelIds.push(id)
 			}
@@ -87,6 +88,17 @@ class ModelService {
 		}
 
 		return modelIds
+	}
+
+	public getBoardModel(): WhiteboardModel | null {
+		const ids = this.getModelIds('Whiteboard')
+
+		if (ids) {
+			const whiteboardModel = this.getModel('Whiteboard', ids[0])
+			return whiteboardModel as WhiteboardModel
+		}
+
+		return null
 	}
 
 }

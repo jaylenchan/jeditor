@@ -25,7 +25,10 @@ export interface Border {
 export interface ElementModel {
 	readonly id: string
 	readonly type: string
-	position: Position
-	border: Border
-	opacity: number
+	props: {
+		position: Position
+		border: Border
+		opacity: number
+		[k: string]: unknown
+	}
 }

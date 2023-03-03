@@ -1,5 +1,6 @@
 import path from 'path'
-import fs from 'fs-extra'
+import * as fse from 'fs-extra'
+import * as fs from 'fs'
 import type { Options as ExecaOptions } from 'execa'
 import { execa } from 'execa'
 
@@ -7,7 +8,7 @@ const web = (): string => path.resolve(__dirname, '../packages', 'jeditor-web')
 const app = (): string => path.resolve(__dirname, '../packages', 'jeditor-app')
 
 const isDirectory = (path: string) => fs.statSync(path).isDirectory()
-const pathExist = (path: string) => fs.pathExistsSync(path)
+const pathExist = (path: string) => fse.pathExistsSync(path)
 const run = (bin: string, args: string[], opts: ExecaOptions<string> = {}) => {
 	return execa(bin, args, { stdio: 'inherit', ...opts })
 }
@@ -16,7 +17,7 @@ const clearOldDist = async (src: string) => {
 	src = path.resolve(src, 'dist')
 
 	if (pathExist(src) && isDirectory(src)) {
-		fs.removeSync(src)
+		fse.removeSync(src)
 	}
 }
 
@@ -29,7 +30,7 @@ const moveDistTo = async (src: string, des: string): Promise<void> => {
 
 	if (!isDirectory(src)) throw new Error(`${src} is not directory!`)
 
-	fs.moveSync(src, des)
+	fse.moveSync(src, des)
 }
 
 async function main() {
