@@ -50,6 +50,11 @@ module.exports = {
 						pattern: '**/type',
 						group: 'type',
 					},
+					{
+						pattern: './*.module.scss',
+						group: 'type',
+						position: 'after',
+					},
 				],
 				alphabetize: {
 					order: 'asc',

@@ -13,9 +13,9 @@ import ModelService from 'core/modelService'
 import BoardModel from 'core/views/whiteboard/model'
 import container from 'src/dependency-inject.config'
 
-import style from './index.module.scss'
-
 import { ElementModel, TYPES } from 'core/type'
+
+import style from './index.module.scss'
 
 const WhiteboardView = defineComponent({
 	props: {
