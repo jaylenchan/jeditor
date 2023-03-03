@@ -4,6 +4,7 @@ const Wrapper = defineComponent({
 	props: {
 		id: {
 			type: String,
+			required: true,
 		},
 	},
 	emits: ['selected'],

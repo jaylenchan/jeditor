@@ -14,9 +14,10 @@ class JEditor {
 	@inject(TYPES.BoardService) boardService!: BoardService
 
 	public run(appContainer: string, plugins: EditorPlugin[]): void {
-		this.pluginService.usePlugin(container.get(TYPES.Whiteboard))
-		this.pluginService.usePlugins(plugins)
-		this.pluginService.applyPlugins(appContainer)
+		this.pluginService
+			.usePlugin(container.get(TYPES.Whiteboard))
+			.usePlugins(plugins)
+			.applyPlugins(appContainer)
 
 		const boardPlugin = this.pluginService.pluginPool.get('Whiteboard')
 		if (boardPlugin) {

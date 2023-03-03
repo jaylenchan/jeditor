@@ -45,7 +45,7 @@ const WhiteboardView = defineComponent({
 						<Wrapper
 							id={el.id}
 							onSelected={id => {
-								id as string
+								id
 							}}
 						>
 							{h(resolveComponent(el.type), { ...el.props })}
