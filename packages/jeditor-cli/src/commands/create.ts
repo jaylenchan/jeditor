@@ -1,6 +1,8 @@
-import type JEditorCli from '../cli'
-import * as fs from 'fs-extra'
 import path from 'path'
+
+import * as fs from 'fs-extra'
+
+import type JEditorCli from '../cli'
 
 type Options = { plugin: boolean }
 

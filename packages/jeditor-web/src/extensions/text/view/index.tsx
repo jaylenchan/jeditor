@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue'
+
 import style from './index.module.scss'
 
 const TextView = defineComponent({

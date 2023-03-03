@@ -1,11 +1,13 @@
+import { h, render } from 'vue'
+
+import { inject, injectable } from 'common/utils/dependencyInject'
+import { ee } from 'common/utils/event'
 import ModelService from 'core/modelService'
 import PluginService from 'core/pluginService'
+
 import { TYPES } from 'core/type'
-import { inject, injectable } from 'common/utils/dependencyInject'
 import { EditorPlugin } from 'extensions/type'
-import { h, render } from 'vue'
 import type { App } from 'vue'
-import { ee } from 'common/utils/event'
 
 type VNode = ReturnType<typeof h>
 

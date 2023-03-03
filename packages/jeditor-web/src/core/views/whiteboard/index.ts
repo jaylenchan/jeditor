@@ -1,6 +1,8 @@
-import View from './view'
-import Model from './model'
 import { injectable } from 'common/utils/dependencyInject'
+
+import Model from './model'
+import View from './view'
+
 import { EditorPlugin } from 'extensions/type'
 
 @injectable()

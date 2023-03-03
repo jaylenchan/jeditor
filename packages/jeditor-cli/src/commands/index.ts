@@ -1,6 +1,7 @@
-import type JEditorCli from '../cli'
-import introduce from './introduce'
 import create from './create'
+import introduce from './introduce'
+
+import type JEditorCli from '../cli'
 
 export default [introduce, create]
 

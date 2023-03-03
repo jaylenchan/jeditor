@@ -6,13 +6,16 @@ import {
 	watchEffect,
 	reactive,
 } from 'vue'
-import style from './index.module.scss'
+
+import { ee } from 'common/utils/event'
 import Wrapper from 'common/wrapper'
-import { ElementModel, TYPES } from 'core/type'
+import ModelService from 'core/modelService'
 import BoardModel from 'core/views/whiteboard/model'
 import container from 'src/dependency-inject.config'
-import ModelService from 'core/modelService'
-import { ee } from 'common/utils/event'
+
+import style from './index.module.scss'
+
+import { ElementModel, TYPES } from 'core/type'
 
 const WhiteboardView = defineComponent({
 	props: {

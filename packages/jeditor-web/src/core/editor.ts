@@ -1,9 +1,11 @@
-import { EditorPlugin } from 'extensions/type'
-import { TYPES } from 'core/type'
 import { inject, injectable } from 'common/utils/dependencyInject'
-import PluginService from './pluginService'
-import BoardService from './boardService'
 import container from 'src/dependency-inject.config'
+
+import BoardService from './boardService'
+import PluginService from './pluginService'
+
+import { TYPES } from 'core/type'
+import { EditorPlugin } from 'extensions/type'
 
 @injectable()
 class JEditor {

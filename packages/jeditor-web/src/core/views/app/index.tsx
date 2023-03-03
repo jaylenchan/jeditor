@@ -1,7 +1,10 @@
-import style from './index.module.scss'
 import { defineComponent } from 'vue'
-import container from 'src/dependency-inject.config'
+
 import BoardService from 'core/boardService'
+import container from 'src/dependency-inject.config'
+
+import style from './index.module.scss'
+
 import { TYPES } from 'core/type'
 
 const App = defineComponent({

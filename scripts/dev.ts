@@ -1,8 +1,10 @@
-import path from 'path'
-import * as fse from 'fs-extra'
 import * as fs from 'fs'
-import type { Options as ExecaOptions } from 'execa'
+import path from 'path'
+
 import { execa } from 'execa'
+import * as fse from 'fs-extra'
+
+import type { Options as ExecaOptions } from 'execa'
 
 const web = (): string => path.resolve(__dirname, '../packages', 'jeditor-web')
 const app = (): string => path.resolve(__dirname, '../packages', 'jeditor-app')

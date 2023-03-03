@@ -1,4 +1,5 @@
 import { Mixin } from 'ts-mixer'
+
 import { Class } from './type'
 
 /**

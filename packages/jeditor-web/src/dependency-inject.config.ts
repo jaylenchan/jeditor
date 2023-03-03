@@ -1,12 +1,13 @@
 import { Container } from 'common/utils/dependencyInject'
-import JEditor from 'core/editor'
-import { TYPES } from 'core/type'
-import PluginService from 'core/pluginService'
 import BoardService from 'core/boardService'
+import JEditor from 'core/editor'
 import ModelService from 'core/modelService'
-import { Text } from 'extensions/index'
-import type { EditorPlugin } from 'extensions/type'
+import PluginService from 'core/pluginService'
 import Whiteboard from 'core/views/whiteboard'
+import { Text } from 'extensions/index'
+
+import { TYPES } from 'core/type'
+import type { EditorPlugin } from 'extensions/type'
 
 const container = new Container()
 

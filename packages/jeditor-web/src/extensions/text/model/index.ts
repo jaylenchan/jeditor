@@ -1,5 +1,6 @@
-import { ElementModel, Border, Position } from 'core/type'
 import { createIdentifier } from 'common/utils/uuid'
+
+import { ElementModel, Border, Position } from 'core/type'
 
 class TextModel implements ElementModel {
 

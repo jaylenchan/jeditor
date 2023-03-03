@@ -17,13 +17,6 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['@typescript-eslint'],
-	rules: {
-		'padded-blocks': ['error', { classes: 'always' }],
-		'@typescript-eslint/no-unused-vars': 'error',
-		'@typescript-eslint/no-explicit-any': 'error',
-		'no-console': 'error',
-		'import/no-unresolved': 'error',
-	},
 	settings: {
 		'import/parsers': {
 			'@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -35,5 +28,35 @@ module.exports = {
 			},
 			node: true,
 		},
+	},
+	rules: {
+		'padded-blocks': ['error', { classes: 'always' }],
+		'@typescript-eslint/no-unused-vars': 'error',
+		'@typescript-eslint/no-explicit-any': 'error',
+		'no-console': 'error',
+		'import/no-unresolved': 'error',
+		'import/order': [
+			'error',
+			{
+				groups: [
+					'builtin',
+					'external',
+					'internal',
+					['parent', 'sibling', 'index', 'object'],
+					'type',
+				],
+				pathGroups: [
+					{
+						pattern: '**/type',
+						group: 'type',
+					},
+				],
+				alphabetize: {
+					order: 'asc',
+					caseInsensitive: true,
+				},
+				'newlines-between': 'always',
+			},
+		],
 	},
 }

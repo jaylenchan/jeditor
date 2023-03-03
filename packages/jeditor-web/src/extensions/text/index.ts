@@ -1,7 +1,8 @@
-import View from './view'
 import { injectable } from 'inversify'
-import { EditorPlugin } from '../type'
+
 import Model from './model'
+import View from './view'
+import { EditorPlugin } from '../type'
 
 @injectable()
 class Text implements EditorPlugin {

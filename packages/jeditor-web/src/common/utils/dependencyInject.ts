@@ -1,5 +1,6 @@
 import { injectable, inject, decorate, Container } from 'inversify'
 import { Mixin } from 'ts-mixer'
+
 import { Class } from './type'
 
 /**

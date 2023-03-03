@@ -1,8 +1,11 @@
-import { injectable } from 'common/utils/dependencyInject'
-import { EditorPlugin } from 'extensions/type'
 import { createApp } from 'vue'
-import type { App } from 'vue'
+
+import { injectable } from 'common/utils/dependencyInject'
+
 import AppView from './views/app'
+
+import type { EditorPlugin } from 'extensions/type'
+import type { App } from 'vue'
 
 @injectable()
 class PluginService {

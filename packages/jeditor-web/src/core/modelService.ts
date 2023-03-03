@@ -1,5 +1,6 @@
-import PluginService from 'core/pluginService'
 import { inject, injectable } from 'common/utils/dependencyInject'
+import PluginService from 'core/pluginService'
+
 import { ElementModel, TYPES } from 'core/type'
 import type WhiteboardModel from 'core/views/whiteboard/model'
 

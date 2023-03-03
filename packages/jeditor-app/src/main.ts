@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from 'electron'
 import path from 'path'
+
+import { app, BrowserWindow } from 'electron'
 
 const ui = () => path.resolve(__dirname, './index.html')
 
