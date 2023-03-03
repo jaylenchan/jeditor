@@ -5,7 +5,8 @@
 		"target": "ES2020",
 		"baseUrl": ".",
 		"paths": {
-			"src/*": ["src/*"]
+			"src/*": ["src/*"],
+			"cli-src/*": ["src/*"]
 		},
 		"outDir": "lib"
 	},

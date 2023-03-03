@@ -8,6 +8,7 @@ import PluginService from 'core/pluginService'
 import { TYPES } from 'core/type'
 import { EditorPlugin } from 'extensions/type'
 import type { App } from 'vue'
+import 'reflect-metadata'
 
 type VNode = ReturnType<typeof h>
 

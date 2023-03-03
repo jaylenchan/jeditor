@@ -10,7 +10,8 @@
 			"core/*": ["src/core/*"],
 			"extensions/*": ["src/extensions/*"],
 			"common/*": ["src/common/*"],
-			"src/*": ["src/*"]
+			"src/*": ["src/*"],
+			"web-src/*": ["src/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

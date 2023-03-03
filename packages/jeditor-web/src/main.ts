@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import JEditor from 'core/editor'
 
 import container from './dependency-inject.config'

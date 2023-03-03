@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.0",
     "@vitest/coverage-c8": "^0.28.5",
     "@vitest/ui": "^0.28.5",
     "eslint": "^8.35.0",
@@ -51,6 +52,7 @@
     "tsx": "^3.12.2",
     "typescript": "^4.9.0",
     "vite": "^4.0.0",
+    "vite-tsconfig-paths": "^4.0.5",
     "vitest": "^0.28.5",
     "vue": "^3.2.45"
   }
