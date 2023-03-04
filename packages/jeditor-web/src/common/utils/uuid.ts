@@ -6,9 +6,7 @@ export function createIdentifier() {
 
 // =========  test createIdentifier  ======= //
 if (import.meta.vitest) {
-	const { test, expect } = import.meta.vitest
-
-	test('createIdentifier', () => {
+	it('should create a id', () => {
 		const id = createIdentifier()
 
 		expect(id).not.toBeUndefined()
@@ -16,3 +14,5 @@ if (import.meta.vitest) {
 	})
 }
 // =========  test createIdentifier  ======= //
+
+export { validate }
