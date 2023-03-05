@@ -7,7 +7,7 @@ import {
 	reactive,
 } from 'vue'
 
-import ModelService from 'core/modelService'
+import BoardService from 'core/boardService'
 import { ee } from 'shared/utils/event'
 import Wrapper from 'shared/wrapper'
 import container from 'dependency-inject.config'
@@ -29,8 +29,8 @@ const WhiteboardView = defineComponent({
 
 		watchEffect(() => {
 			ee.on('modelChange', () => {
-				const modelService = container.get<ModelService>(Symbols.ModelService)
-				const boardModel = modelService.getBoardModel()
+				const boardService = container.get<BoardService>(Symbols.BoardService)
+				const boardModel = boardService.getBoardModel()
 				if (boardModel) {
 					elements.length = 0
 					elements.push(...boardModel.elements)
@@ -48,7 +48,7 @@ const WhiteboardView = defineComponent({
 								id
 							}}
 						>
-							{h(resolveComponent(el.type), { ...el.props })}
+							{h(resolveComponent(el.type.toString()), { ...el.props })}
 						</Wrapper>
 					)
 				})}

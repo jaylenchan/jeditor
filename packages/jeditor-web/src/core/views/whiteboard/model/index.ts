@@ -1,11 +1,12 @@
 import { createIdentifier } from 'shared/utils/uuid'
+import Symbols from 'dependency-type.config'
 
 import { ElementModel, Border, Position } from 'core/type'
 
 class WhiteboardModel implements ElementModel {
 
 	public readonly id: string
-	public readonly type: string
+	public readonly type: symbol
 	public elements: ElementModel[]
 	public props: {
 		position: Position
@@ -15,7 +16,7 @@ class WhiteboardModel implements ElementModel {
 
 	constructor() {
 		this.id = createIdentifier()
-		this.type = 'Whiteboard'
+		this.type = Symbols.Whiteboard
 		this.elements = []
 		this.props = {
 			position: {

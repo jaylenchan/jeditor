@@ -6,7 +6,8 @@ import { inject, injectable } from 'shared/utils/dependencyInject'
 import { ee } from 'shared/utils/event'
 import Symbols from 'dependency-type.config'
 
-import { EditorPlugin } from 'extensions/type'
+import WhiteboardModel from './views/whiteboard/model'
+
 import type { App } from 'vue'
 
 type VNode = ReturnType<typeof h>
@@ -20,12 +21,15 @@ class BoardService {
 	private boardVNode!: VNode
 
 	/** 初始化whiteboard */
-	public initBoard(boardPlugin: EditorPlugin, app: App): void {
+	public initBoard(app: App): void {
+		const boardPlugin = this.pluginService.getPlugin(Symbols.Whiteboard)
+		if (!boardPlugin) throw new Error('can not init board, editor init failed!')
+
 		const boardView = boardPlugin.view
 		const board = document.getElementById('board')
 
 		if (board) {
-			const model = this.modelService.generateModel('Whiteboard')
+			const model = this.modelService.generateModel(Symbols.Whiteboard)
 			const boardVNode = h(boardView, { model })
 
 			this.boardVNode = boardVNode
@@ -34,9 +38,23 @@ class BoardService {
 		}
 	}
 
-	public addElement(type: string): void {
+	public getBoardModel(): WhiteboardModel | null {
+		const ids = this.modelService.getModelIds(Symbols.Whiteboard)
+
+		if (ids) {
+			const whiteboardModel = this.modelService.getModel(
+				Symbols.Whiteboard,
+				ids[0]
+			)
+			return whiteboardModel as WhiteboardModel
+		}
+
+		return null
+	}
+
+	public addElement(type: symbol): void {
 		const model = this.modelService.generateModel(type)
-		const boardModel = this.modelService.getBoardModel()
+		const boardModel = this.getBoardModel()
 
 		if (boardModel) {
 			boardModel.elements.push(model)

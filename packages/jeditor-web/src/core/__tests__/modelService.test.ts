@@ -6,16 +6,20 @@ import { createIdentifier } from 'shared/utils/uuid'
 import container from 'dependency-inject.config'
 import Symbols from 'dependency-type.config'
 
+import type BoardService from 'core/boardService'
 import type ModelService from 'core/modelService'
 import type PluginService from 'core/pluginService'
 import { ElementModel } from 'core/type'
 import { EditorPlugin } from 'extensions/type'
 
-describe('modelService', () => {
+describe.concurrent('modelService', () => {
 	let pluginService: PluginService
 	let modelService: ModelService
+	let boardService: BoardService
 	let plugin: EditorPlugin
 	let model: ElementModel
+	const validType = Symbol.for('validType')
+	const invalidType = Symbol.for('invalidType')
 
 	beforeEach(() => {
 		container.snapshot()
@@ -30,9 +34,10 @@ describe('modelService', () => {
 
 		pluginService = container.get<PluginService>(Symbols.PluginService)
 		modelService = container.get<ModelService>(Symbols.ModelService)
+		boardService = container.get<BoardService>(Symbols.BoardService)
 
 		plugin = {
-			type: 'validType',
+			type: validType,
 			view: defineComponent({
 				setup() {
 					return 'plugin'
@@ -41,7 +46,7 @@ describe('modelService', () => {
 			model: class {
 
 				public id = createIdentifier()
-				public type = 'validType'
+				public type = validType
 				public props = {
 					position: { x: 0, y: 0 },
 					border: {
@@ -58,7 +63,7 @@ describe('modelService', () => {
 
 		pluginService.usePlugin(plugin)
 
-		model = modelService.generateModel('validType')
+		model = modelService.generateModel(validType)
 	})
 
 	afterEach(() => {
@@ -71,7 +76,7 @@ describe('modelService', () => {
 		expect(model).not.toBeNull()
 		expect(model).toEqual(pluginModel)
 		expect(model.id).toBe('validId')
-		expect(model.type).toBe('validType')
+		expect(model.type).toBe(validType)
 		expect(model.props).toEqual({
 			position: { x: 0, y: 0 },
 			border: {
@@ -85,7 +90,7 @@ describe('modelService', () => {
 	})
 
 	it('should throw error if given invalid type when modelService generateModel', () => {
-		expect(() => modelService.generateModel('invalidType')).toThrow(
+		expect(() => modelService.generateModel(invalidType)).toThrow(
 			/unknown model type/
 		)
 	})
@@ -93,12 +98,12 @@ describe('modelService', () => {
 	it('should has a model in modelPool and a modelId in modelIdPool if set a specific type model', () => {
 		modelService.setModel(model)
 
-		expect(modelService.modelPool.has('validType')).toBe(true)
-		expect(modelService.modelIdPool.has('validType')).toBe(true)
+		expect(modelService.modelPool.has(validType)).toBe(true)
+		expect(modelService.modelIdPool.has(validType)).toBe(true)
 	})
 
 	it('should get model given a valid type and id', () => {
-		const model = modelService.getModel('validType', 'validId')
+		const model = modelService.getModel(validType, 'validId')
 		const pluginModel = new plugin.model()
 
 		expect(model).not.toBeNull()
@@ -106,15 +111,15 @@ describe('modelService', () => {
 	})
 
 	it('should get null given a invalid type or id', () => {
-		const invalidTypeModel = modelService.getModel('invalidType', 'validId')
-		const invalidIdModel = modelService.getModel('validType', 'invalidId')
+		const invalidTypeModel = modelService.getModel(invalidType, 'validId')
+		const invalidIdModel = modelService.getModel(validType, 'invalidId')
 
 		expect(invalidTypeModel).toBeNull()
 		expect(invalidIdModel).toBeNull()
 	})
 
 	it('should get a id array given a valid type', () => {
-		const ids = modelService.getModelIds('validType')
+		const ids = modelService.getModelIds(validType)
 
 		expect(ids).not.toBeNull()
 		expect(ids?.length).toBe(1)
@@ -126,7 +131,7 @@ describe('modelService', () => {
 
 		expect(allIds).not.toBeNull()
 		expect(allIds).toEqual({
-			validType: ['validId'],
+			'Symbol(validType)': ['validId'],
 		})
 	})
 
@@ -141,18 +146,18 @@ describe('modelService', () => {
 		const whiteboard = container.get<Whiteboard>(Symbols.Whiteboard)
 		pluginService.usePlugin(whiteboard)
 
-		modelService.generateModel('Whiteboard')
+		modelService.generateModel(Symbols.Whiteboard)
 
-		const boardModel = modelService.getBoardModel()
+		const boardModel = boardService.getBoardModel()
 
 		expect(boardModel).not.toBeNull()
 		expect(isArray(boardModel?.elements)).toBe(true)
 		expect(boardModel?.id).toBe('validId')
-		expect(boardModel?.type).toBe('Whiteboard')
+		expect(boardModel?.type).toBe(Symbols.Whiteboard)
 	})
 
 	it('should get null if Whiteboard Plugin not used', () => {
-		const boardModel = modelService.getBoardModel()
+		const boardModel = boardService.getBoardModel()
 
 		expect(boardModel).toBeNull()
 	})

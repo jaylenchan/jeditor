@@ -13,7 +13,7 @@ export interface Border {
 /** 面板元素 */
 export interface ElementModel {
 	readonly id: string
-	readonly type: string
+	readonly type: symbol
 	props: {
 		position: Position
 		border: Border

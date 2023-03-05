@@ -23,7 +23,7 @@ const App = defineComponent({
 									const boardService = container.get<BoardService>(
 										Symbols.BoardService
 									)
-									boardService.addElement('Text')
+									boardService.addElement(Symbols.Text)
 								}}
 							>
 								点击新增文本元素

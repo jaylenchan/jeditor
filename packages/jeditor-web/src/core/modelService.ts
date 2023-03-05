@@ -3,7 +3,6 @@ import { inject, injectable } from 'shared/utils/dependencyInject'
 import Symbols from 'dependency-type.config'
 
 import { ElementModel } from 'core/type'
-import type WhiteboardModel from 'core/views/whiteboard/model'
 
 interface ModelIds {
 	[k: string]: string[]
@@ -14,10 +13,10 @@ class ModelService {
 
 	@inject(Symbols.PluginService) pluginService!: PluginService
 
-	public modelIdPool: Map<string, Set<string>> = new Map()
-	public modelPool: Map<string, Map<string, ElementModel>> = new Map()
+	public modelIdPool: Map<symbol, Set<string>> = new Map()
+	public modelPool: Map<symbol, Map<string, ElementModel>> = new Map()
 
-	public generateModel(type: string): ElementModel {
+	public generateModel(type: symbol): ElementModel {
 		const plugin = this.pluginService.pluginPool.get(type)
 
 		if (plugin && plugin.model) {
@@ -49,7 +48,7 @@ class ModelService {
 		models.set(modelId, model)
 	}
 
-	public getModel(type: string, id: string): ElementModel | null {
+	public getModel(type: symbol, id: string): ElementModel | null {
 		const models = this.modelPool.get(type)
 		if (!models) return null
 
@@ -59,7 +58,7 @@ class ModelService {
 		return model
 	}
 
-	public getModelIds(type: string): string[] | null {
+	public getModelIds(type: symbol): string[] | null {
 		const ids = this.modelIdPool.get(type)
 
 		if (!ids) return null
@@ -76,27 +75,16 @@ class ModelService {
 		const modelIds = {} as ModelIds
 
 		for (const [type, ids] of this.modelIdPool) {
-			if (!modelIds[type]) {
-				modelIds[type] = []
+			if (!modelIds[type.toString()]) {
+				modelIds[type.toString()] = []
 			}
 
 			for (const id of ids) {
-				modelIds[type].push(id)
+				modelIds[type.toString()].push(id)
 			}
 		}
 
 		return modelIds
-	}
-
-	public getBoardModel(): WhiteboardModel | null {
-		const ids = this.getModelIds('Whiteboard')
-
-		if (ids) {
-			const whiteboardModel = this.getModel('Whiteboard', ids[0])
-			return whiteboardModel as WhiteboardModel
-		}
-
-		return null
 	}
 
 }
