@@ -10,8 +10,7 @@
 			"core/*": ["src/core/*"],
 			"extensions/*": ["src/extensions/*"],
 			"shared/*": ["src/shared/*"],
-			"dependency-inject.config": ["src/dependency-inject.config.ts"],
-			"dependency-type.config": ["src/dependency-type.config.ts"]
+			"settings/*": ["src/settings/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

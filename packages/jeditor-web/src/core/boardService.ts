@@ -2,9 +2,9 @@ import { h, render } from 'vue'
 
 import ModelService from 'core/modelService'
 import PluginService from 'core/pluginService'
+import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 import { ee } from 'shared/utils/event'
-import Symbols from 'dependency-type.config'
 
 import WhiteboardModel from './views/whiteboard/model'
 

@@ -28,14 +28,7 @@ export default defineConfig({
 			core: path.resolve(__dirname, './src/core'),
 			extensions: path.resolve(__dirname, './src/extensions'),
 			shared: path.resolve(__dirname, './src/shared'),
-			'dependency-inject.config': path.resolve(
-				__dirname,
-				'./src/dependency-inject.config.ts'
-			),
-			'dependency-type.config': path.resolve(
-				__dirname,
-				'./src/dependency-type.config.ts'
-			),
+			settings: path.resolve(__dirname, './src/settings'),
 		},
 	},
 	base: './',

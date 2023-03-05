@@ -21,4 +21,6 @@ export function injectableInherit<T>(...inheritClasses: Class<unknown>[]) {
 	}
 }
 
-export { injectable, inject, Container }
+export const container = new Container()
+
+export { injectable, inject }

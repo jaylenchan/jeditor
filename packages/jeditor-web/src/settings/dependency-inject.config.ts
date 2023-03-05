@@ -4,12 +4,10 @@ import ModelService from 'core/modelService'
 import PluginService from 'core/pluginService'
 import Whiteboard from 'core/views/whiteboard'
 import { Text } from 'extensions/index'
-import { Container } from 'shared/utils/dependencyInject'
-import Symbols from 'dependency-type.config'
+import Symbols from 'settings/dependency-type.config'
+import { container } from 'shared/utils/dependencyInject'
 
 import type { EditorPlugin } from 'extensions/type'
-
-const container = new Container()
 
 container
 	.bind<PluginService>(Symbols.PluginService)

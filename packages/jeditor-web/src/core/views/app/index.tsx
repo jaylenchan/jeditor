@@ -1,8 +1,8 @@
 import { defineComponent } from 'vue'
 
 import BoardService from 'core/boardService'
-import container from 'dependency-inject.config'
-import Symbols from 'dependency-type.config'
+import container from 'settings/dependency-inject.config'
+import Symbols from 'settings/dependency-type.config'
 
 import style from './index.module.scss'
 

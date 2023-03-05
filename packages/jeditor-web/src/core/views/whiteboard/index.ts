@@ -1,5 +1,5 @@
+import Symbols from 'settings/dependency-type.config'
 import { injectable } from 'shared/utils/dependencyInject'
-import Symbols from 'dependency-type.config'
 
 import Model from './model'
 import View from './view'

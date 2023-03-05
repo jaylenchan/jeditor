@@ -1,5 +1,5 @@
+import Symbols from 'settings/dependency-type.config'
 import { createIdentifier } from 'shared/utils/uuid'
-import Symbols from 'dependency-type.config'
 
 import { ElementModel, Border, Position } from 'core/type'
 

@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue'
 
 import Whiteboard from 'core/views/whiteboard'
+import container from 'settings/dependency-inject.config'
+import Symbols from 'settings/dependency-type.config'
 import { isArray } from 'shared/utils/typeCheck'
 import { createIdentifier } from 'shared/utils/uuid'
-import container from 'dependency-inject.config'
-import Symbols from 'dependency-type.config'
 
 import type BoardService from 'core/boardService'
 import type ModelService from 'core/modelService'

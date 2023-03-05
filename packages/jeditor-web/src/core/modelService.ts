@@ -1,6 +1,6 @@
 import PluginService from 'core/pluginService'
+import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
-import Symbols from 'dependency-type.config'
 
 import { ElementModel } from 'core/type'
 

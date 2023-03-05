@@ -8,10 +8,10 @@ import {
 } from 'vue'
 
 import BoardService from 'core/boardService'
+import container from 'settings/dependency-inject.config'
+import Symbols from 'settings/dependency-type.config'
 import { ee } from 'shared/utils/event'
 import Wrapper from 'shared/wrapper'
-import container from 'dependency-inject.config'
-import Symbols from 'dependency-type.config'
 
 import { ElementModel } from 'core/type'
 import type BoardModel from 'core/views/whiteboard/model'
