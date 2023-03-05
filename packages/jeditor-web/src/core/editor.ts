@@ -1,21 +1,21 @@
-import { inject, injectable } from 'common/utils/dependencyInject'
-import container from 'src/dependency-inject.config'
+import { inject, injectable } from 'shared/utils/dependencyInject'
+import container from 'dependency-inject.config'
+import Symbols from 'dependency-type.config'
 
 import BoardService from './boardService'
 import PluginService from './pluginService'
 
-import { TYPES } from 'core/type'
 import { EditorPlugin } from 'extensions/type'
 
 @injectable()
 class JEditor {
 
-	@inject(TYPES.PluginService) pluginService!: PluginService
-	@inject(TYPES.BoardService) boardService!: BoardService
+	@inject(Symbols.PluginService) pluginService!: PluginService
+	@inject(Symbols.BoardService) boardService!: BoardService
 
 	public run(appContainer: string, plugins: EditorPlugin[]): void {
 		this.pluginService
-			.usePlugin(container.get(TYPES.Whiteboard))
+			.usePlugin(container.get(Symbols.Whiteboard))
 			.usePlugins(plugins)
 			.applyPlugins(appContainer)
 

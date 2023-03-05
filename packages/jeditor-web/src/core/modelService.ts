@@ -1,7 +1,8 @@
-import { inject, injectable } from 'common/utils/dependencyInject'
 import PluginService from 'core/pluginService'
+import { inject, injectable } from 'shared/utils/dependencyInject'
+import Symbols from 'dependency-type.config'
 
-import { ElementModel, TYPES } from 'core/type'
+import { ElementModel } from 'core/type'
 import type WhiteboardModel from 'core/views/whiteboard/model'
 
 interface ModelIds {
@@ -11,7 +12,7 @@ interface ModelIds {
 @injectable()
 class ModelService {
 
-	@inject(TYPES.PluginService) pluginService!: PluginService
+	@inject(Symbols.PluginService) pluginService!: PluginService
 
 	public modelIdPool: Map<string, Set<string>> = new Map()
 	public modelPool: Map<string, Map<string, ElementModel>> = new Map()

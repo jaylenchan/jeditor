@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 
-import { injectable } from 'common/utils/dependencyInject'
+import { injectable } from 'shared/utils/dependencyInject'
 
 import AppView from './views/app'
 

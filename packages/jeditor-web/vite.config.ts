@@ -27,8 +27,15 @@ export default defineConfig({
 		alias: {
 			core: path.resolve(__dirname, './src/core'),
 			extensions: path.resolve(__dirname, './src/extensions'),
-			common: path.resolve(__dirname, './src/common'),
-			src: path.resolve(__dirname, './src'),
+			shared: path.resolve(__dirname, './src/shared'),
+			'dependency-inject.config': path.resolve(
+				__dirname,
+				'./src/dependency-inject.config.ts'
+			),
+			'dependency-type.config': path.resolve(
+				__dirname,
+				'./src/dependency-type.config.ts'
+			),
 		},
 	},
 	base: './',

@@ -9,9 +9,9 @@
 		"paths": {
 			"core/*": ["src/core/*"],
 			"extensions/*": ["src/extensions/*"],
-			"common/*": ["src/common/*"],
-			"src/*": ["src/*"],
-			"web-src/*": ["src/*"]
+			"shared/*": ["src/shared/*"],
+			"dependency-inject.config": ["src/dependency-inject.config.ts"],
+			"dependency-type.config": ["src/dependency-type.config.ts"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

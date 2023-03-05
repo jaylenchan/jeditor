@@ -1,9 +1,8 @@
 import { defineComponent } from 'vue'
 
 import BoardService from 'core/boardService'
-import container from 'src/dependency-inject.config'
-
-import { TYPES } from 'core/type'
+import container from 'dependency-inject.config'
+import Symbols from 'dependency-type.config'
 
 import style from './index.module.scss'
 
@@ -22,7 +21,7 @@ const App = defineComponent({
 								type={'primary'}
 								onClick={() => {
 									const boardService = container.get<BoardService>(
-										TYPES.BoardService
+										Symbols.BoardService
 									)
 									boardService.addElement('Text')
 								}}

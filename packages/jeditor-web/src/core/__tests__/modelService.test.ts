@@ -1,13 +1,14 @@
 import { defineComponent } from 'vue'
 
-import { isArray } from 'common/utils/typeCheck'
-import { createIdentifier } from 'common/utils/uuid'
 import Whiteboard from 'core/views/whiteboard'
-import container from 'web-src/dependency-inject.config'
+import { isArray } from 'shared/utils/typeCheck'
+import { createIdentifier } from 'shared/utils/uuid'
+import container from 'dependency-inject.config'
+import Symbols from 'dependency-type.config'
 
 import type ModelService from 'core/modelService'
 import type PluginService from 'core/pluginService'
-import { ElementModel, TYPES } from 'core/type'
+import { ElementModel } from 'core/type'
 import { EditorPlugin } from 'extensions/type'
 
 describe('modelService', () => {
@@ -19,7 +20,7 @@ describe('modelService', () => {
 	beforeEach(() => {
 		container.snapshot()
 
-		vi.mock('common/utils/uuid', async importOriginal => {
+		vi.mock('shared/utils/uuid', async importOriginal => {
 			const mod = (await importOriginal()) as object
 			return {
 				...mod,
@@ -27,8 +28,8 @@ describe('modelService', () => {
 			}
 		})
 
-		pluginService = container.get<PluginService>(TYPES.PluginService)
-		modelService = container.get<ModelService>(TYPES.ModelService)
+		pluginService = container.get<PluginService>(Symbols.PluginService)
+		modelService = container.get<ModelService>(Symbols.ModelService)
 
 		plugin = {
 			type: 'validType',
@@ -83,11 +84,11 @@ describe('modelService', () => {
 		})
 	})
 
-	// it("should throw error if given invalid type when modelService generateModel", () => {
-	// 	const model = modelService.generateModel('invalidType');
-
-	// 	expect(model).toThrowError(/unknown model type/)
-	// })
+	it('should throw error if given invalid type when modelService generateModel', () => {
+		expect(() => modelService.generateModel('invalidType')).toThrow(
+			/unknown model type/
+		)
+	})
 
 	it('should has a model in modelPool and a modelId in modelIdPool if set a specific type model', () => {
 		modelService.setModel(model)
@@ -137,7 +138,7 @@ describe('modelService', () => {
 	})
 
 	it('should get the whiteboard model if Whiteboard Plugin used', () => {
-		const whiteboard = container.get<Whiteboard>(TYPES.Whiteboard)
+		const whiteboard = container.get<Whiteboard>(Symbols.Whiteboard)
 		pluginService.usePlugin(whiteboard)
 
 		modelService.generateModel('Whiteboard')

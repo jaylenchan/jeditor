@@ -1,22 +1,21 @@
 import { h, render } from 'vue'
 
-import { inject, injectable } from 'common/utils/dependencyInject'
-import { ee } from 'common/utils/event'
 import ModelService from 'core/modelService'
 import PluginService from 'core/pluginService'
+import { inject, injectable } from 'shared/utils/dependencyInject'
+import { ee } from 'shared/utils/event'
+import Symbols from 'dependency-type.config'
 
-import { TYPES } from 'core/type'
 import { EditorPlugin } from 'extensions/type'
 import type { App } from 'vue'
-import 'reflect-metadata'
 
 type VNode = ReturnType<typeof h>
 
 @injectable()
 class BoardService {
 
-	@inject(TYPES.PluginService) pluginService!: PluginService
-	@inject(TYPES.ModelService) modelService!: ModelService
+	@inject(Symbols.PluginService) pluginService!: PluginService
+	@inject(Symbols.ModelService) modelService!: ModelService
 
 	private boardVNode!: VNode
 

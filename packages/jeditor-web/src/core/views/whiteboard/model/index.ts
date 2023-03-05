@@ -1,4 +1,4 @@
-import { createIdentifier } from 'common/utils/uuid'
+import { createIdentifier } from 'shared/utils/uuid'
 
 import { ElementModel, Border, Position } from 'core/type'
 

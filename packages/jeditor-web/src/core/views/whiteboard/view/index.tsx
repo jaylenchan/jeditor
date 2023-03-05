@@ -7,14 +7,14 @@ import {
 	reactive,
 } from 'vue'
 
-import { ee } from 'common/utils/event'
-import Wrapper from 'common/wrapper'
 import ModelService from 'core/modelService'
-import BoardModel from 'core/views/whiteboard/model'
-import container from 'src/dependency-inject.config'
+import { ee } from 'shared/utils/event'
+import Wrapper from 'shared/wrapper'
+import container from 'dependency-inject.config'
+import Symbols from 'dependency-type.config'
 
-import { ElementModel, TYPES } from 'core/type'
-
+import { ElementModel } from 'core/type'
+import type BoardModel from 'core/views/whiteboard/model'
 import style from './index.module.scss'
 
 const WhiteboardView = defineComponent({
@@ -29,7 +29,7 @@ const WhiteboardView = defineComponent({
 
 		watchEffect(() => {
 			ee.on('modelChange', () => {
-				const modelService = container.get<ModelService>(TYPES.ModelService)
+				const modelService = container.get<ModelService>(Symbols.ModelService)
 				const boardModel = modelService.getBoardModel()
 				if (boardModel) {
 					elements.length = 0

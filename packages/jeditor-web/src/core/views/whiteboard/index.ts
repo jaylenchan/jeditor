@@ -1,4 +1,4 @@
-import { injectable } from 'common/utils/dependencyInject'
+import { injectable } from 'shared/utils/dependencyInject'
 
 import Model from './model'
 import View from './view'

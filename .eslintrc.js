@@ -47,6 +47,16 @@ module.exports = {
 				],
 				pathGroups: [
 					{
+						pattern: 'dependency-inject.config',
+						group: 'internal',
+						position: 'after',
+					},
+					{
+						pattern: 'dependency-type.config',
+						group: 'internal',
+						position: 'after',
+					},
+					{
 						pattern: '**/type',
 						group: 'type',
 					},
@@ -56,6 +66,7 @@ module.exports = {
 						position: 'after',
 					},
 				],
+				distinctGroup: false,
 				alphabetize: {
 					order: 'asc',
 					caseInsensitive: true,
