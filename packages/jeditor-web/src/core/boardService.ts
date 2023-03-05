@@ -39,14 +39,13 @@ class BoardService {
 	}
 
 	public getBoardModel(): WhiteboardModel | null {
-		const ids = this.modelService.getModelIds(Symbols.Whiteboard)
+		const boardModel = this.modelService.getModel(
+			Symbols.Whiteboard,
+			Symbols.Whiteboard.toString()
+		)
 
-		if (ids) {
-			const whiteboardModel = this.modelService.getModel(
-				Symbols.Whiteboard,
-				ids[0]
-			)
-			return whiteboardModel as WhiteboardModel
+		if (boardModel) {
+			return boardModel as WhiteboardModel
 		}
 
 		return null

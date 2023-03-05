@@ -1,5 +1,4 @@
 import Symbols from 'settings/dependency-type.config'
-import { createIdentifier } from 'shared/utils/uuid'
 
 import { ElementModel, Border, Position } from 'core/type'
 
@@ -15,7 +14,7 @@ class WhiteboardModel implements ElementModel {
 	}
 
 	constructor() {
-		this.id = createIdentifier()
+		this.id = Symbols.Whiteboard.toString()
 		this.type = Symbols.Whiteboard
 		this.elements = []
 		this.props = {

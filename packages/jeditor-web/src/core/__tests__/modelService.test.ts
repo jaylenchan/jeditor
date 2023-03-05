@@ -152,7 +152,7 @@ describe.concurrent('modelService', () => {
 
 		expect(boardModel).not.toBeNull()
 		expect(isArray(boardModel?.elements)).toBe(true)
-		expect(boardModel?.id).toBe('validId')
+		expect(boardModel?.id).toBe(Symbols.Whiteboard.toString())
 		expect(boardModel?.type).toBe(Symbols.Whiteboard)
 	})
 
