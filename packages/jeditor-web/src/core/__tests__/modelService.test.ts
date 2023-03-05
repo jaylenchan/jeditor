@@ -1,6 +1,8 @@
 import { defineComponent } from 'vue'
 
+import { isArray } from 'common/utils/typeCheck'
 import { createIdentifier } from 'common/utils/uuid'
+import Whiteboard from 'core/views/whiteboard'
 import container from 'web-src/dependency-inject.config'
 
 import type ModelService from 'core/modelService'
@@ -81,6 +83,12 @@ describe('modelService', () => {
 		})
 	})
 
+	// it("should throw error if given invalid type when modelService generateModel", () => {
+	// 	const model = modelService.generateModel('invalidType');
+
+	// 	expect(model).toThrowError(/unknown model type/)
+	// })
+
 	it('should has a model in modelPool and a modelId in modelIdPool if set a specific type model', () => {
 		modelService.setModel(model)
 
@@ -126,5 +134,25 @@ describe('modelService', () => {
 		const allIds = modelService.getAllModelIds()
 
 		expect(allIds).toEqual({})
+	})
+
+	it('should get the whiteboard model if Whiteboard Plugin used', () => {
+		const whiteboard = container.get<Whiteboard>(TYPES.Whiteboard)
+		pluginService.usePlugin(whiteboard)
+
+		modelService.generateModel('Whiteboard')
+
+		const boardModel = modelService.getBoardModel()
+
+		expect(boardModel).not.toBeNull()
+		expect(isArray(boardModel?.elements)).toBe(true)
+		expect(boardModel?.id).toBe('validId')
+		expect(boardModel?.type).toBe('Whiteboard')
+	})
+
+	it('should get null if Whiteboard Plugin not used', () => {
+		const boardModel = modelService.getBoardModel()
+
+		expect(boardModel).toBeNull()
 	})
 })

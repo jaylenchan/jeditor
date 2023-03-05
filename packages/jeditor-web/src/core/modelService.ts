@@ -58,21 +58,17 @@ class ModelService {
 		return model
 	}
 
-	public getModelIds(type?: string): string[] | null {
-		if (!type) {
-			return null
-		} else {
-			const ids = this.modelIdPool.get(type)
+	public getModelIds(type: string): string[] | null {
+		const ids = this.modelIdPool.get(type)
 
-			if (!ids) return null
+		if (!ids) return null
 
-			const modelIds: string[] = []
-			for (const id of ids) {
-				modelIds.push(id)
-			}
-
-			return modelIds
+		const modelIds: string[] = []
+		for (const id of ids) {
+			modelIds.push(id)
 		}
+
+		return modelIds
 	}
 
 	public getAllModelIds(): ModelIds {
