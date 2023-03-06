@@ -1,6 +1,5 @@
 import Symbols from 'settings/dependency-type.config'
 import { injectable, inject } from 'shared/utils/dependencyInject'
-import { ee } from 'shared/utils/event'
 import { generateRenderVNode, renderVNode } from 'shared/utils/render'
 
 import type EditorPluginService from './editorPluginService'
@@ -76,8 +75,6 @@ class PropPanelService {
 
 			renderVNode(this.propPanelVNode, propPanelContainer)
 		}
-
-		ee.emit('propPanelAcitve', Symbols.Text)
 	}
 
 	public getPanel(type: symbol): PanelItem[] {

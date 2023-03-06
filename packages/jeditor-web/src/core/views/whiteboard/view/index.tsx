@@ -44,8 +44,9 @@ const WhiteboardView = defineComponent({
 					return (
 						<Wrapper
 							id={el.id}
-							onSelected={id => {
-								id
+							type={el.type}
+							onSelected={({ id, type }: { id: string; type: symbol }) => {
+								ee.emit('propPanelAcitve', { id, type })
 							}}
 						>
 							{h(resolveComponent(el.type.toString()), { ...el.props })}

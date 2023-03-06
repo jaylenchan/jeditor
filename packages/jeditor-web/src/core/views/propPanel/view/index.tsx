@@ -13,6 +13,7 @@ import { container } from 'shared/utils/dependencyInject'
 import { ee } from 'shared/utils/event'
 
 import type PropPanelModel from '../model'
+import type ModelService from 'core/modelService'
 import type { PanelItem } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import './index.module.scss'
@@ -29,7 +30,7 @@ const PropPanelView = defineComponent({
 		const curType = ref(Symbol.for(''))
 
 		watchEffect(() => {
-			ee.on('propPanelAcitve', (type: symbol) => {
+			ee.on('propPanelAcitve', ({ type, id }: { type: symbol; id: string }) => {
 				if (curType.value.toString() != type.toString()) {
 					curType.value = type
 					curPanel.length = 0
@@ -37,8 +38,13 @@ const PropPanelView = defineComponent({
 					const propPanelService = container.get<PropPanelService>(
 						Symbols.PropPanelService
 					)
+
 					const panel = propPanelService.getPanel(Symbols.Text)
 					curPanel.push(...panel)
+
+					const modelService = container.get<ModelService>(Symbols.ModelService)
+					const model = modelService.getModel(type, id)
+					model
 				}
 			})
 		})
@@ -49,6 +55,7 @@ const PropPanelView = defineComponent({
 					const [event, eventHandler] = el.event
 					return h(resolveComponent('Symbol(Text)'), {
 						[event]: eventHandler,
+						text: JSON.stringify('DDDDD'),
 					})
 				})}
 			</div>

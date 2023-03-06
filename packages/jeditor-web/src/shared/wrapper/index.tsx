@@ -6,15 +6,19 @@ const Wrapper = defineComponent({
 			type: String,
 			required: true,
 		},
+		type: {
+			type: Symbol,
+			required: true,
+		},
 	},
 	emits: ['selected'],
-	setup({ id }, { slots, emit }) {
+	setup({ id, type }, { slots, emit }) {
 		return () => {
 			return (
 				<div
 					id="element-wrapper"
 					onClick={() => {
-						emit('selected', id)
+						emit('selected', { id, type })
 					}}
 				>
 					{slots.default && slots.default()}
