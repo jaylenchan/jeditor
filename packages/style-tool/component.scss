@@ -1,0 +1,47 @@
+@use 'color' as *;
+
+$components: (
+	// === button ===
+	button:
+		(
+			bg: (
+				hover: (
+					info: 2,
+				),
+				active: (
+					info: 3,
+				),
+				normal: (
+					white: 1,
+				),
+			),
+			text: (
+				normal: (
+					info: 10,
+				),
+			),
+		),
+	// === button ===
+);
+
+@mixin define-component-color-var($components) {
+	:root {
+		@each $component, $props in $components {
+			--component-type: #{$component};
+			@each $prop, $statusArr in $props {
+				@each $status, $types in $statusArr {
+					@each $type, $level in $types {
+						#{createVarName((color,$component,$prop,$status))}: useColor(
+							$type,
+							$level
+						);
+					}
+				}
+			}
+		}
+	}
+}
+
+@function useComponentColor($component, $prop, $status) {
+	@return var(#{createVarName((color, $component, $prop, $status))});
+}

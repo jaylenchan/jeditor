@@ -1,4 +1,4 @@
 .boardContainer {
-	@include position(relative);
-	@include text-color(getTextColor(brand, primary));
+	@include pos(relative);
+	@include text-color(useColor(success, 7));
 }

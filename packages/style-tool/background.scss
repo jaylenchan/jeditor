@@ -1,29 +1,53 @@
 // background
 @mixin bg($vals...) {
-  background: $vals;
+	background: $vals;
 }
 
 // background-color
 @mixin bg-color($val) {
-  background-color: $val;
+	background-color: $val;
+}
+
+@mixin bg-color-hover($val) {
+	&:hover {
+		background-color: $val;
+	}
+}
+
+@mixin bg-color-active($val) {
+	&:active {
+		background-color: $val;
+	}
+}
+
+@mixin bg-color-visited($val) {
+	&:visited {
+		background-color: $val;
+	}
+}
+
+@mixin bg-color-disabled($val) {
+	&:disabled {
+		background-color: $val;
+	}
 }
 
 // background-image
 @mixin bg-img($val) {
-  background-image: $val;
+	background-image: $val;
 }
 
 // background-repeat
 @mixin bg-repeat($vals) {
-  background-repeat: $vals;
+	background-repeat: $vals;
 }
 
 // background-attachment
 @mixin bg-attach($val) {
-  background-attachment: $val;
+	background-attachment: $val;
 }
 
 // background-position
 @mixin bg-pos($vals) {
-  background-position: $vals;
+	background-position: $vals;
 }

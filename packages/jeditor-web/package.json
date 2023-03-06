@@ -9,6 +9,7 @@
     "create-plugin": "cd src/editor-plugins && npx jeditor-cli create template --plugin"
   },
   "dependencies": {
+    "@jeditor/materials": "workspace:^0.0.1",
     "@jeditor/style-tool": "workspace:^0.0.1",
     "element-plus": "^2.2.32",
     "eventemitter3": "^5.0.0",

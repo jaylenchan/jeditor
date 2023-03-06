@@ -2,3 +2,21 @@
 @mixin text-color($val) {
 	color: $val;
 }
+
+@mixin text-color-hover($val) {
+	&:hover {
+		color: $val;
+	}
+}
+
+@mixin text-color-active($val) {
+	&:active {
+		color: $val;
+	}
+}
+
+@mixin text-color-disabled($val) {
+	&:disabled {
+		color: $val;
+	}
+}

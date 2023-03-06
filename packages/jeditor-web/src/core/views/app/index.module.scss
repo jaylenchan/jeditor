@@ -1,16 +1,16 @@
 @include reset-style($resetEls);
 @include reset-style-for-old-browser();
 @include full-page($fullPageEls);
-@include define-color-vars($colors);
-@include extend-color-state($types, $states);
-@include extend-color-prop($propColors);
+@include define-color-var($colors);
+@include define-color-status-var($typeStatusMap);
+@include define-component-color-var($components);
 
 .container {
 	@include full-in-father();
 	.header {
 		@include width(100%);
-		@include bg-color(getBackgroundColor(gray, primary));
-		@include bd-bottom(1px solid getBorderColor(gray, tertiary));
+		@include bg-color(useColor(info, 1));
+		@include bd-bottom(1px solid useColor(info, 1));
 	}
 
 	.bottom {
@@ -18,7 +18,7 @@
 
 		.componentPanel {
 			@include full-in-father();
-			@include bg-color(getBackgroundColor(gray, primary));
+			@include bg-color(useColor(info, 1));
 		}
 
 		.whiteboard {
@@ -30,7 +30,7 @@
 
 		.propPanel {
 			@include full-in-father();
-			@include bg-color(getBackgroundColor(gray, primary));
+			@include bg-color(useColor(info, 1));
 		}
 	}
 }
