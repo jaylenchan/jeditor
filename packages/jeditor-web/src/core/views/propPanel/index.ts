@@ -7,12 +7,12 @@ import View from './view'
 import type { BuiltInPlugin } from 'core/type'
 
 @injectable()
-class Whiteboard implements BuiltInPlugin {
+class PropPanel implements BuiltInPlugin {
 
-	type = Symbols.Whiteboard
+	type = Symbols.PropPanel
 	view = View
 	model = Model
 
 }
 
-export default Whiteboard
+export default PropPanel

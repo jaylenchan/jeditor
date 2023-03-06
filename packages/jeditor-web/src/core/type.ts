@@ -1,23 +1,8 @@
-export interface Position {
-	x: number
-	y: number
-}
+import { ModelClass } from 'shared/utils/type'
+import type { Component } from 'vue'
 
-export interface Border {
-	type: string
-	color: string
-	weight: number
-	radius: number
-}
-
-/** 面板元素 */
-export interface ElementModel {
-	readonly id: string
-	readonly type: symbol
-	props: {
-		position: Position
-		border: Border
-		opacity: number
-		[k: string]: unknown
-	}
+export interface BuiltInPlugin {
+	type: symbol
+	view: Component
+	model: ModelClass
 }

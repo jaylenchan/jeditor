@@ -1,22 +1,22 @@
 import Symbols from 'settings/dependency-type.config'
-import { createIdentifier } from 'shared/utils/uuid'
 
 import type { Border, ElementModel, Position } from 'shared/utils/type'
-class TextModel implements ElementModel {
+
+class PropPanelModel implements ElementModel {
 
 	public readonly id: string
 	public readonly type: symbol
-
+	public components: ElementModel[]
 	public props: {
 		position: Position
 		border: Border
 		opacity: number
-		text: string
 	}
 
 	constructor() {
-		this.id = createIdentifier()
-		this.type = Symbols.Text
+		this.id = Symbols.Whiteboard.toString()
+		this.type = Symbols.Whiteboard
+		this.components = []
 		this.props = {
 			position: {
 				x: 0,
@@ -29,10 +29,9 @@ class TextModel implements ElementModel {
 				radius: 1,
 			},
 			opacity: 1,
-			text: '我是一个快乐的文本元素~',
 		}
 	}
 
 }
 
-export default TextModel
+export default PropPanelModel

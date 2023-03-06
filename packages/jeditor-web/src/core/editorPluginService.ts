@@ -4,11 +4,11 @@ import type { EditorPlugin } from 'extensions/type'
 import type { App } from 'vue'
 
 @injectable()
-class PluginService {
+class EditorPluginService {
 
 	public pluginPool: Map<symbol, EditorPlugin> = new Map()
 
-	public usePlugin(plugin: EditorPlugin): PluginService {
+	public usePlugin(plugin: EditorPlugin): EditorPluginService {
 		if (!this.pluginPool.has(plugin.type)) {
 			this.pluginPool.set(plugin.type, plugin)
 		}
@@ -16,7 +16,7 @@ class PluginService {
 		return this
 	}
 
-	public usePlugins(plugins: EditorPlugin[]): PluginService {
+	public usePlugins(plugins: EditorPlugin[]): EditorPluginService {
 		for (const plugin of plugins) {
 			this.usePlugin(plugin)
 		}
@@ -38,6 +38,20 @@ class PluginService {
 		return null
 	}
 
+	public getAllPlugins(): EditorPlugin[] {
+		const allPlugins: EditorPlugin[] = []
+
+		for (const plugin of this.pluginPool.values()) {
+			allPlugins.push(plugin)
+		}
+
+		return allPlugins
+	}
+
+	public hasPlugin(type: symbol): boolean {
+		return this.pluginPool.has(type)
+	}
+
 }
 
-export default PluginService
+export default EditorPluginService

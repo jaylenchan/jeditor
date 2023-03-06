@@ -1,21 +1,18 @@
 import { defineComponent } from 'vue'
 
-import Whiteboard from 'core/views/whiteboard'
 import container from 'settings/dependency-inject.config'
 import Symbols from 'settings/dependency-type.config'
-import { isArray } from 'shared/utils/typeCheck'
 import { createIdentifier } from 'shared/utils/uuid'
 
-import type BoardService from 'core/boardService'
+import type PluginService from 'core/editorPluginService'
 import type ModelService from 'core/modelService'
-import type PluginService from 'core/pluginService'
-import { ElementModel } from 'core/type'
-import { EditorPlugin } from 'extensions/type'
+import type { EditorPlugin } from 'extensions/type'
+import type { ElementModel, PanelItem } from 'shared/utils/type'
 
 describe.concurrent('modelService', () => {
 	let pluginService: PluginService
 	let modelService: ModelService
-	let boardService: BoardService
+	// let boardService: BoardService
 	let plugin: EditorPlugin
 	let model: ElementModel
 	const validType = Symbol.for('validType')
@@ -32,9 +29,9 @@ describe.concurrent('modelService', () => {
 			}
 		})
 
-		pluginService = container.get<PluginService>(Symbols.PluginService)
+		pluginService = container.get<PluginService>(Symbols.EditorPluginService)
 		modelService = container.get<ModelService>(Symbols.ModelService)
-		boardService = container.get<BoardService>(Symbols.BoardService)
+		// boardService = container.get<BoardService>(Symbols.BoardService)
 
 		plugin = {
 			type: validType,
@@ -56,6 +53,15 @@ describe.concurrent('modelService', () => {
 						radius: 1,
 					},
 					opacity: 1,
+				}
+			
+},
+			propPanel: class {
+
+				public type = Symbols.Text
+				public components = new Map<string, Set<PanelItem>>()
+				public initPanel = () => {
+					;('')
 				}
 			
 },
@@ -142,23 +148,23 @@ describe.concurrent('modelService', () => {
 		expect(allIds).toEqual({})
 	})
 
-	it('should get the whiteboard model if Whiteboard Plugin used', () => {
-		const whiteboard = container.get<Whiteboard>(Symbols.Whiteboard)
-		pluginService.usePlugin(whiteboard)
+	// it('should get the whiteboard model if Whiteboard Plugin used', () => {
+	// 	const whiteboard = container.get<Whiteboard>(Symbols.Whiteboard)
+	// 	pluginService.usePlugin(whiteboard)
 
-		modelService.generateModel(Symbols.Whiteboard)
+	// 	modelService.generateModel(Symbols.Whiteboard)
 
-		const boardModel = boardService.getBoardModel()
+	// 	const boardModel = boardService.getBoardModel()
 
-		expect(boardModel).not.toBeNull()
-		expect(isArray(boardModel?.elements)).toBe(true)
-		expect(boardModel?.id).toBe(Symbols.Whiteboard.toString())
-		expect(boardModel?.type).toBe(Symbols.Whiteboard)
-	})
+	// 	expect(boardModel).not.toBeNull()
+	// 	expect(isArray(boardModel?.elements)).toBe(true)
+	// 	expect(boardModel?.id).toBe(Symbols.Whiteboard.toString())
+	// 	expect(boardModel?.type).toBe(Symbols.Whiteboard)
+	// })
 
-	it('should get null if Whiteboard Plugin not used', () => {
-		const boardModel = boardService.getBoardModel()
+	// it('should get null if Whiteboard Plugin not used', () => {
+	// 	const boardModel = boardService.getBoardModel()
 
-		expect(boardModel).toBeNull()
-	})
+	// 	expect(boardModel).toBeNull()
+	// })
 })

@@ -1,0 +1,4 @@
+.propPanelContainer {
+	@include position(relative);
+	@include text-color(getTextColor(brand, primary));
+}

@@ -1,6 +1,6 @@
 import Symbols from 'settings/dependency-type.config'
 
-import { ElementModel, Border, Position } from 'core/type'
+import type { Border, ElementModel, Position } from 'shared/utils/type'
 
 class WhiteboardModel implements ElementModel {
 

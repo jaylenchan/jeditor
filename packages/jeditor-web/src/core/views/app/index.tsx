@@ -31,10 +31,13 @@ const App = defineComponent({
 						</el-aside>
 					</el-col>
 					<el-col span={15}>
-						<el-main class={style.whiteboard} id="board"></el-main>
+						<el-main class={style.whiteboard} id="board-container"></el-main>
 					</el-col>
 					<el-col span={6}>
-						<el-aside class={style.propPanel}>属性面板</el-aside>
+						<el-aside
+							class={style.propPanel}
+							id="prop-panel-container"
+						></el-aside>
 					</el-col>
 				</el-row>
 			</el-container>

@@ -2,7 +2,6 @@ import {
 	defineComponent,
 	h,
 	resolveComponent,
-	PropType,
 	watchEffect,
 	reactive,
 } from 'vue'
@@ -13,8 +12,9 @@ import Symbols from 'settings/dependency-type.config'
 import { ee } from 'shared/utils/event'
 import Wrapper from 'shared/wrapper'
 
-import { ElementModel } from 'core/type'
-import type BoardModel from 'core/views/whiteboard/model'
+import type BoardModel from '../model'
+import type { ElementModel } from 'shared/utils/type'
+import type { PropType } from 'vue'
 import style from './index.module.scss'
 
 const WhiteboardView = defineComponent({

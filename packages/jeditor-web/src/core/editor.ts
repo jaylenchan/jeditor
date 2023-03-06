@@ -5,17 +5,19 @@ import Symbols from 'settings/dependency-type.config'
 import plugins from 'settings/plugin.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 
-import BoardService from './boardService'
-import PluginService from './pluginService'
 import AppView from './views/app'
 
+import type BoardService from './boardService'
+import type EditorPluginService from './editorPluginService'
+import type PropPanelService from './propPanelService'
 import type { App } from 'vue'
 
 @injectable()
 class JEditor {
 
-	@inject(Symbols.PluginService) pluginService!: PluginService
+	@inject(Symbols.EditorPluginService) pluginService!: EditorPluginService
 	@inject(Symbols.BoardService) boardService!: BoardService
+	@inject(Symbols.PropPanelService) propPanelService!: PropPanelService
 
 	public app: App = createApp(AppView)
 
@@ -24,10 +26,12 @@ class JEditor {
 
 		this.pluginService
 			.usePlugin(container.get(Symbols.Whiteboard))
+			.usePlugin(container.get(Symbols.PropPanel))
 			.usePlugins(plugins())
 			.applyPlugins(this.app)
 
 		this.boardService.initBoard(this.app)
+		this.propPanelService.initPanel(this.app)
 	}
 
 }

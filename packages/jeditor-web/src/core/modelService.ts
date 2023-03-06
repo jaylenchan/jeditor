@@ -1,8 +1,8 @@
-import PluginService from 'core/pluginService'
+import EditorPluginService from 'core/editorPluginService'
 import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 
-import { ElementModel } from 'core/type'
+import type { ElementModel } from 'shared/utils/type'
 
 interface ModelIds {
 	[k: string]: string[]
@@ -11,7 +11,7 @@ interface ModelIds {
 @injectable()
 class ModelService {
 
-	@inject(Symbols.PluginService) pluginService!: PluginService
+	@inject(Symbols.EditorPluginService) pluginService!: EditorPluginService
 
 	public modelIdPool: Map<symbol, Set<string>> = new Map()
 	public modelPool: Map<symbol, Map<string, ElementModel>> = new Map()
