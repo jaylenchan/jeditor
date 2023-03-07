@@ -1,8 +1,7 @@
 import { defineComponent } from 'vue'
 
-import BoardService from 'core/boardService'
-import container from 'settings/dependency-inject.config'
 import Symbols from 'settings/dependency-type.config'
+import { useService } from 'shared/utils/service'
 
 import style from './index.module.scss'
 
@@ -20,9 +19,7 @@ const App = defineComponent({
 							<el-button
 								type={'primary'}
 								onClick={() => {
-									const boardService = container.get<BoardService>(
-										Symbols.BoardService
-									)
+									const { boardService } = useService()
 									boardService.addElement(Symbols.Text)
 								}}
 							>

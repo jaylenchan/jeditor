@@ -1,11 +1,10 @@
 import { defineComponent, nextTick, reactive, watchEffect } from 'vue'
 
 import Symbols from 'settings/dependency-type.config'
-import { container } from 'shared/utils/dependencyInject'
 import { ee } from 'shared/utils/event'
+import { useService } from 'shared/utils/service'
 
 import type PropPanelModel from '../model'
-import type PropPanelService from 'core/propPanelService'
 import type { ElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import './index.module.scss'
@@ -22,9 +21,7 @@ const PropPanelView = defineComponent({
 
 		watchEffect(() => {
 			ee.on('elementSelected', (model: ElementModel) => {
-				const propPanelService = container.get<PropPanelService>(
-					Symbols.PropPanelService
-				)
+				const { propPanelService } = useService()
 				const panel = propPanelService.usePanel(Symbols.Text, model)
 				if (panel) {
 					curPanel.length = 0

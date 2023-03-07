@@ -7,10 +7,8 @@ import {
 	nextTick,
 } from 'vue'
 
-import BoardService from 'core/boardService'
-import container from 'settings/dependency-inject.config'
-import Symbols from 'settings/dependency-type.config'
 import { ee } from 'shared/utils/event'
+import { useService } from 'shared/utils/service'
 import Wrapper from 'shared/wrapper'
 
 import type BoardModel from '../model'
@@ -29,7 +27,7 @@ const WhiteboardView = defineComponent({
 		const elements = reactive<ElementModel[]>([])
 
 		function updateBoard() {
-			const boardService = container.get<BoardService>(Symbols.BoardService)
+			const { boardService } = useService()
 			const boardModel = boardService.getBoardModel()
 			if (boardModel) {
 				elements.length = 0

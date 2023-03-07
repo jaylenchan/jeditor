@@ -1,14 +1,13 @@
 import { h } from 'vue'
 
-import container from 'settings/dependency-inject.config'
 import Symbols from 'settings/dependency-type.config'
+import { useService } from 'shared/utils/service'
 
 import FontBlock from './font'
 import LayoutBlock from './layout'
 import TextBlock from './text'
 
 import type { TextModelProps } from '../types'
-import type BoardService from 'core/boardService'
 import type { ElementModel, PropPanelPlugin, VNode } from 'shared/utils/type'
 
 class TextPanel implements PropPanelPlugin {
@@ -32,7 +31,7 @@ class TextPanel implements PropPanelPlugin {
 		return h(TextBlock, {
 			onTextChange: newText => {
 				this.model.props.text = newText
-				const boardService = container.get<BoardService>(Symbols.BoardService)
+				const { boardService } = useService()
 				boardService.updateElement(this.model)
 			},
 		})
@@ -43,7 +42,7 @@ class TextPanel implements PropPanelPlugin {
 			text: this.model.props.text,
 			onLayoutChange: newLayout => {
 				this.model.props.layout = newLayout
-				const boardService = container.get<BoardService>(Symbols.BoardService)
+				const { boardService } = useService()
 				boardService.updateElement(this.model)
 			},
 		})
@@ -53,7 +52,7 @@ class TextPanel implements PropPanelPlugin {
 		return h(FontBlock, {
 			onFontChange: newFont => {
 				this.model.props.font = newFont
-				const boardService = container.get<BoardService>(Symbols.BoardService)
+				const { boardService } = useService()
 				boardService.updateElement(this.model)
 			},
 		})
