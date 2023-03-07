@@ -11,24 +11,16 @@ use style tool to apply style to elements
 
 ## color
 
-|                 Mixin                 |                    Function                     |
-| :-----------------------------------: | :---------------------------------------------: |
-|     `define-color-vars($colors)`      |               `genVarName($list)`               |
-| `extend-color-state($types, $states)` |         `genColorVarName($type, $num)`          |
-|   `extend-color-prop($propColors)`    |             `getColor($type, $num)`             |
-|                                       |      `getColorByState($colorType, $state)`      |
-|                                       |             `getBrandState($state)`             |
-|                                       |            `getWarningState($state)`            |
-|                                       |            `getSuccessState($state)`            |
-|                                       |             `getErrorState($state)`             |
-|                                       |          `mapGetColors($color, $num)`           |
-|                                       | `getColorByProp($propType, $colorType, $level)` |
-|                                       |    `getBackgroundColor($colorType, $level)`     |
-|                                       |       `getTextColor($colorType, $level)`        |
-|                                       |       `getIconColor($colorType, $level)`        |
-|                                       |       `getFillColor($colorType, $level)`        |
-|                                       |      ` getBorderColor($colorType, $level)`      |
-|                                       |       `getMaskColor($colorType, $level)`        |
+|                 Mixin                 |               Function                |
+| :-----------------------------------: | :-----------------------------------: |
+|     `define-color-vars($colors)`      |          `genVarName($list)`          |
+| `extend-color-state($types, $states)` |    `genColorVarName($type, $num)`     |
+|                  ``                   |        getColor($type, $num)`         |
+|                                       | `getColorByState($colorType, $state)` |
+|                                       |        `getBrandState($state)`        |
+|                                       |       `getWarningState($state)`       |
+|                                       |       `getSuccessState($state)`       |
+|                                       |        `getErrorState($state)`        |
 
 ## layout
 
