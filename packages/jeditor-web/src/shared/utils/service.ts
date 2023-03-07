@@ -14,7 +14,7 @@ export function useService() {
 		editorPluginService: container.get<EditorPluginService>(
 			Symbols.EditorPluginService
 		),
-		ModelService: container.get<ModelService>(Symbols.ModelService),
+		modelService: container.get<ModelService>(Symbols.ModelService),
 		propPanelService: container.get<PropPanelService>(Symbols.PropPanelService),
 		propPanelPluginService: container.get<PropPanelPluginService>(
 			Symbols.PropPanelPluginService
