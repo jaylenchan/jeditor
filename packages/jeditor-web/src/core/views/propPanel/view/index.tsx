@@ -1,4 +1,4 @@
-import { defineComponent, reactive, watchEffect } from 'vue'
+import { defineComponent, nextTick, reactive, watchEffect } from 'vue'
 
 import Symbols from 'settings/dependency-type.config'
 import { container } from 'shared/utils/dependencyInject'
@@ -28,7 +28,9 @@ const PropPanelView = defineComponent({
 				const panel = propPanelService.usePanel(Symbols.Text, model)
 				if (panel) {
 					curPanel.length = 0
-					curPanel.push(...panel)
+					nextTick(() => {
+						curPanel.push(...panel)
+					})
 				}
 			})
 		})
