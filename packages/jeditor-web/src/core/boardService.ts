@@ -1,13 +1,14 @@
 import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 import { ee } from 'shared/utils/event'
+import { merge } from 'shared/utils/object'
 import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
 import WhiteboardModel from './views/whiteboard/model'
 
 import type EditorPluginService from 'core/editorPluginService'
 import type ModelService from 'core/modelService'
-import type { VNode } from 'shared/utils/type'
+import type { ElementModel, VNode } from 'shared/utils/type'
 import type { App } from 'vue'
 @injectable()
 class BoardService {
@@ -58,6 +59,21 @@ class BoardService {
 		if (boardModel) {
 			boardModel.elements.push(model)
 			ee.emit('modelChange')
+		}
+	}
+
+	public updateElement<T>(newModel: ElementModel<T>): void {
+		const oldModel = this.modelService.getModel<T>(newModel.type, newModel.id)
+
+		if (!oldModel) return
+
+		newModel = merge(oldModel, newModel)
+
+		const boardModel = this.getBoardModel()
+		if (boardModel) {
+			const index = boardModel.elements.findIndex(el => el.id === newModel.id)
+			boardModel.elements[index] = newModel
+			ee.emit('modelUpdate')
 		}
 	}
 

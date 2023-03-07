@@ -9,7 +9,7 @@ const TextView = defineComponent({
 		},
 	},
 	setup({ text }) {
-		return () => <div class={style.container}>Text文本:{text}</div>
+		return () => <div class={style.container}>{text}</div>
 	},
 })
 

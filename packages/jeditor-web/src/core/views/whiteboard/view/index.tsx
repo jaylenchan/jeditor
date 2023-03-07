@@ -4,6 +4,7 @@ import {
 	resolveComponent,
 	watchEffect,
 	reactive,
+	nextTick,
 } from 'vue'
 
 import BoardService from 'core/boardService'
@@ -33,7 +34,19 @@ const WhiteboardView = defineComponent({
 				const boardModel = boardService.getBoardModel()
 				if (boardModel) {
 					elements.length = 0
-					elements.push(...boardModel.elements)
+					nextTick(() => {
+						elements.push(...boardModel.elements)
+					})
+				}
+			})
+			ee.on('modelUpdate', () => {
+				const boardService = container.get<BoardService>(Symbols.BoardService)
+				const boardModel = boardService.getBoardModel()
+				if (boardModel) {
+					elements.length = 0
+					nextTick(() => {
+						elements.push(...boardModel.elements)
+					})
 				}
 			})
 		})
@@ -47,6 +60,7 @@ const WhiteboardView = defineComponent({
 							onSelected={(model: ElementModel) => {
 								ee.emit('elementSelected', model)
 							}}
+							key={el.id}
 						>
 							{h(resolveComponent(el.type.toString()), {
 								...(el.props as object),

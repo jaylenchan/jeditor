@@ -48,14 +48,14 @@ class ModelService {
 		models.set(modelId, model)
 	}
 
-	public getModel(type: symbol, id: string): ElementModel | null {
+	public getModel<T>(type: symbol, id: string): ElementModel<T> | null {
 		const models = this.modelPool.get(type)
 		if (!models) return null
 
 		const model = models.get(id)
 		if (!model) return null
 
-		return model
+		return model as ElementModel<T>
 	}
 
 	public getModelIds(type: symbol): string[] | null {

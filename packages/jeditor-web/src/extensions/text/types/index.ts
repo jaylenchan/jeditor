@@ -10,4 +10,6 @@ export interface Font {
 
 export interface TextModelProps {
 	text: string
+	layout: Layout
+	font: Font
 }
