@@ -1,6 +1,6 @@
 import { h, render } from 'vue'
 
-import type { UnwrapRef } from 'vue'
+import type { UnwrapRef, Component } from 'vue'
 
 /** 所有class通用的类型就是Class<T> */
 export interface Class<T> extends Function {
@@ -25,19 +25,14 @@ export interface Border {
 	radius: number
 }
 
-export interface ElementModel {
+export interface ElementModel<T = unknown> {
 	readonly id: string
 	readonly type: symbol
-	props: {
-		position?: Position
-		border?: Border
-		opacity?: number
-		[k: string]: unknown
-	}
+	props: T
 }
 
-export interface ModelClass extends Function {
-	new (...args: unknown[]): ElementModel
+export interface ModelClass<T = unknown> extends Function {
+	new (...args: unknown[]): ElementModel<T>
 }
 
 export interface PropPanelPlugin {
@@ -45,6 +40,13 @@ export interface PropPanelPlugin {
 	editBlockPool: Map<string, VNode>
 }
 
-export interface PropPanelClass extends Function {
-	new (initModel: ElementModel): PropPanelPlugin
+export interface PropPanelClass<T = unknown> extends Function {
+	new (initialModel: ElementModel<T>): PropPanelPlugin
+}
+
+export interface EditorPlugin<T = unknown> {
+	type: symbol
+	view: Component // Note:目前没找到一个完美类型能够标注所有由defineComponent定义出来的组件，现在使用的这个类型除了字面上标注，实际上类型已经不安全了，这就又得在运行时做功夫检查
+	model: ModelClass
+	propPanel: PropPanelClass<T>
 }

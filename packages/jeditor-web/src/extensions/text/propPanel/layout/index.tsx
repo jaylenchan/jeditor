@@ -1,30 +1,30 @@
 import { defineComponent } from 'vue'
 
-import { useRef } from 'shared/utils/render'
-
+import type { Layout } from 'extensions/text/types'
+import type { PropType } from 'vue'
 import style from './index.module.scss'
 
-const Layout = defineComponent({
+const LayoutBlock = defineComponent({
 	props: {
-		onModelChanged: {
-			type: Function,
+		text: {
+			type: String,
+			required: true,
+		},
+		onLayoutChange: {
+			type: Function as PropType<(newLayout: Layout) => void>,
 			required: true,
 		},
 	},
-	emits: ['modelChanged'],
-	setup({ onModelChanged }) {
-		const [text, setText] = useRef(1)
-
-		function handleClick() {
-			onModelChanged(setText)
-		}
-
+	setup({ onLayoutChange }) {
 		return () => (
-			<div class={style.layout} onClick={handleClick}>
-				{text.value}
+			<div
+				class={style.layout}
+				onClick={() => onLayoutChange({ x: 10, y: 100 })}
+			>
+				Layout Edit Block
 			</div>
 		)
 	},
 })
 
-export default Layout
+export default LayoutBlock

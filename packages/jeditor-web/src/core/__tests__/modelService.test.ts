@@ -6,8 +6,7 @@ import { createIdentifier } from 'shared/utils/uuid'
 
 import type PluginService from 'core/editorPluginService'
 import type ModelService from 'core/modelService'
-import type { EditorPlugin } from 'extensions/type'
-import type { ElementModel } from 'shared/utils/type'
+import type { ElementModel, EditorPlugin } from 'shared/utils/type'
 
 describe.concurrent('modelService', () => {
 	let pluginService: PluginService

@@ -2,23 +2,20 @@ import { h } from 'vue'
 
 import Symbols from 'settings/dependency-type.config'
 
-import Font from './font'
-import Layout from './layout'
+import FontBlock from './font'
+import LayoutBlock from './layout'
 
-import type {
-	ElementModel,
-	PropPanelPlugin,
-	SetRefFunc,
-	VNode,
-} from 'shared/utils/type'
+import type { TextModelProps } from '../types'
+import type { ElementModel, PropPanelPlugin, VNode } from 'shared/utils/type'
 
 class TextPanel implements PropPanelPlugin {
 
 	type = Symbols.Text
 	editBlockPool: Map<string, VNode> = new Map()
+	model: ElementModel<TextModelProps>
 
-	constructor(initialModel: ElementModel) {
-		initialModel
+	constructor(initialModel: ElementModel<TextModelProps>) {
+		this.model = initialModel
 		// edit layout props()
 		this.addEditBlock('layout', this.layoutBlock())
 		// edit font props(font-size, font-family)
@@ -27,16 +24,20 @@ class TextPanel implements PropPanelPlugin {
 	}
 
 	layoutBlock(): VNode {
-		return h(Layout, {
-			text: 'Layout',
-			onModelChanged: (setText: SetRefFunc<number>) => {
-				setText(2)
+		return h(LayoutBlock, {
+			text: this.model.props.text,
+			onLayoutChange: newLayout => {
+				newLayout
 			},
 		})
 	}
 
 	fontBlock(): VNode {
-		return h(Font)
+		return h(FontBlock, {
+			onFontChange: newFont => {
+				newFont
+			},
+		})
 	}
 
 	public addEditBlock(blockName: string, block: VNode): void {

@@ -10,7 +10,8 @@ import { Text } from 'extensions/index'
 import Symbols from 'settings/dependency-type.config'
 import { container } from 'shared/utils/dependencyInject'
 
-import type { EditorPlugin } from 'extensions/type'
+import type { TextModelProps } from 'extensions/text/types'
+import type { EditorPlugin } from 'shared/utils/type'
 
 container
 	.bind<EditorPluginService>(Symbols.EditorPluginService)
@@ -43,6 +44,9 @@ container.bind<Whiteboard>(Symbols.Whiteboard).to(Whiteboard).inSingletonScope()
 
 container.bind<PropPanel>(Symbols.PropPanel).to(PropPanel).inSingletonScope()
 
-container.bind<EditorPlugin>(Symbols.Text).to(Text).inSingletonScope()
+container
+	.bind<EditorPlugin<TextModelProps>>(Symbols.Text)
+	.to(Text)
+	.inSingletonScope()
 
 export default container

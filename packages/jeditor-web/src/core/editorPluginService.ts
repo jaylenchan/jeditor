@@ -1,6 +1,6 @@
 import { injectable } from 'shared/utils/dependencyInject'
 
-import type { EditorPlugin } from 'extensions/type'
+import type { EditorPlugin } from 'shared/utils/type'
 import type { App } from 'vue'
 
 @injectable()

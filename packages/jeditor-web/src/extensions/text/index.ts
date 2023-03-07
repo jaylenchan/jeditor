@@ -4,10 +4,12 @@ import { injectable } from 'shared/utils/dependencyInject'
 import Model from './model'
 import PropPanel from './propPanel'
 import View from './view'
-import { EditorPlugin } from '../type'
+
+import type { TextModelProps } from './types'
+import type { EditorPlugin } from 'shared/utils/type'
 
 @injectable()
-class Text implements EditorPlugin {
+class Text implements EditorPlugin<TextModelProps> {
 
 	type = Symbols.Text
 	view = View

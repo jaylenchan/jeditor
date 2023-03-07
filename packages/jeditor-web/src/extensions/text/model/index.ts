@@ -1,16 +1,14 @@
 import Symbols from 'settings/dependency-type.config'
 import { createIdentifier } from 'shared/utils/uuid'
 
-import type { ElementModel, Position } from 'shared/utils/type'
-class TextModel implements ElementModel {
+import type { TextModelProps } from '../types'
+import type { ElementModel } from 'shared/utils/type'
+class TextModel implements ElementModel<TextModelProps> {
 
 	public readonly id: string
 	public readonly type: symbol
 
 	public props: {
-		position: Position
-		// border: Border
-		opacity: number
 		text: string
 	}
 
@@ -18,17 +16,6 @@ class TextModel implements ElementModel {
 		this.id = createIdentifier()
 		this.type = Symbols.Text
 		this.props = {
-			position: {
-				x: 0,
-				y: 0,
-			},
-			// border: {
-			// 	type: 'solid',
-			// 	color: '#000000',
-			// 	weight: 1,
-			// 	radius: 1,
-			// },
-			opacity: 1,
 			text: '我是一个快乐的文本元素~',
 		}
 	}

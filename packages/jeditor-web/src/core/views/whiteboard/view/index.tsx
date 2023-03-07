@@ -48,7 +48,9 @@ const WhiteboardView = defineComponent({
 								ee.emit('elementSelected', model)
 							}}
 						>
-							{h(resolveComponent(el.type.toString()), { ...el.props })}
+							{h(resolveComponent(el.type.toString()), {
+								...(el.props as object),
+							})}
 						</Wrapper>
 					)
 				})}
