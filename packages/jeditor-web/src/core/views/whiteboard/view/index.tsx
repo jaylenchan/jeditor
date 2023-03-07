@@ -28,26 +28,23 @@ const WhiteboardView = defineComponent({
 	setup() {
 		const elements = reactive<ElementModel[]>([])
 
+		function updateBoard() {
+			const boardService = container.get<BoardService>(Symbols.BoardService)
+			const boardModel = boardService.getBoardModel()
+			if (boardModel) {
+				elements.length = 0
+				nextTick(() => {
+					elements.push(...boardModel.elements)
+				})
+			}
+		}
+
 		watchEffect(() => {
 			ee.on('modelChange', () => {
-				const boardService = container.get<BoardService>(Symbols.BoardService)
-				const boardModel = boardService.getBoardModel()
-				if (boardModel) {
-					elements.length = 0
-					nextTick(() => {
-						elements.push(...boardModel.elements)
-					})
-				}
+				updateBoard()
 			})
 			ee.on('modelUpdate', () => {
-				const boardService = container.get<BoardService>(Symbols.BoardService)
-				const boardModel = boardService.getBoardModel()
-				if (boardModel) {
-					elements.length = 0
-					nextTick(() => {
-						elements.push(...boardModel.elements)
-					})
-				}
+				updateBoard()
 			})
 		})
 
