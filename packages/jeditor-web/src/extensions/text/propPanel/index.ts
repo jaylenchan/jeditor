@@ -5,24 +5,25 @@ import Symbols from 'settings/dependency-type.config'
 import Font from './font'
 import Layout from './layout'
 
-import type { PropPanelPlugin, SetRefFunc, VNode } from 'shared/utils/type'
+import type {
+	ElementModel,
+	PropPanelPlugin,
+	SetRefFunc,
+	VNode,
+} from 'shared/utils/type'
 
 class TextPanel implements PropPanelPlugin {
 
 	type = Symbols.Text
 	editBlockPool: Map<string, VNode> = new Map()
 
-	constructor() {
+	constructor(initialModel: ElementModel) {
+		initialModel
+		// edit layout props()
 		this.addEditBlock('layout', this.layoutBlock())
+		// edit font props(font-size, font-family)
 		this.addEditBlock('font', this.fontBlock())
-	}
-
-	public addEditBlock(blockName: string, block: VNode): void {
-		this.editBlockPool.set(blockName, block)
-	}
-
-	fontBlock(): VNode {
-		return h(Font)
+		// add more block to edit element ...
 	}
 
 	layoutBlock(): VNode {
@@ -32,6 +33,14 @@ class TextPanel implements PropPanelPlugin {
 				setText(2)
 			},
 		})
+	}
+
+	fontBlock(): VNode {
+		return h(Font)
+	}
+
+	public addEditBlock(blockName: string, block: VNode): void {
+		this.editBlockPool.set(blockName, block)
 	}
 
 }

@@ -1,38 +1,33 @@
 import { injectable } from 'shared/utils/dependencyInject'
 
-import type { PropPanelPlugin } from 'shared/utils/type'
+import type { PropPanelClass } from 'shared/utils/type'
 
 @injectable()
 class PropPanelPluginService {
 
-	public pluginPool: Map<symbol, PropPanelPlugin> = new Map()
+	public pluginPool: Map<symbol, PropPanelClass> = new Map()
 
-	public usePlugin(plugin: PropPanelPlugin): PropPanelPluginService {
+	public usePlugin(
+		type: symbol,
+		plugin: PropPanelClass
+	): PropPanelPluginService {
 		if (plugin) {
-			this.pluginPool.set(plugin.type, plugin)
+			this.pluginPool.set(type, plugin)
 		}
 
 		return this
 	}
 
-	public usePlugins(plugins: PropPanelPlugin[]): PropPanelPluginService {
-		for (const plugin of plugins) {
-			this.usePlugin(plugin)
-		}
+	public getPlugin(type: symbol): PropPanelClass | null {
+		const propPanelClass = this.pluginPool.get(type)
 
-		return this
-	}
-
-	public getPlugin(type: symbol): PropPanelPlugin | null {
-		const propPanelPlugin = this.pluginPool.get(type)
-
-		if (propPanelPlugin) return propPanelPlugin
+		if (propPanelClass) return propPanelClass
 
 		return null
 	}
 
-	public getAllPlugins(): PropPanelPlugin[] {
-		const allPlugins: PropPanelPlugin[] = []
+	public getAllPlugins(): PropPanelClass[] {
+		const allPlugins: PropPanelClass[] = []
 
 		for (const plugin of this.pluginPool.values()) {
 			allPlugins.push(plugin)

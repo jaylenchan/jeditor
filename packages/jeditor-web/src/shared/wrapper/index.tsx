@@ -1,24 +1,22 @@
 import { defineComponent } from 'vue'
 
+import type { ElementModel } from 'shared/utils/type'
+import type { PropType } from 'vue'
+
 const Wrapper = defineComponent({
 	props: {
-		id: {
-			type: String,
-			required: true,
-		},
-		type: {
-			type: Symbol,
-			required: true,
+		model: {
+			type: Object as PropType<ElementModel>,
 		},
 	},
 	emits: ['selected'],
-	setup({ id, type }, { slots, emit }) {
+	setup({ model }, { slots, emit }) {
 		return () => {
 			return (
 				<div
 					id="element-wrapper"
 					onClick={() => {
-						emit('selected', { id, type })
+						emit('selected', model)
 					}}
 				>
 					{slots.default && slots.default()}

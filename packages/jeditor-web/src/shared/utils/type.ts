@@ -46,5 +46,5 @@ export interface PropPanelPlugin {
 }
 
 export interface PropPanelClass extends Function {
-	new (...args: unknown[]): PropPanelPlugin
+	new (initModel: ElementModel): PropPanelPlugin
 }

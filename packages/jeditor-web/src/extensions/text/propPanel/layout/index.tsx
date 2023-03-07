@@ -1,7 +1,5 @@
 import { defineComponent } from 'vue'
 
-// import { createSetter } from 'shared/utils/render'
-
 import { useRef } from 'shared/utils/render'
 
 import style from './index.module.scss'

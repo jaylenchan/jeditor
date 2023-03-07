@@ -5,7 +5,7 @@ import { createRenderVNode, renderVNode } from 'shared/utils/render'
 import type EditorPluginService from './editorPluginService'
 import type PropPanelPluginService from './propPanelPluginService'
 import type ModelService from 'core/modelService'
-import type { PropPanelClass, VNode } from 'shared/utils/type'
+import type { ElementModel, PropPanelClass, VNode } from 'shared/utils/type'
 import type { App } from 'vue'
 
 @injectable()
@@ -34,7 +34,10 @@ class PropPanelService {
 			panelPluginConstructor,
 		] of allPanelConstructor) {
 			if (!this.propPanelPluginService.hasPlugin(panelPluginType)) {
-				this.propPanelPluginService.usePlugin(new panelPluginConstructor())
+				this.propPanelPluginService.usePlugin(
+					panelPluginType,
+					panelPluginConstructor
+				)
 			}
 		}
 	}
@@ -76,13 +79,12 @@ class PropPanelService {
 		}
 	}
 
-	public getPanel(type: symbol): VNode[] {
-		const plugin = this.propPanelPluginService.getPlugin(type)
-		const panel: VNode[] = []
+	public usePanel(type: symbol, initialModel: ElementModel): VNode[] {
+		const pluginClass = this.propPanelPluginService.getPlugin(type)
+		let panel: VNode[] = []
 
-		if (plugin) {
-			const blocks = Array.from(plugin.editBlockPool.values())
-			panel.push(...blocks)
+		if (pluginClass) {
+			panel = Array.from(new pluginClass(initialModel).editBlockPool.values())
 		}
 
 		return panel
