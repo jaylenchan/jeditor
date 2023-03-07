@@ -11,7 +11,7 @@ interface RenderComponent {
 	app: App
 }
 
-export function generateRenderVNode(renderCompoennt: RenderComponent): VNode {
+export function createRenderVNode(renderCompoennt: RenderComponent): VNode {
 	const { view, model, app } = renderCompoennt
 	const renderNode = h(view, { model })
 	renderNode.appContext = app._context

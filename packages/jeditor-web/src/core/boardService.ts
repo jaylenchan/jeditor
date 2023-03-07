@@ -1,7 +1,7 @@
 import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 import { ee } from 'shared/utils/event'
-import { generateRenderVNode, renderVNode } from 'shared/utils/render'
+import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
 import WhiteboardModel from './views/whiteboard/model'
 
@@ -26,9 +26,9 @@ class BoardService {
 		const boardContainer = document.getElementById('board-container')
 
 		if (boardContainer) {
-			const boardModel = this.modelService.generateModel(Symbols.Whiteboard)
+			const boardModel = this.modelService.createModel(Symbols.Whiteboard)
 
-			this.boardVNode = generateRenderVNode({
+			this.boardVNode = createRenderVNode({
 				view: boardView,
 				model: boardModel,
 				app,
@@ -52,7 +52,7 @@ class BoardService {
 	}
 
 	public addElement(type: symbol): void {
-		const model = this.modelService.generateModel(type)
+		const model = this.modelService.createModel(type)
 		const boardModel = this.getBoardModel()
 
 		if (boardModel) {

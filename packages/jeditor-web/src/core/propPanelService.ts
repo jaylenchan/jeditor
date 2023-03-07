@@ -1,6 +1,6 @@
 import Symbols from 'settings/dependency-type.config'
 import { injectable, inject } from 'shared/utils/dependencyInject'
-import { generateRenderVNode, renderVNode } from 'shared/utils/render'
+import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
 import type EditorPluginService from './editorPluginService'
 import type PropPanelPluginService from './propPanelPluginService'
@@ -28,7 +28,7 @@ class PropPanelService {
 		this.renderPanel(app)
 	}
 
-	public useAllPanelPlugins() {
+	public useAllPanelPlugins(): void {
 		const allPanelConstructor = this.extractAllPanelConstructors()
 		for (const [
 			panelPluginType,
@@ -65,9 +65,9 @@ class PropPanelService {
 		const propPanelContainer = document.getElementById('prop-panel-container')
 
 		if (propPanelContainer) {
-			const propPanelModel = this.modelService.generateModel(Symbols.Whiteboard)
+			const propPanelModel = this.modelService.createModel(Symbols.PropPanel)
 
-			this.propPanelVNode = generateRenderVNode({
+			this.propPanelVNode = createRenderVNode({
 				view: propPanelView,
 				model: propPanelModel,
 				app,

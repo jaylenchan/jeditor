@@ -25,9 +25,9 @@ export interface ElementModel {
 	readonly id: string
 	readonly type: symbol
 	props: {
-		position: Position
-		border: Border
-		opacity: number
+		position?: Position
+		border?: Border
+		opacity?: number
 		[k: string]: unknown
 	}
 }

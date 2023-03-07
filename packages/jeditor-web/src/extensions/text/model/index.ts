@@ -1,7 +1,7 @@
 import Symbols from 'settings/dependency-type.config'
 import { createIdentifier } from 'shared/utils/uuid'
 
-import type { Border, ElementModel, Position } from 'shared/utils/type'
+import type { ElementModel, Position } from 'shared/utils/type'
 class TextModel implements ElementModel {
 
 	public readonly id: string
@@ -9,7 +9,7 @@ class TextModel implements ElementModel {
 
 	public props: {
 		position: Position
-		border: Border
+		// border: Border
 		opacity: number
 		text: string
 	}
@@ -22,12 +22,12 @@ class TextModel implements ElementModel {
 				x: 0,
 				y: 0,
 			},
-			border: {
-				type: 'solid',
-				color: '#000000',
-				weight: 1,
-				radius: 1,
-			},
+			// border: {
+			// 	type: 'solid',
+			// 	color: '#000000',
+			// 	weight: 1,
+			// 	radius: 1,
+			// },
 			opacity: 1,
 			text: '我是一个快乐的文本元素~',
 		}

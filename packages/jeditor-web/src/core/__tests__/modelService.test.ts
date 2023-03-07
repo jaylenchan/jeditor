@@ -69,7 +69,7 @@ describe.concurrent('modelService', () => {
 
 		pluginService.usePlugin(plugin)
 
-		model = modelService.generateModel(validType)
+		model = modelService.createModel(validType)
 	})
 
 	afterEach(() => {
@@ -95,8 +95,8 @@ describe.concurrent('modelService', () => {
 		})
 	})
 
-	it('should throw error if given invalid type when modelService generateModel', () => {
-		expect(() => modelService.generateModel(invalidType)).toThrow(
+	it('should throw error if given invalid type when modelService createModel', () => {
+		expect(() => modelService.createModel(invalidType)).toThrow(
 			/unknown model type/
 		)
 	})
@@ -152,7 +152,7 @@ describe.concurrent('modelService', () => {
 	// 	const whiteboard = container.get<Whiteboard>(Symbols.Whiteboard)
 	// 	pluginService.usePlugin(whiteboard)
 
-	// 	modelService.generateModel(Symbols.Whiteboard)
+	// 	modelService.createModel(Symbols.Whiteboard)
 
 	// 	const boardModel = boardService.getBoardModel()
 

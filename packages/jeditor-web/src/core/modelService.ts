@@ -16,7 +16,7 @@ class ModelService {
 	public modelIdPool: Map<symbol, Set<string>> = new Map()
 	public modelPool: Map<symbol, Map<string, ElementModel>> = new Map()
 
-	public generateModel(type: symbol): ElementModel {
+	public createModel(type: symbol): ElementModel {
 		const plugin = this.pluginService.pluginPool.get(type)
 
 		if (plugin && plugin.model) {
