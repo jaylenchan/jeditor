@@ -9,7 +9,7 @@ import type { TextModelProps } from './types'
 import type { EditorPlugin } from 'shared/utils/type'
 
 @injectable()
-class Text implements EditorPlugin<TextModelProps> {
+class TextPlugin implements EditorPlugin<TextModelProps> {
 
 	type = Symbols.Text
 	view = View
@@ -18,4 +18,4 @@ class Text implements EditorPlugin<TextModelProps> {
 
 }
 
-export default Text
+export default TextPlugin

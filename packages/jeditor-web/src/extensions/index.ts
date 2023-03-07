@@ -1,2 +1,2 @@
 // export { default as Picuture } from './picture'
-export { default as Text } from './text'
+export { default as TextPlugin } from './text'

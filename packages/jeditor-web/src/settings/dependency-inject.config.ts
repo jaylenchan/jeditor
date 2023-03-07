@@ -6,12 +6,9 @@ import PropPanelPluginService from 'core/propPanelPluginService'
 import PropPanelService from 'core/propPanelService'
 import PropPanel from 'core/views/propPanel'
 import Whiteboard from 'core/views/whiteboard'
-import { Text } from 'extensions/index'
+import { TextPlugin } from 'extensions/index'
 import Symbols from 'settings/dependency-type.config'
 import { container } from 'shared/utils/dependencyInject'
-
-import type { TextModelProps } from 'extensions/text/types'
-import type { EditorPlugin } from 'shared/utils/type'
 
 container
 	.bind<EditorPluginService>(Symbols.EditorPluginService)
@@ -44,9 +41,6 @@ container.bind<Whiteboard>(Symbols.Whiteboard).to(Whiteboard).inSingletonScope()
 
 container.bind<PropPanel>(Symbols.PropPanel).to(PropPanel).inSingletonScope()
 
-container
-	.bind<EditorPlugin<TextModelProps>>(Symbols.Text)
-	.to(Text)
-	.inSingletonScope()
+container.bind<TextPlugin>(Symbols.Text).to(TextPlugin).inSingletonScope()
 
 export default container
