@@ -23,12 +23,6 @@ class PropPanelPluginService {
 		return this
 	}
 
-	public applyPlugins(): void {
-		for (const plugin of this.getAllPlugins()) {
-			plugin.initPanel()
-		}
-	}
-
 	public getPlugin(type: symbol): PropPanelPlugin | null {
 		const propPanelPlugin = this.pluginPool.get(type)
 

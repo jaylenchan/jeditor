@@ -6,7 +6,6 @@ class PropPanelModel implements ElementModel {
 
 	public readonly id: string
 	public readonly type: symbol
-	public components: ElementModel[]
 	public props: {
 		position: Position
 		border: Border
@@ -14,9 +13,8 @@ class PropPanelModel implements ElementModel {
 	}
 
 	constructor() {
-		this.id = Symbols.Whiteboard.toString()
-		this.type = Symbols.Whiteboard
-		this.components = []
+		this.id = Symbols.PropPanel.toString()
+		this.type = Symbols.PropPanel
 		this.props = {
 			position: {
 				x: 0,

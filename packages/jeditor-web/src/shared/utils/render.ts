@@ -1,6 +1,6 @@
 import { h, ref, render } from 'vue'
 
-import { VNode, RenderContainer } from './type'
+import { VNode, RenderContainer, SetRefFunc } from './type'
 
 import type { ElementModel } from 'shared/utils/type'
 import type { Component, App, UnwrapRef, Ref } from 'vue'
@@ -23,11 +23,9 @@ export function renderVNode(renderNode: VNode, container: RenderContainer) {
 	render(renderNode, container)
 }
 
-export function useRef<T>(
-	value: T
-): [Ref<UnwrapRef<T>>, (value: UnwrapRef<T>) => void] {
+export function useRef<T>(value: T): [Ref<UnwrapRef<T>>, SetRefFunc<T>] {
 	const refObject = ref(value)
-	const setRefObject = (value: UnwrapRef<T>) => {
+	const setRefObject: SetRefFunc<T> = (value: UnwrapRef<T>) => {
 		refObject.value = value
 	}
 

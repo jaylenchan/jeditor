@@ -1,5 +1,7 @@
 import { h, render } from 'vue'
 
+import type { UnwrapRef } from 'vue'
+
 /** 所有class通用的类型就是Class<T> */
 export interface Class<T> extends Function {
 	new (...args: unknown[]): T
@@ -8,6 +10,8 @@ export interface Class<T> extends Function {
 export type VNode = ReturnType<typeof h>
 
 export type RenderContainer = Parameters<typeof render>[1]
+
+export type SetRefFunc<T> = (value: UnwrapRef<T>) => void
 
 export interface Position {
 	x: number
@@ -36,16 +40,9 @@ export interface ModelClass extends Function {
 	new (...args: unknown[]): ElementModel
 }
 
-export interface PanelItem {
-	componentType: string
-	prop: string
-	event: [string, (...args: unknown[]) => unknown]
-}
-
 export interface PropPanelPlugin {
 	type: symbol
-	components: Map<string, Set<PanelItem>>
-	initPanel(): void
+	editBlockPool: Map<string, VNode>
 }
 
 export interface PropPanelClass extends Function {

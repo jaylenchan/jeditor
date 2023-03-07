@@ -15,9 +15,14 @@ import type { App } from 'vue'
 @injectable()
 class JEditor {
 
-	@inject(Symbols.EditorPluginService) pluginService!: EditorPluginService
-	@inject(Symbols.BoardService) boardService!: BoardService
-	@inject(Symbols.PropPanelService) propPanelService!: PropPanelService
+	@inject(Symbols.EditorPluginService)
+	pluginService!: EditorPluginService
+
+	@inject(Symbols.BoardService)
+	boardService!: BoardService
+
+	@inject(Symbols.PropPanelService)
+	propPanelService!: PropPanelService
 
 	public app: App = createApp(AppView)
 
