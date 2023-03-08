@@ -10,7 +10,7 @@
 	.header {
 		@include width(100%);
 		@include bg-color(useColor(info, 1));
-		@include bd-bottom(1px solid useColor(info, 1));
+		@include bd-bottom(1px solid useColor(info, 3));
 	}
 
 	.bottom {
@@ -19,18 +19,18 @@
 		.componentPanel {
 			@include full-in-father();
 			@include bg-color(useColor(info, 1));
+			@include bd-right(1px solid useColor(info, 3));
 		}
 
 		.whiteboard {
 			@include full-in-father();
-			.board {
-				@include full-in-father();
-			}
+			@include bg-color(useColor(info, 2));
 		}
 
 		.propPanel {
 			@include full-in-father();
 			@include bg-color(useColor(info, 1));
+			@include bd-left(1px solid useColor(info, 3));
 		}
 	}
 }

@@ -27,10 +27,10 @@ const App = defineComponent({
 							</el-button>
 						</el-aside>
 					</el-col>
-					<el-col span={15}>
+					<el-col span={16}>
 						<el-main class={style.whiteboard} id="board-container"></el-main>
 					</el-col>
-					<el-col span={6}>
+					<el-col span={5}>
 						<el-aside
 							class={style.propPanel}
 							id="prop-panel-container"

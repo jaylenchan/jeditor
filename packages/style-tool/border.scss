@@ -1,14 +1,22 @@
 // border
 @mixin bd($vals...) {
-  border: $vals;
+	border: $vals;
 }
 
 // border-bottom
 @mixin bd-bottom($vals...) {
-  border-bottom: $vals;
+	border-bottom: $vals;
+}
+
+@mixin bd-left($vals...) {
+	border-left: $vals;
+}
+
+@mixin bd-right($vals...) {
+	border-right: $vals;
 }
 
 // border-color
 @mixin bd-color($val) {
-  border-color: $val;
+	border-color: $val;
 }
