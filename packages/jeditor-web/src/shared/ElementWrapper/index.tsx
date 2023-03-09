@@ -1,6 +1,4 @@
-import { defineComponent, ref, watch } from 'vue'
-
-import { useDrag } from 'shared/utils/drag'
+import { defineComponent } from 'vue'
 
 import type { ElementModel } from 'shared/utils/type'
 import type { PropType } from 'vue'
@@ -14,20 +12,10 @@ const Wrapper = defineComponent({
 	},
 	emits: ['selected'],
 	setup({ model }, { slots, emit }) {
-		const dragRef = ref<HTMLDivElement | null>(null)
-
-		watch(dragRef, dom => {
-			if (dom) {
-				useDrag(dom)
-			}
-		})
-
 		return () => {
 			return (
 				<div
 					class={style.elementWrapper}
-					ref={dragRef}
-					id="element-wrapper"
 					onClick={() => {
 						emit('selected', model)
 					}}

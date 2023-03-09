@@ -5,13 +5,15 @@ export function useDrag(el: HTMLElement) {
 	const elementLayout = reactive({ left: el.clientLeft, top: el.clientTop })
 
 	function handleMouseDown(event: MouseEvent) {
+		event.stopPropagation()
+
 		mouseLayout.x = event.clientX
 		mouseLayout.y = event.clientY
 
 		document.addEventListener('mousemove', handleMouseMove)
 		document.addEventListener('mouseup', handleMouseUp)
 
-		el.style.position = 'absolute'
+		if (el.style.position != 'absolute') el.style.position = 'absolute'
 	}
 
 	function handleMouseMove(event: MouseEvent) {

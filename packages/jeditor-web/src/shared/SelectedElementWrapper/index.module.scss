@@ -1,5 +1,5 @@
 .selectedElementWrapper {
 	@include pos(relative);
-	@include bd(1.5px solid rgb(0, 170, 255));
+	@include bd(2px solid rgb(0, 170, 255));
 	@include pd(8px);
 }

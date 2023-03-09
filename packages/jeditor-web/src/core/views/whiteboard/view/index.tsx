@@ -5,10 +5,12 @@ import {
 	watchEffect,
 	reactive,
 	nextTick,
+	ref,
 } from 'vue'
 
+import DragElementWrapper from 'shared/DragElementWrapper'
 import ElementWrapper from 'shared/ElementWrapper'
-import SelectedEelemntWrapper from 'shared/SelectedElementWrapper'
+import SelectedElementWrapper from 'shared/SelectedElementWrapper'
 import { ee } from 'shared/utils/event'
 import { useService } from 'shared/utils/service'
 
@@ -26,6 +28,7 @@ const WhiteboardView = defineComponent({
 	},
 	setup() {
 		const elements = reactive<ElementModel[]>([])
+		const selectedElement = ref<string>('')
 
 		function updateBoard() {
 			const { boardService } = useService()
@@ -51,19 +54,22 @@ const WhiteboardView = defineComponent({
 			<div class={style.boardContainer}>
 				{elements.map(el => {
 					return (
-						<ElementWrapper
-							model={el}
-							onSelected={(model: ElementModel) => {
-								ee.emit('elementSelected', model)
-							}}
-							key={el.id}
-						>
-							<SelectedEelemntWrapper elementId={el.id}>
-								{h(resolveComponent(el.type.toString()), {
-									...(el.props as object),
-								})}
-							</SelectedEelemntWrapper>
-						</ElementWrapper>
+						<DragElementWrapper>
+							<SelectedElementWrapper>
+								<ElementWrapper
+									model={el}
+									onSelected={(model: ElementModel) => {
+										ee.emit('elementSelected', model)
+										selectedElement.value = model.id
+									}}
+									key={el.id}
+								>
+									{h(resolveComponent(el.type.toString()), {
+										...(el.props as object),
+									})}
+								</ElementWrapper>
+							</SelectedElementWrapper>
+						</DragElementWrapper>
 					)
 				})}
 			</div>

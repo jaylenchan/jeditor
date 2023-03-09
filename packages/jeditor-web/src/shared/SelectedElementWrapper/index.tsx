@@ -161,13 +161,8 @@ function createDot(
 	}
 }
 
-const SelectedEelemntWrapper = defineComponent({
-	props: {
-		elementId: {
-			type: String,
-			required: true,
-		},
-	},
+const SelectedElementWrapper = defineComponent({
+	// props: {},
 	setup(_, { slots }) {
 		const dotPositions = ref<DotPosition[]>([])
 		const selectedElementWrapperRef = ref<HTMLDivElement | null>(null)
@@ -180,31 +175,33 @@ const SelectedEelemntWrapper = defineComponent({
 			}
 		})
 
-		return () => (
-			<>
-				{dotPositions.value.length > 0 &&
-					dotPositions.value.map(dot =>
-						createDot(
-							{
-								left: dot.left + 'px',
-								top: dot.top + 'px',
-								marginTop: dot.hasBottom ? `-5px` : `-4px`,
-								marginLeft: dot.hasRight ? `-5px` : `-4px`,
-								cursor: dot.cursor,
-							},
-							selectedElementWrapperRef,
-							dotPositions
-						)
-					)}
-				<div
-					class={style.selectedElementWrapper}
-					ref={selectedElementWrapperRef}
-				>
-					{slots.default?.()}
-				</div>
-			</>
-		)
+		return () => {
+			return (
+				<>
+					{dotPositions.value.length > 0 &&
+						dotPositions.value.map(dot =>
+							createDot(
+								{
+									left: dot.left + 'px',
+									top: dot.top + 'px',
+									marginTop: dot.hasBottom ? `-5px` : `-4px`,
+									marginLeft: dot.hasRight ? `-5px` : `-4px`,
+									cursor: dot.cursor,
+								},
+								selectedElementWrapperRef,
+								dotPositions
+							)
+						)}
+					<div
+						class={style.selectedElementWrapper}
+						ref={selectedElementWrapperRef}
+					>
+						{slots.default?.()}
+					</div>
+				</>
+			)
+		}
 	},
 })
 
-export default SelectedEelemntWrapper
+export default SelectedElementWrapper
