@@ -1,6 +1,6 @@
 import Symbols from 'settings/dependency-type.config'
 
-import type { Border, ElementModel, Position } from 'shared/utils/type'
+import type { Border, ElementModel, Position, Size } from 'shared/utils/type'
 
 class PropPanelModel implements ElementModel {
 
@@ -10,8 +10,7 @@ class PropPanelModel implements ElementModel {
 		position: Position
 		border: Border
 		opacity: number
-		width: number
-		height: number
+		size: Size
 	}
 
 	constructor() {
@@ -29,8 +28,10 @@ class PropPanelModel implements ElementModel {
 				radius: 1,
 			},
 			opacity: 1,
-			width: 0,
-			height: 0,
+			size: {
+				width: 0,
+				height: 0,
+			},
 		}
 	}
 

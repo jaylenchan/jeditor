@@ -1,3 +1,5 @@
 .elementWrapper {
 	@include pos(relative !important);
+	@include height(100%);
+	@include width(100%);
 }

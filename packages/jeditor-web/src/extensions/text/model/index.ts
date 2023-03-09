@@ -2,7 +2,7 @@ import Symbols from 'settings/dependency-type.config'
 import { createIdentifier } from 'shared/utils/uuid'
 
 import type { TextModelProps, Layout, Font } from '../types'
-import type { ElementModel } from 'shared/utils/type'
+import type { ElementModel, Size } from 'shared/utils/type'
 class TextModel implements ElementModel<TextModelProps> {
 
 	public readonly id: string
@@ -12,25 +12,26 @@ class TextModel implements ElementModel<TextModelProps> {
 		text: string
 		layout: Layout
 		font: Font
-		width: number
-		height: number
+		size: Size
 	}
 
 	constructor() {
 		this.id = createIdentifier()
 		this.type = Symbols.Text
 		this.props = {
-			text: '我是一个快乐的文本元素~',
+			text: '我是一个新建的文本元素',
 			layout: {
 				x: 0,
 				y: 0,
 			},
 			font: {
-				size: 12,
-				family: 'Courview',
+				size: 24,
+				family: 'cursive',
 			},
-			width: 0,
-			height: 0,
+			size: {
+				width: 0,
+				height: 0,
+			},
 		}
 	}
 

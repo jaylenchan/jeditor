@@ -1,6 +1,6 @@
 import Symbols from 'settings/dependency-type.config'
 
-import type { Border, ElementModel, Position } from 'shared/utils/type'
+import type { Border, ElementModel, Position, Size } from 'shared/utils/type'
 
 class WhiteboardModel implements ElementModel {
 
@@ -11,8 +11,7 @@ class WhiteboardModel implements ElementModel {
 		position: Position
 		border: Border
 		opacity: number
-		width: number
-		height: number
+		size: Size
 	}
 
 	constructor() {
@@ -31,8 +30,10 @@ class WhiteboardModel implements ElementModel {
 				radius: 1,
 			},
 			opacity: 1,
-			width: 900,
-			height: 500,
+			size: {
+				width: 900,
+				height: 500,
+			},
 		}
 	}
 

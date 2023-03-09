@@ -25,10 +25,14 @@ export interface Border {
 	radius: number
 }
 
+export interface Size {
+	width: number
+	height: number
+}
 export interface ElementModel<T = unknown> {
 	readonly id: string
 	readonly type: symbol
-	props: T & { width: number; height: number }
+	props: T & { size: Size }
 }
 
 export interface ModelClass<T = unknown> extends Function {

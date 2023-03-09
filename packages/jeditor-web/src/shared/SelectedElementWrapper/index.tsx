@@ -100,7 +100,7 @@ function createDot(
 	const defaultOptions = {
 		width: `9px`,
 		height: `9px`,
-		border: `1px solid rgb(0, 170, 255)`,
+		border: `2px solid rgb(0, 170, 255)`,
 		borderRadius: `50%`,
 		backgroundColor: `#ffffff`,
 		position: 'absolute',
