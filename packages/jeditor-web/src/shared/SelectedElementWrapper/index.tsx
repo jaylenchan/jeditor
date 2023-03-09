@@ -1,9 +1,8 @@
 import { defineComponent, reactive, ref, watch } from 'vue'
 
 import { merge } from 'shared/utils/object'
-import { useService } from 'shared/utils/service'
 
-import type { StyleValue } from 'vue'
+import type { StyleValue, Ref } from 'vue'
 import style from './index.module.scss'
 
 interface DotPosition {
@@ -85,8 +84,18 @@ function getAllDotsPosition(width: number, height: number) {
 	return dotPositions
 }
 
-function createDot(styleOptions: StyleValue, elementId: string) {
-	const defaultOptions: StyleValue = {
+function createDot(
+	cunstomStyleOptions: {
+		left: string
+		top: string
+		marginTop: string
+		marginLeft: string
+		cursor: string
+	},
+	selectedElementWrapperRef: Ref<HTMLDivElement | null>,
+	dotPositions: Ref<DotPosition[]>
+) {
+	const defaultOptions = {
 		width: `9px`,
 		height: `9px`,
 		border: `1px solid rgb(0, 170, 255)`,
@@ -102,19 +111,25 @@ function createDot(styleOptions: StyleValue, elementId: string) {
 		deltaX: 0,
 		deltaY: 0,
 	})
+	const dotRef = ref<HTMLDivElement | null>(null)
+	const styleOptions = reactive(merge(defaultOptions, cunstomStyleOptions))
 
 	return (
 		<div
-			style={merge(defaultOptions, styleOptions)}
+			ref={dotRef}
+			style={styleOptions as StyleValue}
 			onMousedown={handleDotMousedown}
-			onMousemove={handleDotMousemove}
-			onMouseup={handleDotMouseup}
 		></div>
 	)
 
 	function handleDotMousedown(event: MouseEvent) {
+		event.stopPropagation()
+
 		mouseLayout.x = event.clientX
 		mouseLayout.y = event.clientY
+
+		document.addEventListener('mousemove', handleDotMousemove)
+		document.addEventListener('mouseup', handleDotMouseup)
 	}
 
 	function handleDotMousemove(event: MouseEvent) {
@@ -126,19 +141,23 @@ function createDot(styleOptions: StyleValue, elementId: string) {
 		mouseLayout.deltaX = deltaX
 		mouseLayout.deltaY = deltaY
 
-		const { boardService } = useService()
-		const boardModel = boardService.getBoardModel()
-		const element = boardModel?.elements.find(el => el.id == elementId)
-		if (element) {
-			element.props.width = element.props.width + mouseLayout.deltaX
-			element.props.height = element.props.height + mouseLayout.deltaY
+		if (selectedElementWrapperRef.value) {
+			const { width, height } =
+				selectedElementWrapperRef.value.getBoundingClientRect()
+			selectedElementWrapperRef.value.style.width =
+				width + mouseLayout.deltaX + 'px'
+			selectedElementWrapperRef.value.style.height =
+				height + mouseLayout.deltaY + 'px'
 
-			boardService.updateElement(element)
+			dotPositions.value = getAllDotsPosition(
+				width + mouseLayout.deltaX,
+				height + mouseLayout.deltaY
+			)
 		}
 	}
 
-	function handleDotMouseup(event: MouseEvent) {
-		event
+	function handleDotMouseup() {
+		document.removeEventListener('mousemove', handleDotMousemove)
 	}
 }
 
@@ -149,7 +168,7 @@ const SelectedEelemntWrapper = defineComponent({
 			required: true,
 		},
 	},
-	setup({ elementId }, { slots }) {
+	setup(_, { slots }) {
 		const dotPositions = ref<DotPosition[]>([])
 		const selectedElementWrapperRef = ref<HTMLDivElement | null>(null)
 
@@ -173,7 +192,8 @@ const SelectedEelemntWrapper = defineComponent({
 								marginLeft: dot.hasRight ? `-5px` : `-4px`,
 								cursor: dot.cursor,
 							},
-							elementId
+							selectedElementWrapperRef,
+							dotPositions
 						)
 					)}
 				<div
