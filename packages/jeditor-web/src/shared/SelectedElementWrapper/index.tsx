@@ -1,7 +1,9 @@
-import { defineComponent, reactive, ref, watch } from 'vue'
+import { defineComponent, reactive, ref, watch, watchEffect } from 'vue'
 
+import { ee } from 'shared/utils/event'
 import { merge } from 'shared/utils/object'
 
+import type { ElementModel } from 'shared/utils/type'
 import type { StyleValue, Ref } from 'vue'
 import style from './index.module.scss'
 
@@ -162,10 +164,16 @@ function createDot(
 }
 
 const SelectedElementWrapper = defineComponent({
-	// props: {},
-	setup(_, { slots }) {
+	props: {
+		elementId: {
+			type: String,
+			required: true,
+		},
+	},
+	setup({ elementId }, { slots }) {
 		const dotPositions = ref<DotPosition[]>([])
 		const selectedElementWrapperRef = ref<HTMLDivElement | null>(null)
+		const selectedActive = ref<boolean>(false)
 
 		watch(selectedElementWrapperRef, selectedElementWrapper => {
 			if (selectedElementWrapper) {
@@ -175,10 +183,21 @@ const SelectedElementWrapper = defineComponent({
 			}
 		})
 
+		watchEffect(() => {
+			ee.on('elementSelected', (model: ElementModel) => {
+				if (elementId == model.id) {
+					selectedActive.value = true
+				} else {
+					selectedActive.value = false
+				}
+			})
+		})
+
 		return () => {
 			return (
 				<>
-					{dotPositions.value.length > 0 &&
+					{selectedActive.value &&
+						dotPositions.value.length > 0 &&
 						dotPositions.value.map(dot =>
 							createDot(
 								{
@@ -193,7 +212,10 @@ const SelectedElementWrapper = defineComponent({
 							)
 						)}
 					<div
-						class={style.selectedElementWrapper}
+						class={[
+							style.selectedElementWrapper,
+							!selectedActive.value && style.notSelected,
+						]}
 						ref={selectedElementWrapperRef}
 					>
 						{slots.default?.()}

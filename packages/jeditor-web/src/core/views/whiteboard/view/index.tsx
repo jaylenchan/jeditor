@@ -5,7 +5,6 @@ import {
 	watchEffect,
 	reactive,
 	nextTick,
-	ref,
 } from 'vue'
 
 import DragElementWrapper from 'shared/DragElementWrapper'
@@ -28,7 +27,6 @@ const WhiteboardView = defineComponent({
 	},
 	setup() {
 		const elements = reactive<ElementModel[]>([])
-		const selectedElement = ref<string>('')
 
 		function updateBoard() {
 			const { boardService } = useService()
@@ -55,12 +53,11 @@ const WhiteboardView = defineComponent({
 				{elements.map(el => {
 					return (
 						<DragElementWrapper>
-							<SelectedElementWrapper>
+							<SelectedElementWrapper elementId={el.id}>
 								<ElementWrapper
 									model={el}
 									onSelected={(model: ElementModel) => {
 										ee.emit('elementSelected', model)
-										selectedElement.value = model.id
 									}}
 									key={el.id}
 								>

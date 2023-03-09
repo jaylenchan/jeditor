@@ -3,3 +3,7 @@
 	@include bd(2px solid rgb(0, 170, 255));
 	@include pd(8px);
 }
+
+.selectedElementWrapper.notSelected {
+	@include bd-color(transparent);
+}
