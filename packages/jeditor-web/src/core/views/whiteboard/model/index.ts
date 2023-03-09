@@ -11,6 +11,8 @@ class WhiteboardModel implements ElementModel {
 		position: Position
 		border: Border
 		opacity: number
+		width: number
+		height: number
 	}
 
 	constructor() {
@@ -29,6 +31,8 @@ class WhiteboardModel implements ElementModel {
 				radius: 1,
 			},
 			opacity: 1,
+			width: 900,
+			height: 500,
 		}
 	}
 

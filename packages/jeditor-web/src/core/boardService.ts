@@ -63,7 +63,7 @@ class BoardService {
 	}
 
 	public updateElement<T>(newModel: ElementModel<T>): void {
-		const oldModel = this.modelService.getModel<T>(newModel.type, newModel.id)
+		const oldModel = this.modelService.getModel(newModel.type, newModel.id)
 
 		if (!oldModel) return
 

@@ -12,6 +12,8 @@ class TextModel implements ElementModel<TextModelProps> {
 		text: string
 		layout: Layout
 		font: Font
+		width: number
+		height: number
 	}
 
 	constructor() {
@@ -27,6 +29,8 @@ class TextModel implements ElementModel<TextModelProps> {
 				size: 12,
 				family: 'Courview',
 			},
+			width: 0,
+			height: 0,
 		}
 	}
 

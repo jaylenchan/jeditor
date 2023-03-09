@@ -15,6 +15,7 @@ class ModelService {
 
 	public modelIdPool: Map<symbol, Set<string>> = new Map()
 	public modelPool: Map<symbol, Map<string, ElementModel>> = new Map()
+	public models: Map<string, ElementModel> = new Map()
 
 	public createModel(type: symbol): ElementModel {
 		const plugin = this.pluginService.pluginPool.get(type)
@@ -46,16 +47,25 @@ class ModelService {
 			this.modelPool.set(modelType, models)
 		}
 		models.set(modelId, model)
+		this.models.set(modelId, model)
 	}
 
-	public getModel<T>(type: symbol, id: string): ElementModel<T> | null {
+	public getModel(type: symbol, id: string): ElementModel | null {
 		const models = this.modelPool.get(type)
 		if (!models) return null
 
 		const model = models.get(id)
 		if (!model) return null
 
-		return model as ElementModel<T>
+		return model
+	}
+
+	public getModelById(id: string): ElementModel | null {
+		const model = this.models.get(id)
+
+		if (!model) return null
+
+		return model
 	}
 
 	public getModelIds(type: symbol): string[] | null {

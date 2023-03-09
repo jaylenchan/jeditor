@@ -28,7 +28,7 @@ export interface Border {
 export interface ElementModel<T = unknown> {
 	readonly id: string
 	readonly type: symbol
-	props: T
+	props: T & { width: number; height: number }
 }
 
 export interface ModelClass<T = unknown> extends Function {

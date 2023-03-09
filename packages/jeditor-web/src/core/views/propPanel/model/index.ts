@@ -10,6 +10,8 @@ class PropPanelModel implements ElementModel {
 		position: Position
 		border: Border
 		opacity: number
+		width: number
+		height: number
 	}
 
 	constructor() {
@@ -27,6 +29,8 @@ class PropPanelModel implements ElementModel {
 				radius: 1,
 			},
 			opacity: 1,
+			width: 0,
+			height: 0,
 		}
 	}
 

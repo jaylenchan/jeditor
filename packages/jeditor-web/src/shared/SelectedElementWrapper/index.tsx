@@ -1,6 +1,7 @@
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, reactive, ref, watch } from 'vue'
 
 import { merge } from 'shared/utils/object'
+import { useService } from 'shared/utils/service'
 
 import type { StyleValue } from 'vue'
 import style from './index.module.scss'
@@ -84,7 +85,7 @@ function getAllDotsPosition(width: number, height: number) {
 	return dotPositions
 }
 
-function createDot(styleOptions: StyleValue) {
+function createDot(styleOptions: StyleValue, elementId: string) {
 	const defaultOptions: StyleValue = {
 		width: `9px`,
 		height: `9px`,
@@ -95,11 +96,60 @@ function createDot(styleOptions: StyleValue) {
 		zIndex: 100,
 	}
 
-	return <div style={merge(defaultOptions, styleOptions)}></div>
+	const mouseLayout = reactive({
+		x: 0,
+		y: 0,
+		deltaX: 0,
+		deltaY: 0,
+	})
+
+	return (
+		<div
+			style={merge(defaultOptions, styleOptions)}
+			onMousedown={handleDotMousedown}
+			onMousemove={handleDotMousemove}
+			onMouseup={handleDotMouseup}
+		></div>
+	)
+
+	function handleDotMousedown(event: MouseEvent) {
+		mouseLayout.x = event.clientX
+		mouseLayout.y = event.clientY
+	}
+
+	function handleDotMousemove(event: MouseEvent) {
+		const deltaX = event.clientX - mouseLayout.x
+		const deltaY = event.clientY - mouseLayout.y
+
+		mouseLayout.x = event.clientX
+		mouseLayout.y = event.clientY
+		mouseLayout.deltaX = deltaX
+		mouseLayout.deltaY = deltaY
+
+		const { boardService } = useService()
+		const boardModel = boardService.getBoardModel()
+		const element = boardModel?.elements.find(el => el.id == elementId)
+		if (element) {
+			element.props.width = element.props.width + mouseLayout.deltaX
+			element.props.height = element.props.height + mouseLayout.deltaY
+
+			boardService.updateElement(element)
+		}
+	}
+
+	function handleDotMouseup(event: MouseEvent) {
+		event
+	}
 }
 
 const SelectedEelemntWrapper = defineComponent({
-	setup(_, { slots }) {
+	props: {
+		elementId: {
+			type: String,
+			required: true,
+		},
+	},
+	setup({ elementId }, { slots }) {
 		const dotPositions = ref<DotPosition[]>([])
 		const selectedElementWrapperRef = ref<HTMLDivElement | null>(null)
 
@@ -115,13 +165,16 @@ const SelectedEelemntWrapper = defineComponent({
 			<>
 				{dotPositions.value.length > 0 &&
 					dotPositions.value.map(dot =>
-						createDot({
-							left: dot.left + 'px',
-							top: dot.top + 'px',
-							marginTop: dot.hasBottom ? `-5px` : `-4px`,
-							marginLeft: dot.hasRight ? `-5px` : `-4px`,
-							cursor: dot.cursor,
-						})
+						createDot(
+							{
+								left: dot.left + 'px',
+								top: dot.top + 'px',
+								marginTop: dot.hasBottom ? `-5px` : `-4px`,
+								marginLeft: dot.hasRight ? `-5px` : `-4px`,
+								cursor: dot.cursor,
+							},
+							elementId
+						)
 					)}
 				<div
 					class={style.selectedElementWrapper}

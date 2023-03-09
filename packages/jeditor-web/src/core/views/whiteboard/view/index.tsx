@@ -58,7 +58,7 @@ const WhiteboardView = defineComponent({
 							}}
 							key={el.id}
 						>
-							<SelectedEelemntWrapper>
+							<SelectedEelemntWrapper elementId={el.id}>
 								{h(resolveComponent(el.type.toString()), {
 									...(el.props as object),
 								})}
