@@ -20,6 +20,7 @@
 			@include full-in-father();
 			@include bg-color(useColor(info, 1));
 			@include bd-right(1px solid useColor(info, 3));
+			@include pd(16px);
 		}
 
 		.whiteboard {

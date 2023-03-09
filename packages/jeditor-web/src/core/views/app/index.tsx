@@ -15,7 +15,6 @@ const App = defineComponent({
 				<el-row class={style.bottom}>
 					<el-col span={3}>
 						<el-aside class={style.componentPanel}>
-							<div>组件面板</div>
 							<el-button
 								type={'primary'}
 								onClick={() => {

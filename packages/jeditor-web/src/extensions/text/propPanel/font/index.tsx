@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 
-import EditBlockWrapper from 'extensions/shared/propPanel/EditBlockWrapper'
+import EditBlockWrapper from 'shared/EditBlockWrapper'
 
 import type { Font } from 'extensions/text/types'
 import type { PropType } from 'vue'

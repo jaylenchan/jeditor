@@ -7,9 +7,9 @@ import {
 	nextTick,
 } from 'vue'
 
+import ElementWrapper from 'shared/ElementWrapper'
 import { ee } from 'shared/utils/event'
 import { useService } from 'shared/utils/service'
-import Wrapper from 'shared/wrapper'
 
 import type BoardModel from '../model'
 import type { ElementModel } from 'shared/utils/type'
@@ -50,7 +50,7 @@ const WhiteboardView = defineComponent({
 			<div class={style.boardContainer}>
 				{elements.map(el => {
 					return (
-						<Wrapper
+						<ElementWrapper
 							model={el}
 							onSelected={(model: ElementModel) => {
 								ee.emit('elementSelected', model)
@@ -60,7 +60,7 @@ const WhiteboardView = defineComponent({
 							{h(resolveComponent(el.type.toString()), {
 								...(el.props as object),
 							})}
-						</Wrapper>
+						</ElementWrapper>
 					)
 				})}
 			</div>

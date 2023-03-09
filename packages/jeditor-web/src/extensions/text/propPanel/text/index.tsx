@@ -1,6 +1,6 @@
 import { defineComponent, ref } from 'vue'
 
-import EditBlockWrapper from 'extensions/shared/propPanel/EditBlockWrapper'
+import EditBlockWrapper from 'shared/EditBlockWrapper'
 
 import type { PropType } from 'vue'
 import style from './index.module.scss'
