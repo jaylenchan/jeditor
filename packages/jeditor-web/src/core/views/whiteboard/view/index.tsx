@@ -8,6 +8,7 @@ import {
 } from 'vue'
 
 import ElementWrapper from 'shared/ElementWrapper'
+import SelectedEelemntWrapper from 'shared/SelectedElementWrapper'
 import { ee } from 'shared/utils/event'
 import { useService } from 'shared/utils/service'
 
@@ -57,9 +58,11 @@ const WhiteboardView = defineComponent({
 							}}
 							key={el.id}
 						>
-							{h(resolveComponent(el.type.toString()), {
-								...(el.props as object),
-							})}
+							<SelectedEelemntWrapper>
+								{h(resolveComponent(el.type.toString()), {
+									...(el.props as object),
+								})}
+							</SelectedEelemntWrapper>
 						</ElementWrapper>
 					)
 				})}

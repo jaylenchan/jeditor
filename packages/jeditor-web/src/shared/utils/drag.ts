@@ -10,6 +10,8 @@ export function useDrag(el: HTMLElement) {
 
 		document.addEventListener('mousemove', handleMouseMove)
 		document.addEventListener('mouseup', handleMouseUp)
+
+		el.style.position = 'absolute'
 	}
 
 	function handleMouseMove(event: MouseEvent) {
