@@ -31,6 +31,7 @@
 			@include full-in-father();
 			@include bg-color(useColor(info, 1));
 			@include bd-left(1px solid useColor(info, 3));
+			@include pd(15px);
 		}
 	}
 }

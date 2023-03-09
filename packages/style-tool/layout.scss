@@ -21,3 +21,10 @@ $fullPageEls: html, body, '#app';
 @mixin pos($val) {
 	position: $val;
 }
+
+@mixin display($val) {
+	display: $val;
+	@if $val == flex {
+		align-items: center;
+	}
+}

@@ -1,0 +1,27 @@
+.editBlockWrapper {
+	@include bd-bottom(1px solid useColor(info, 3));
+	@include pd-bottom(16px);
+	.blockName {
+		@include ft-sz(12px);
+		@include ft-fy(
+			(
+				-apple-system,
+				BlinkMacSystemFont,
+				'Segoe UI',
+				Roboto,
+				'Helvetica Neue',
+				Arial,
+				'Noto Sans',
+				sans-serif,
+				'Apple Color Emoji',
+				'Segoe UI Emoji',
+				'Segoe UI Symbol',
+				'Noto Color Emoji'
+			)
+		);
+		@include ft-wt(700);
+		@include height(32px);
+		@include mg(8px 0);
+		@include display(flex);
+	}
+}

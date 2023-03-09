@@ -18,17 +18,17 @@ class TextPanel implements PropPanelPlugin {
 
 	constructor(initialModel: ElementModel<TextModelProps>) {
 		this.model = initialModel
-		// edit text
+
 		this.addEditBlock('text', this.textBlock())
-		// edit layout props()
-		this.addEditBlock('layout', this.layoutBlock())
-		// edit font props(font-size, font-family)
+
 		this.addEditBlock('font', this.fontBlock())
-		// add more block to edit element ...
+
+		this.addEditBlock('layout', this.layoutBlock())
 	}
 
 	textBlock(): VNode {
 		return h(TextBlock, {
+			text: this.model.props.text,
 			onTextChange: newText => {
 				this.model.props.text = newText
 				const { boardService } = useService()

@@ -2,6 +2,6 @@
 	@include pos(relative);
 	@include text-color(useColor(success, 7));
 	@include bg-color(useColor(white, 1));
-	@include width(900);
-	@include height(500);
+	@include width(900px);
+	@include height(500px);
 }

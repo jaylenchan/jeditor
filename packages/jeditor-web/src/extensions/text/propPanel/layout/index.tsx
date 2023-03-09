@@ -1,5 +1,7 @@
 import { defineComponent } from 'vue'
 
+import EditBlockWrapper from 'extensions/shared/propPanel/EditBlockWrapper'
+
 import type { Layout } from 'extensions/text/types'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
@@ -17,12 +19,14 @@ const LayoutBlock = defineComponent({
 	},
 	setup({ onLayoutChange }) {
 		return () => (
-			<div
-				class={style.layout}
-				onClick={() => onLayoutChange({ x: 10, y: 100 })}
-			>
-				Layout Edit Block
-			</div>
+			<EditBlockWrapper blockName="布局">
+				<div
+					class={style.layout}
+					onClick={() => onLayoutChange({ x: 10, y: 100 })}
+				>
+					{/* Layout Edit Block */}
+				</div>
+			</EditBlockWrapper>
 		)
 	},
 })

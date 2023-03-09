@@ -1,71 +1,66 @@
-$unit: px;
-
-@function getVal($val) {
-  @return $val + $unit;
-}
 /// 宽高
 // height
 @mixin height($val) {
-  height: getVal($val);
+	height: $val !important;
 }
 
 // width
 @mixin width($val) {
-  @if $val == 100% {
-    width: 100%;
-  } @else {
-    width: getVal($val);
-  }
+	@if $val == 100% {
+		width: 100%;
+	} @else {
+		width: $val !important;
+	}
 }
 
 /// 外边距
 // margin
 @mixin mg($vals...) {
-  margin: getVal($val);
+	margin: $vals;
 }
 
 // margin-top
 @mixin mg-top($val) {
-  margin-top: getVal($val);
+	margin-top: $val !important;
 }
 
 // margin-right
 @mixin mg-right($val) {
-  margin-right: getVal($val);
+	margin-right: $val !important;
 }
 
 // margin-bottom
 @mixin mg-bottom($val) {
-  margin-bottom: getVal($val);
+	margin-bottom: $val !important;
 }
 
 // margin-left
 @mixin mg-left($val) {
-  margin-left: getVal($val);
+	margin-left: $val !important;
 }
 
 /// 内边距
 // padding
-@mixin pd($vals...) {
-  padding: getVal($val);
+@mixin pd($val) {
+	padding: $val !important;
 }
 
 // padding-top
 @mixin pd-top($val) {
-  padding-top: getVal($val);
+	padding-top: $val !important;
 }
 
 // padding-right
 @mixin pd-right($val) {
-  padding-right: getVal($val);
+	padding-right: $val !important;
 }
 
 // padding-bottom
 @mixin pd-bottom($val) {
-  padding-bottom: getVal($val);
+	padding-bottom: $val !important;
 }
 
 // padding-left
 @mixin pd-left($val) {
-  padding-left: getVal($val);
+	padding-left: $val !important;
 }
