@@ -1,55 +1,54 @@
-import { reactive } from 'vue'
-
 export function useDrag(el: HTMLElement) {
-	const mouseLayout = reactive({ x: 0, y: 0, deltaX: 0, deltaY: 0 })
-	const elementLayout = reactive({ left: el.clientLeft, top: el.clientTop })
-
-	function handleMouseDown(event: MouseEvent) {
-		event.stopPropagation()
-
-		mouseLayout.x = event.clientX
-		mouseLayout.y = event.clientY
-
-		document.addEventListener('mousemove', handleMouseMove)
-		document.addEventListener('mouseup', handleMouseUp)
-
-		if (getComputedStyle(el).position != 'absolute')
-			el.style.position = 'absolute'
+	// the distance of mouse to element[left|top]
+	const distanceOfMouseToElement = {
+		left: 0,
+		top: 0,
 	}
 
-	function handleMouseMove(event: MouseEvent) {
-		event.stopPropagation()
+	function handleMousedown(e: MouseEvent) {
+		const { left, top } = el.getBoundingClientRect()
 
-		const deltaX = event.clientX - mouseLayout.x
-		const deltaY = event.clientY - mouseLayout.y
+		distanceOfMouseToElement.left = e.clientX - left
+		distanceOfMouseToElement.top = e.clientY - top
 
-		mouseLayout.x = event.clientX
-		mouseLayout.y = event.clientY
-		mouseLayout.deltaX = deltaX
-		mouseLayout.deltaY = deltaY
-
-		elementLayout.left = elementLayout.left + mouseLayout.deltaX
-		elementLayout.top = elementLayout.top + mouseLayout.deltaY
-
-		el.style.left = elementLayout.left + 'px'
-		el.style.top = elementLayout.top + 'px'
+		document.addEventListener('mousemove', handleMousemove)
+		document.addEventListener('mouseup', handleMouseup)
 	}
 
-	function handleMouseUp() {
-		document.removeEventListener('mousemove', handleMouseMove)
-		document.removeEventListener('mouseup', handleMouseUp)
+	function handleMousemove(e: MouseEvent) {
+		const board = document.getElementById('whiteboard')
+		if (board) {
+			const { clientX, clientY } = e
+
+			const newBoundingClientLeft = clientX - distanceOfMouseToElement.left
+			const newBoundingClientTop = clientY - distanceOfMouseToElement.top
+
+			const { left, top } = board.getBoundingClientRect()
+
+			const leftToBoard = newBoundingClientLeft - left
+			const topToBoard = newBoundingClientTop - top
+
+			el.style.left = leftToBoard + 'px'
+			el.style.top = topToBoard + 'px'
+		}
 	}
 
-	function handleMouseEnter() {
+	function handleMouseup() {
+		document.removeEventListener('mousemove', handleMousemove)
+		document.removeEventListener('mouseup', handleMouseup)
+	}
+
+	function handleMouseenter() {
 		el.style.cursor = 'move'
 		el.style.userSelect = 'none'
 	}
 
-	function handleMouseLeave() {
+	function handleMouseleave() {
 		el.style.cursor = 'move'
+		el.style.userSelect = 'initial'
 	}
 
-	el.addEventListener('mouseenter', handleMouseEnter)
-	el.addEventListener('mouseleave', handleMouseLeave)
-	el.addEventListener('mousedown', handleMouseDown)
+	el.addEventListener('mousedown', handleMousedown)
+	el.addEventListener('mouseenter', handleMouseenter)
+	el.addEventListener('mouseleave', handleMouseleave)
 }
