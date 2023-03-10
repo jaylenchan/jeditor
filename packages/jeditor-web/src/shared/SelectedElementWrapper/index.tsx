@@ -2,8 +2,9 @@ import { defineComponent, ref, watch, watchEffect } from 'vue'
 
 import { useDrag } from 'shared/utils/drag'
 import { ee } from 'shared/utils/event'
+import { useRef } from 'shared/utils/render'
 
-import type { ElementModel } from 'shared/utils/type'
+import type { ElementModel, SetRefFunc } from 'shared/utils/type'
 import type { StyleValue } from 'vue'
 import style from './index.module.scss'
 
@@ -13,6 +14,7 @@ interface DotLayout {
 	inRight: boolean
 	inBottom: boolean
 	cursor: string
+	dragPosition: DragPosition
 }
 
 enum Cursor {
@@ -24,6 +26,17 @@ enum Cursor {
 	BottomLeft = 'sw-resize',
 	BottomCenter = 's-resize',
 	BottomRight = 'se-resize',
+}
+
+enum DragPosition {
+	TopLeft,
+	TopCenter,
+	TopRight,
+	CenterLeft,
+	CenterRight,
+	BottomLeft,
+	BottomCenter,
+	BottomRight,
 }
 
 // all dot is positioned relative to the selected parent -> SelectedElementWrapper
@@ -43,6 +56,7 @@ function getDotsPositions({
 			inRight: false,
 			inBottom: false,
 			cursor: Cursor.TopLeft,
+			dragPosition: DragPosition.TopLeft,
 		},
 		{
 			// top-center
@@ -51,6 +65,7 @@ function getDotsPositions({
 			inRight: false,
 			inBottom: false,
 			cursor: Cursor.TopCenter,
+			dragPosition: DragPosition.TopCenter,
 		},
 
 		{
@@ -60,6 +75,7 @@ function getDotsPositions({
 			inRight: true,
 			inBottom: false,
 			cursor: Cursor.TopRight,
+			dragPosition: DragPosition.TopRight,
 		},
 		// ================ top =============
 
@@ -71,6 +87,7 @@ function getDotsPositions({
 			inRight: false,
 			inBottom: false,
 			cursor: Cursor.CenterLeft,
+			dragPosition: DragPosition.CenterLeft,
 		},
 		{
 			// center-right
@@ -79,6 +96,7 @@ function getDotsPositions({
 			inRight: true,
 			inBottom: false,
 			cursor: Cursor.CenterRight,
+			dragPosition: DragPosition.CenterRight,
 		},
 		// ================ center ==========
 
@@ -90,6 +108,7 @@ function getDotsPositions({
 			inRight: false,
 			inBottom: true,
 			cursor: Cursor.BottomLeft,
+			dragPosition: DragPosition.BottomLeft,
 		},
 		{
 			// bottom-center
@@ -98,6 +117,7 @@ function getDotsPositions({
 			inRight: false,
 			inBottom: true,
 			cursor: Cursor.BottomCenter,
+			dragPosition: DragPosition.BottomCenter,
 		},
 		{
 			// bottom-right
@@ -106,6 +126,7 @@ function getDotsPositions({
 			inRight: true,
 			inBottom: true,
 			cursor: Cursor.BottomRight,
+			dragPosition: DragPosition.BottomRight,
 		},
 		// ================ bottom ==========
 	]
@@ -114,10 +135,168 @@ function getDotsPositions({
 }
 
 // create all dot
-function createDots(dotLayoutList: DotLayout[]) {
+function createDots(
+	dotLayoutList: DotLayout[],
+	selectedElementWrapper: HTMLDivElement,
+	setDotPositions: SetRefFunc<DotLayout[]>
+) {
 	if (!dotLayoutList || !dotLayoutList.length) return
 
 	return dotLayoutList.map(dotLayout => {
+		const { width, height } = selectedElementWrapper.getBoundingClientRect()
+		const layout = {
+			originClientX: 0,
+			originClientY: 0,
+			originWidth: width,
+			originHeight: height,
+			originTop: 0,
+			originLeft: 0,
+		}
+
+		function handleMousedown(e: MouseEvent) {
+			layout.originClientX = e.clientX
+			layout.originClientY = e.clientY
+			layout.originTop = selectedElementWrapper.offsetTop
+			layout.originLeft = selectedElementWrapper.offsetLeft
+
+			document.addEventListener('mousemove', handleMousemove)
+			document.addEventListener('mouseup', handleMouseup)
+		}
+
+		function handleMousemove(e: MouseEvent) {
+			const { clientX, clientY } = e
+
+			switch (dotLayout.dragPosition) {
+				case DragPosition.TopLeft: {
+					const newWidth = layout.originWidth - (clientX - layout.originClientX)
+					const newHeight =
+						layout.originHeight - (clientY - layout.originClientY)
+
+					const newLeft = layout.originLeft + (clientX - layout.originClientX)
+					const newTop = layout.originTop + (clientY - layout.originClientY)
+
+					if (newWidth <= 0 || newHeight <= 0) return
+
+					selectedElementWrapper.style.width = newWidth + 'px'
+					selectedElementWrapper.style.height = newHeight + 'px'
+					selectedElementWrapper.style.left = newLeft + 'px'
+					selectedElementWrapper.style.top = newTop + 'px'
+
+					setDotPositions(
+						getDotsPositions({ width: newWidth, height: newHeight })
+					)
+
+					break
+				}
+				case DragPosition.TopCenter: {
+					const newHeight =
+						layout.originHeight - (clientY - layout.originClientY)
+					const newTop = layout.originTop + (clientY - layout.originClientY)
+
+					if (newHeight <= 0) return
+
+					selectedElementWrapper.style.height = newHeight + 'px'
+					selectedElementWrapper.style.top = newTop + 'px'
+
+					setDotPositions(getDotsPositions({ width, height: newHeight }))
+
+					break
+				}
+				case DragPosition.TopRight: {
+					const newWidth = layout.originWidth + (clientX - layout.originClientX)
+					const newHeight =
+						layout.originHeight - (clientY - layout.originClientY)
+					const newTop = layout.originTop + (clientY - layout.originClientY)
+
+					if (newWidth <= 0 || newHeight <= 0) return
+
+					selectedElementWrapper.style.width = newWidth + 'px'
+					selectedElementWrapper.style.height = newHeight + 'px'
+					selectedElementWrapper.style.top = newTop + 'px'
+
+					setDotPositions(
+						getDotsPositions({ width: newWidth, height: newHeight })
+					)
+
+					break
+				}
+				case DragPosition.CenterLeft: {
+					const newWidth = layout.originWidth - (clientX - layout.originClientX)
+
+					const newLeft = layout.originLeft + (clientX - layout.originClientX)
+
+					if (newWidth <= 0) return
+
+					selectedElementWrapper.style.width = newWidth + 'px'
+					selectedElementWrapper.style.left = newLeft + 'px'
+
+					setDotPositions(getDotsPositions({ width: newWidth, height }))
+
+					break
+				}
+				case DragPosition.CenterRight: {
+					const newWidth = layout.originWidth + (clientX - layout.originClientX)
+
+					if (newWidth <= 0) return
+
+					selectedElementWrapper.style.width = newWidth + 'px'
+
+					setDotPositions(getDotsPositions({ width: newWidth, height }))
+
+					break
+				}
+				case DragPosition.BottomLeft: {
+					const newWidth = layout.originWidth - (clientX - layout.originClientX)
+					const newHeight =
+						layout.originHeight + (clientY - layout.originClientY)
+
+					const newLeft = layout.originLeft + (clientX - layout.originClientX)
+
+					if (newWidth <= 0 || newHeight <= 0) return
+
+					selectedElementWrapper.style.width = newWidth + 'px'
+					selectedElementWrapper.style.height = newHeight + 'px'
+					selectedElementWrapper.style.left = newLeft + 'px'
+
+					setDotPositions(
+						getDotsPositions({ width: newWidth, height: newHeight })
+					)
+
+					break
+				}
+				case DragPosition.BottomCenter: {
+					const newHeight =
+						layout.originHeight + (clientY - layout.originClientY)
+
+					selectedElementWrapper.style.height = newHeight + 'px'
+
+					setDotPositions(getDotsPositions({ width, height: newHeight }))
+
+					break
+				}
+				case DragPosition.BottomRight: {
+					const newWidth = layout.originWidth + (clientX - layout.originClientX)
+					const newHeight =
+						layout.originHeight + (clientY - layout.originClientY)
+					if (newWidth <= 0 || newHeight <= 0) return
+
+					selectedElementWrapper.style.width = newWidth + 'px'
+					selectedElementWrapper.style.height = newHeight + 'px'
+
+					setDotPositions(
+						getDotsPositions({ width: newWidth, height: newHeight })
+					)
+
+					break
+				}
+			}
+		}
+
+		function handleMouseup() {
+			document.removeEventListener('mousemove', handleMousemove)
+			document.removeEventListener('mouseup', handleMouseup)
+		}
+
 		const styleConfig = {
 			width: `9px`,
 			height: `9px`,
@@ -133,7 +312,12 @@ function createDots(dotLayoutList: DotLayout[]) {
 			cursor: dotLayout.cursor,
 		}
 
-		return <div style={styleConfig as StyleValue}></div>
+		return (
+			<div
+				style={styleConfig as StyleValue}
+				onMousedown={handleMousedown}
+			></div>
+		)
 	})
 }
 
@@ -145,25 +329,25 @@ const SelectedElementWrapper = defineComponent({
 		},
 	},
 	setup({ elementId }, { slots }) {
-		const dotPositions = ref<DotLayout[]>([])
+		const [dotPositions, setDotPositions] = useRef<DotLayout[]>([])
+		const [selectedActive, setSelectedActive] = useRef<boolean>(false)
 		const selectedElementWrapperRef = ref<HTMLDivElement | null>(null)
-		const selectedActive = ref<boolean>(false)
 
 		watch(selectedElementWrapperRef, selectedElementWrapper => {
 			if (selectedElementWrapper) {
 				useDrag(selectedElementWrapper)
 
 				const { width, height } = selectedElementWrapper.getBoundingClientRect()
-				dotPositions.value = getDotsPositions({ width, height })
+				setDotPositions(getDotsPositions({ width, height }))
 			}
 		})
 
 		watchEffect(() => {
 			ee.on('elementSelected', (model: ElementModel) => {
 				if (elementId == model.id) {
-					selectedActive.value = true
+					setSelectedActive(true)
 				} else {
-					selectedActive.value = false
+					setSelectedActive(false)
 				}
 			})
 		})
@@ -173,11 +357,23 @@ const SelectedElementWrapper = defineComponent({
 				<div
 					class={[
 						style.selectedElementWrapper,
-						// !selectedActive.value && style.notSelected,
+						!selectedActive.value && style.notSelected,
 					]}
 					ref={selectedElementWrapperRef}
 				>
-					{dotPositions.value.length > 0 && createDots(dotPositions.value)}
+					<div
+						class={style.selectedEelementWrapperDots}
+						onMousedown={e => e.stopPropagation()}
+					>
+						{selectedActive.value &&
+							dotPositions.value.length > 0 &&
+							selectedElementWrapperRef.value &&
+							createDots(
+								dotPositions.value,
+								selectedElementWrapperRef.value,
+								setDotPositions
+							)}
+					</div>
 					{slots.default?.()}
 				</div>
 			)

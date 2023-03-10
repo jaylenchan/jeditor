@@ -48,7 +48,7 @@ const WhiteboardView = defineComponent({
 		})
 
 		return () => (
-			<div class={style.boardContainer}>
+			<div class={style.boardContainer} id="whiteboard">
 				{elements.map(el => {
 					return (
 						<SelectedElementWrapper elementId={el.id}>

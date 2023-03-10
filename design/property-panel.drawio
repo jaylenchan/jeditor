@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="1wDEzimC1mVASfkiNfk8" name="JEditor__propPanel">
-        <mxGraphModel dx="1630" dy="1749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1672" dy="2031" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -78,7 +78,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="49" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;## 右键菜单 ##&lt;br&gt;1.右键菜单实现需要覆盖宿主环境自身的右键菜单，contextMenu出现的同时元素进入选中状态&lt;br&gt;&lt;br&gt;2. 包含功能：复制、剪切、粘贴、删除、锁定等常规功能&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;&quot;&gt;&lt;/div&gt;" style="text;strokeColor=#36393d;align=left;fillColor=#f9f7ed;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=#f5f4f4;fontSize=21;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="-120" y="380" width="590" height="340" as="geometry"/>
+                    <mxGeometry x="-30" y="510" width="320" height="135" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
