@@ -19,7 +19,7 @@ class TextModel implements ElementModel<TextModelProps> {
 		this.id = createIdentifier()
 		this.type = Symbols.Text
 		this.props = {
-			text: '我是一个新建的文本元素',
+			text: '新建的文本元素' + Math.floor(10000 * Math.random()),
 			layout: {
 				x: 0,
 				y: 0,

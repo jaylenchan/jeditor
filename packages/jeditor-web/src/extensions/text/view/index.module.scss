@@ -1,5 +1,5 @@
 .text {
 	@include height(100%);
 	@include width(100%);
-	@include bg-color(useColor(error, 5));
+	@include bg-color(useColor(success, 2));
 }

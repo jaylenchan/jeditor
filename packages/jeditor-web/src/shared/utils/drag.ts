@@ -13,10 +13,13 @@ export function useDrag(el: HTMLElement) {
 		document.addEventListener('mousemove', handleMouseMove)
 		document.addEventListener('mouseup', handleMouseUp)
 
-		if (el.style.position != 'absolute') el.style.position = 'absolute'
+		if (getComputedStyle(el).position != 'absolute')
+			el.style.position = 'absolute'
 	}
 
 	function handleMouseMove(event: MouseEvent) {
+		event.stopPropagation()
+
 		const deltaX = event.clientX - mouseLayout.x
 		const deltaY = event.clientY - mouseLayout.y
 

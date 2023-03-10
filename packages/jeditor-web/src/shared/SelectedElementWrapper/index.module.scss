@@ -1,6 +1,6 @@
 .selectedElementWrapper {
-	@include pos(relative);
-	@include bd(2px solid rgb(0, 170, 255));
+	@include pos(absolute);
+	@include bd(2px dashed rgb(0, 170, 255));
 	@include pd(8px);
 }
 

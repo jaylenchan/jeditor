@@ -1,166 +1,140 @@
-import { defineComponent, reactive, ref, watch, watchEffect } from 'vue'
+import { defineComponent, ref, watch, watchEffect } from 'vue'
 
+import { useDrag } from 'shared/utils/drag'
 import { ee } from 'shared/utils/event'
-import { merge } from 'shared/utils/object'
 
 import type { ElementModel } from 'shared/utils/type'
-import type { StyleValue, Ref } from 'vue'
+import type { StyleValue } from 'vue'
 import style from './index.module.scss'
 
-interface DotPosition {
+interface DotLayout {
 	left: number
 	top: number
-	hasRight: boolean
-	hasBottom: boolean
+	inRight: boolean
+	inBottom: boolean
 	cursor: string
 }
 
-function getAllDotsPosition(width: number, height: number) {
-	const dotPositions: DotPosition[] = [
-		{
-			// left top
-			left: 0,
-			top: 0,
-			hasRight: false,
-			hasBottom: false,
-			cursor: `nwse-resize`,
-		},
-		{
-			// left center
-			left: 0,
-			top: Math.round(height / 2),
-			hasRight: false,
-			hasBottom: false,
-			cursor: `ew-resize`,
-		},
-		{
-			// left bottom
-			left: 0,
-			top: height,
-			hasRight: false,
-			hasBottom: true,
-			cursor: `nesw-resize`,
-		},
-		{
-			// center top
-			left: Math.round(width / 2),
-			top: 0,
-			hasRight: false,
-			hasBottom: false,
-			cursor: `ns-resize`,
-		},
-		{
-			// center bottom
-			left: Math.round(width / 2),
-			top: height,
-			hasRight: false,
-			hasBottom: true,
-			cursor: `ns-resize`,
-		},
-		{
-			// right top
-			left: width,
-			top: 0,
-			hasRight: true,
-			hasBottom: false,
-			cursor: `nesw-resize`,
-		},
-		{
-			// right center
-			left: width,
-			top: Math.round(height / 2),
-			hasRight: true,
-			hasBottom: false,
-			cursor: `ew-resize`,
-		},
-		{
-			// right bottom
-			left: width,
-			top: height,
-			hasRight: true,
-			hasBottom: true,
-			cursor: `nwse-resize`,
-		},
-	]
-
-	return dotPositions
+enum Cursor {
+	TopLeft = 'nw-resize',
+	TopCenter = 'n-resize',
+	TopRight = 'ne-resize',
+	CenterLeft = 'w-resize',
+	CenterRight = 'e-resize',
+	BottomLeft = 'sw-resize',
+	BottomCenter = 's-resize',
+	BottomRight = 'se-resize',
 }
 
-function createDot(
-	cunstomStyleOptions: {
-		left: string
-		top: string
-		marginTop: string
-		marginLeft: string
-		cursor: string
-	},
-	selectedElementWrapperRef: Ref<HTMLDivElement | null>,
-	dotPositions: Ref<DotPosition[]>
-) {
-	const defaultOptions = {
-		width: `9px`,
-		height: `9px`,
-		border: `2px solid rgb(0, 170, 255)`,
-		borderRadius: `50%`,
-		backgroundColor: `#ffffff`,
-		position: 'absolute',
-		zIndex: 100,
-	}
+// all dot is positioned relative to the selected parent -> SelectedElementWrapper
+function getDotsPositions({
+	width,
+	height,
+}: {
+	width: number
+	height: number
+}): DotLayout[] {
+	const dots = [
+		// ================ top ============
+		{
+			// top-left
+			left: 0,
+			top: 0,
+			inRight: false,
+			inBottom: false,
+			cursor: Cursor.TopLeft,
+		},
+		{
+			// top-center
+			left: Math.round(width / 2),
+			top: 0,
+			inRight: false,
+			inBottom: false,
+			cursor: Cursor.TopCenter,
+		},
 
-	const mouseLayout = reactive({
-		x: 0,
-		y: 0,
-		deltaX: 0,
-		deltaY: 0,
-	})
-	const dotRef = ref<HTMLDivElement | null>(null)
-	const styleOptions = reactive(merge(defaultOptions, cunstomStyleOptions))
+		{
+			// top-right
+			left: width,
+			top: 0,
+			inRight: true,
+			inBottom: false,
+			cursor: Cursor.TopRight,
+		},
+		// ================ top =============
 
-	return (
-		<div
-			ref={dotRef}
-			style={styleOptions as StyleValue}
-			onMousedown={handleDotMousedown}
-		></div>
-	)
+		// ================ center ==========
+		{
+			// center-left
+			left: 0,
+			top: Math.round(height / 2),
+			inRight: false,
+			inBottom: false,
+			cursor: Cursor.CenterLeft,
+		},
+		{
+			// center-right
+			left: width,
+			top: Math.round(height / 2),
+			inRight: true,
+			inBottom: false,
+			cursor: Cursor.CenterRight,
+		},
+		// ================ center ==========
 
-	function handleDotMousedown(event: MouseEvent) {
-		event.stopPropagation()
+		// ================ bottom ==========
+		{
+			// bottom-left
+			left: 0,
+			top: height,
+			inRight: false,
+			inBottom: true,
+			cursor: Cursor.BottomLeft,
+		},
+		{
+			// bottom-center
+			left: Math.round(width / 2),
+			top: height,
+			inRight: false,
+			inBottom: true,
+			cursor: Cursor.BottomCenter,
+		},
+		{
+			// bottom-right
+			left: width,
+			top: height,
+			inRight: true,
+			inBottom: true,
+			cursor: Cursor.BottomRight,
+		},
+		// ================ bottom ==========
+	]
 
-		mouseLayout.x = event.clientX
-		mouseLayout.y = event.clientY
+	return dots
+}
 
-		document.addEventListener('mousemove', handleDotMousemove)
-		document.addEventListener('mouseup', handleDotMouseup)
-	}
+// create all dot
+function createDots(dotLayoutList: DotLayout[]) {
+	if (!dotLayoutList || !dotLayoutList.length) return
 
-	function handleDotMousemove(event: MouseEvent) {
-		const deltaX = event.clientX - mouseLayout.x
-		const deltaY = event.clientY - mouseLayout.y
-
-		mouseLayout.x = event.clientX
-		mouseLayout.y = event.clientY
-		mouseLayout.deltaX = deltaX
-		mouseLayout.deltaY = deltaY
-
-		if (selectedElementWrapperRef.value) {
-			const { width, height } =
-				selectedElementWrapperRef.value.getBoundingClientRect()
-			selectedElementWrapperRef.value.style.width =
-				width + mouseLayout.deltaX + 'px'
-			selectedElementWrapperRef.value.style.height =
-				height + mouseLayout.deltaY + 'px'
-
-			dotPositions.value = getAllDotsPosition(
-				width + mouseLayout.deltaX,
-				height + mouseLayout.deltaY
-			)
+	return dotLayoutList.map(dotLayout => {
+		const styleConfig = {
+			width: `9px`,
+			height: `9px`,
+			border: `2px solid rgb(0, 170, 255)`,
+			borderRadius: `50%`,
+			backgroundColor: `rgb(0, 170, 255)`,
+			zIndex: 100,
+			position: 'absolute',
+			left: dotLayout.left + 'px',
+			top: dotLayout.top + 'px',
+			marginTop: dotLayout.inBottom ? `-7px` : `-5px`,
+			marginLeft: dotLayout.inRight ? `-7px` : `-5px`,
+			cursor: dotLayout.cursor,
 		}
-	}
 
-	function handleDotMouseup() {
-		document.removeEventListener('mousemove', handleDotMousemove)
-	}
+		return <div style={styleConfig as StyleValue}></div>
+	})
 }
 
 const SelectedElementWrapper = defineComponent({
@@ -171,15 +145,16 @@ const SelectedElementWrapper = defineComponent({
 		},
 	},
 	setup({ elementId }, { slots }) {
-		const dotPositions = ref<DotPosition[]>([])
+		const dotPositions = ref<DotLayout[]>([])
 		const selectedElementWrapperRef = ref<HTMLDivElement | null>(null)
 		const selectedActive = ref<boolean>(false)
 
 		watch(selectedElementWrapperRef, selectedElementWrapper => {
 			if (selectedElementWrapper) {
-				const { width, height } = selectedElementWrapper.getBoundingClientRect()
+				useDrag(selectedElementWrapper)
 
-				dotPositions.value = getAllDotsPosition(width, height)
+				const { width, height } = selectedElementWrapper.getBoundingClientRect()
+				dotPositions.value = getDotsPositions({ width, height })
 			}
 		})
 
@@ -195,32 +170,16 @@ const SelectedElementWrapper = defineComponent({
 
 		return () => {
 			return (
-				<>
-					{selectedActive.value &&
-						dotPositions.value.length > 0 &&
-						dotPositions.value.map(dot =>
-							createDot(
-								{
-									left: dot.left + 'px',
-									top: dot.top + 'px',
-									marginTop: dot.hasBottom ? `-5px` : `-4px`,
-									marginLeft: dot.hasRight ? `-5px` : `-4px`,
-									cursor: dot.cursor,
-								},
-								selectedElementWrapperRef,
-								dotPositions
-							)
-						)}
-					<div
-						class={[
-							style.selectedElementWrapper,
-							!selectedActive.value && style.notSelected,
-						]}
-						ref={selectedElementWrapperRef}
-					>
-						{slots.default?.()}
-					</div>
-				</>
+				<div
+					class={[
+						style.selectedElementWrapper,
+						// !selectedActive.value && style.notSelected,
+					]}
+					ref={selectedElementWrapperRef}
+				>
+					{dotPositions.value.length > 0 && createDots(dotPositions.value)}
+					{slots.default?.()}
+				</div>
 			)
 		}
 	},

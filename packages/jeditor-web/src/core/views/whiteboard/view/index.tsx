@@ -7,7 +7,6 @@ import {
 	nextTick,
 } from 'vue'
 
-import DragElementWrapper from 'shared/DragElementWrapper'
 import ElementWrapper from 'shared/ElementWrapper'
 import SelectedElementWrapper from 'shared/SelectedElementWrapper'
 import { ee } from 'shared/utils/event'
@@ -52,21 +51,19 @@ const WhiteboardView = defineComponent({
 			<div class={style.boardContainer}>
 				{elements.map(el => {
 					return (
-						<DragElementWrapper>
-							<SelectedElementWrapper elementId={el.id}>
-								<ElementWrapper
-									model={el}
-									onSelected={(model: ElementModel) => {
-										ee.emit('elementSelected', model)
-									}}
-									key={el.id}
-								>
-									{h(resolveComponent(el.type.toString()), {
-										...(el.props as object),
-									})}
-								</ElementWrapper>
-							</SelectedElementWrapper>
-						</DragElementWrapper>
+						<SelectedElementWrapper elementId={el.id}>
+							<ElementWrapper
+								model={el}
+								onSelected={(model: ElementModel) => {
+									ee.emit('elementSelected', model)
+								}}
+								key={el.id}
+							>
+								{h(resolveComponent(el.type.toString()), {
+									...(el.props as object),
+								})}
+							</ElementWrapper>
+						</SelectedElementWrapper>
 					)
 				})}
 			</div>
