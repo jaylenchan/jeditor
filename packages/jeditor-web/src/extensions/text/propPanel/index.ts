@@ -21,9 +21,9 @@ class TextPanel implements PropPanelPlugin {
 
 		this.addEditBlock('text', this.textBlock())
 
-		this.addEditBlock('font', this.fontBlock())
+		// this.addEditBlock('font', this.fontBlock())
 
-		this.addEditBlock('layout', this.layoutBlock())
+		// this.addEditBlock('layout', this.layoutBlock())
 	}
 
 	textBlock(): VNode {
