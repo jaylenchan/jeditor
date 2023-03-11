@@ -4,6 +4,7 @@ import EditorPluginService from 'core/editor-plugin-service'
 import ModelService from 'core/model-service'
 import PropPanelPluginService from 'core/proppanel-plugin-service'
 import PropPanelService from 'core/proppanel-service'
+import ReactivityService from 'core/reactivity-service'
 import PropPanel from 'core/views/propPanel'
 import Whiteboard from 'core/views/whiteboard'
 import { TextPlugin } from 'extensions/index'
@@ -18,6 +19,11 @@ container
 container
 	.bind<BoardService>(Symbols.BoardService)
 	.to(BoardService)
+	.inSingletonScope()
+
+container
+	.bind<ReactivityService>(Symbols.ReactivityService)
+	.to(ReactivityService)
 	.inSingletonScope()
 
 container
