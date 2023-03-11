@@ -32,7 +32,7 @@ const PropPanelView = defineComponent({
 			})
 		})
 
-		return () => <div>{curPanel}</div>
+		return () => <div id="proppanel-wrapper">{curPanel}</div>
 	},
 })
 

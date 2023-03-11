@@ -1,8 +1,8 @@
 import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 
-import type { ReactiveObject } from './../reactivity-service/index'
 import type EditorPluginService from 'core/editor-plugin-service'
+import type { ReactiveObject } from 'core/reactivity-service'
 import type ReactivityService from 'core/reactivity-service'
 import type { ElementModel } from 'shared/utils/type'
 
