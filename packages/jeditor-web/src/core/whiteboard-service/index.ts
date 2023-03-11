@@ -1,6 +1,5 @@
 import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
-import { ee } from 'shared/utils/event'
 import { merge } from 'shared/utils/object'
 import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
@@ -27,7 +26,6 @@ class BoardService {
 
 		if (boardContainer) {
 			const boardModel = this.modelService.createModel(Symbols.Whiteboard)
-
 			this.boardVNode = createRenderVNode({
 				view: boardView,
 				model: boardModel,
@@ -39,8 +37,7 @@ class BoardService {
 	}
 
 	public getBoardModel(): WhiteboardModel | null {
-		const boardModel = this.modelService.getModel(
-			Symbols.Whiteboard,
+		const boardModel = this.modelService.getModelById(
 			Symbols.Whiteboard.toString()
 		)
 
@@ -57,12 +54,11 @@ class BoardService {
 
 		if (boardModel) {
 			boardModel.elements.push(model)
-			ee.emit('modelChange')
 		}
 	}
 
-	public updateElement<T>(newModel: ElementModel<T>): void {
-		const oldModel = this.modelService.getModel(newModel.type, newModel.id)
+	public updateElement(newModel: ElementModel): void {
+		const oldModel = this.modelService.getModelById(newModel.id)
 
 		if (!oldModel) return
 
@@ -72,7 +68,6 @@ class BoardService {
 		if (boardModel) {
 			const index = boardModel.elements.findIndex(el => el.id === newModel.id)
 			boardModel.elements[index] = newModel
-			ee.emit('modelUpdate')
 		}
 	}
 

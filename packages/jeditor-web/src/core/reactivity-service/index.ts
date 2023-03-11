@@ -4,6 +4,8 @@ import { injectable } from 'shared/utils/dependencyInject'
 
 import type { Ref, UnwrapRef, UnwrapNestedRefs } from 'vue'
 
+export type ReactiveObject<T> = UnwrapNestedRefs<T>
+
 @injectable()
 class ReactivityService {
 
@@ -11,13 +13,11 @@ class ReactivityService {
 		return ref(obj)
 	}
 
-	public toReactive<T extends Record<string | number | symbol, unknown>>(
-		obj: T
-	): UnwrapNestedRefs<T> {
+	public toReactive<T extends object>(obj: T): ReactiveObject<T> {
 		return reactive(obj)
 	}
 
-	public toRaw<T extends UnwrapNestedRefs<unknown>>(obj: T): T {
+	public toRaw<T extends ReactiveObject<unknown>>(obj: T): T {
 		return toRaw(obj)
 	}
 

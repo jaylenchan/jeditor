@@ -24,8 +24,8 @@ const WhiteboardView = defineComponent({
 			required: true,
 		},
 	},
-	setup() {
-		const elements = reactive<ElementModel[]>([])
+	setup({ model }) {
+		const elements = reactive<ElementModel[]>(model.elements)
 
 		function updateBoard() {
 			const { boardService } = useService()
@@ -60,7 +60,7 @@ const WhiteboardView = defineComponent({
 								key={el.id}
 							>
 								{h(resolveComponent(el.type.toString()), {
-									...(el.props as object),
+									model: el,
 								})}
 							</ElementWrapper>
 						</SelectedElementWrapper>

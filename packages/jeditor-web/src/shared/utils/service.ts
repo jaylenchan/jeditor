@@ -2,11 +2,11 @@ import Symbols from 'settings/dependency-type.config'
 
 import { container } from './dependencyInject'
 
-import type BoardService from 'core/board-service'
 import type EditorPluginService from 'core/editor-plugin-service'
 import type ModelService from 'core/model-service'
 import type PropPanelPluginService from 'core/proppanel-plugin-service'
 import type PropPanelService from 'core/proppanel-service'
+import type BoardService from 'core/whiteboard-service'
 
 export function useService() {
 	return {

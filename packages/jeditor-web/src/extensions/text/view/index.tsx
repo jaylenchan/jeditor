@@ -1,42 +1,30 @@
 import { defineComponent, reactive } from 'vue'
 
-import type { Font, Layout } from '../types'
-import type { Size } from 'shared/utils/type'
+import type { TextModelProps } from '../types'
+import type { ElementModel } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
 const TextView = defineComponent({
 	props: {
-		text: {
-			type: String,
-			required: true,
-		},
-		layout: {
-			type: Object as PropType<Layout>,
-			required: true,
-		},
-		font: {
-			type: Object as PropType<Font>,
-			required: true,
-		},
-		size: {
-			type: Object as PropType<Size>,
+		model: {
+			type: Object as PropType<ElementModel<TextModelProps>>,
 			required: true,
 		},
 	},
-	setup({ text, font, layout, size }) {
+	setup({ model }) {
 		const styleOptions = reactive({
-			fontSize: font.size + 'px',
-			fontFamily: font.family,
-			left: layout.x,
-			top: layout.y,
-			width: !size.width ? '100%' : size.width,
-			height: !size.height ? '100%' : size.height,
+			fontSize: model.props.font.size + 'px',
+			fontFamily: model.props.font.family,
+			left: model.props.layout.x,
+			top: model.props.layout.y,
+			width: !model.props.size.width ? '100%' : model.props.size.width,
+			height: !model.props.size.height ? '100%' : model.props.size.height,
 		})
 
 		return () => (
 			<div class={style.text} style={styleOptions}>
-				{text}
+				{model.props.text}
 			</div>
 		)
 	},

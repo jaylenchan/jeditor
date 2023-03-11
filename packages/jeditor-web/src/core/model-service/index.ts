@@ -1,81 +1,161 @@
 import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 
+import type { ReactiveObject } from './../reactivity-service/index'
 import type EditorPluginService from 'core/editor-plugin-service'
+import type ReactivityService from 'core/reactivity-service'
 import type { ElementModel } from 'shared/utils/type'
 
 interface ModelIds {
 	[k: string]: string[]
 }
 
-@injectable()
-class ModelService {
+export type ReactiveElementModel<T = unknown> = ReactiveObject<ElementModel<T>>
 
-	@inject(Symbols.EditorPluginService) pluginService!: EditorPluginService
+@injectable()
+class ReactivityModelService {
+
+	@inject(Symbols.ReactivityService) reactivityService!: ReactivityService
+
+	protected _reactiveModelPool: WeakMap<ElementModel, ReactiveElementModel> =
+		new Map()
+
+	protected $createReactiveModel(
+		rawModel: ElementModel
+	): ReactiveObject<ElementModel> {
+		let reactiveModel = this.$getReactiveModel(rawModel)
+
+		if (!reactiveModel) {
+			reactiveModel = this.reactivityService.toReactive(rawModel)
+
+			this.$setReactiveModel(rawModel, reactiveModel)
+		}
+
+		return reactiveModel
+	}
+
+	protected $setReactiveModel(
+		rawModel: ElementModel,
+		reactiveModel: ReactiveElementModel
+	) {
+		this._reactiveModelPool.set(rawModel, reactiveModel)
+	}
+
+	protected $hasReactiveModel(rawModel: ElementModel): boolean {
+		return this._reactiveModelPool.has(rawModel)
+	}
+
+	protected $getReactiveModel(
+		rawModel: ElementModel
+	): ReactiveElementModel | null {
+		const reactiveModel = this._reactiveModelPool.get(rawModel)
+
+		if (!reactiveModel) return null
+
+		return reactiveModel
+	}
+
+	protected $removeReactiveModel(rawModel: ElementModel): void {
+		if (!this.$hasReactiveModel(rawModel)) return
+
+		this._reactiveModelPool.delete(rawModel)
+	}
+
+}
+
+@injectable()
+class ModelService extends ReactivityModelService {
+
+	@inject(Symbols.EditorPluginService) editorPluginService!: EditorPluginService
+
+	private _typeModelsPool: Map<symbol, Set<ElementModel>> = new Map()
+	private _typeIdsPool: Map<symbol, Set<string>> = new Map()
+	private _idModelPool: Map<string, ElementModel> = new Map()
 
 	public modelIdPool: Map<symbol, Set<string>> = new Map()
 	public modelPool: Map<symbol, Map<string, ElementModel>> = new Map()
 	public models: Map<string, ElementModel> = new Map()
 
-	public createModel(type: symbol): ElementModel {
-		const plugin = this.pluginService.pluginPool.get(type)
+	public createModel(type: symbol): ReactiveElementModel {
+		if (this.editorPluginService.hasPlugin(type)) {
+			const plugin = this.editorPluginService.getPlugin(type)
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			const modelConstructor = plugin!.model
+			const model = new modelConstructor()
 
-		if (plugin && plugin.model) {
-			const model = new plugin.model()
 			this.setModel(model)
-			return model
+			return this.$createReactiveModel(model)
 		} else {
-			throw new Error('unknown model type!')
+			throw new Error(
+				`try to create unknown plugin type model : type is ${type.toString()}!`
+			)
 		}
 	}
 
 	public setModel(model: ElementModel): void {
-		const modelId = model.id
-		const modelType = model.type
+		// id -> model map
+		// type -> models map
+		// type -> ids map
 
-		let ids = this.modelIdPool.get(modelType)
-		let models = this.modelPool.get(modelType)
+		const type = model.type
+		const id = model.id
 
-		if (!ids) {
-			ids = new Set<string>()
-			this.modelIdPool.set(modelType, ids)
+		if (this._idModelPool.get(id)) {
+			return
+		} else {
+			this._idModelPool.set(id, model)
 		}
-		ids.add(modelId)
 
-		if (!models) {
-			models = new Map<string, ElementModel>()
-			this.modelPool.set(modelType, models)
+		let typeModels = this._typeModelsPool.get(type)
+		if (!typeModels) {
+			typeModels = new Set<ElementModel>()
+			this._typeModelsPool.set(type, typeModels)
+		} else {
+			typeModels.add(model)
 		}
-		models.set(modelId, model)
-		this.models.set(modelId, model)
+
+		let typeIds = this._typeIdsPool.get(type)
+		if (!typeIds) {
+			typeIds = new Set<string>()
+			this._typeIdsPool.set(type, typeIds)
+		} else {
+			typeIds.add(id)
+		}
 	}
 
-	public getModel(type: symbol, id: string): ElementModel | null {
-		const models = this.modelPool.get(type)
-		if (!models) return null
+	public getModelById(id: string): ReactiveElementModel | null {
+		const rawModel = this._idModelPool.get(id)
 
-		const model = models.get(id)
-		if (!model) return null
+		if (!rawModel) return null
 
-		return model
+		return this.$getReactiveModel(rawModel)
 	}
 
-	public getModelById(id: string): ElementModel | null {
-		const model = this.models.get(id)
+	public getModelsByType(type: symbol): ReactiveElementModel[] {
+		const reactiveModels: ReactiveElementModel[] = []
+		const rawModels = this._typeModelsPool.get(type)
 
-		if (!model) return null
+		if (rawModels && rawModels.size > 0) {
+			for (const model of rawModels) {
+				const reactiveModel = this.$getReactiveModel(model)
 
-		return model
+				if (!reactiveModel) continue
+
+				reactiveModels.push(reactiveModel)
+			}
+		}
+
+		return reactiveModels
 	}
 
-	public getModelIds(type: symbol): string[] | null {
-		const ids = this.modelIdPool.get(type)
-
-		if (!ids) return null
-
+	public getModelIdsByType(type: symbol): string[] {
 		const modelIds: string[] = []
-		for (const id of ids) {
-			modelIds.push(id)
+		const ids = this._typeIdsPool.get(type)
+
+		if (ids && ids.size > 0) {
+			for (const id of ids) {
+				modelIds.push(id)
+			}
 		}
 
 		return modelIds
@@ -84,7 +164,7 @@ class ModelService {
 	public getAllModelIds(): ModelIds {
 		const modelIds = {} as ModelIds
 
-		for (const [type, ids] of this.modelIdPool) {
+		for (const [type, ids] of this._typeIdsPool) {
 			if (!modelIds[type.toString()]) {
 				modelIds[type.toString()] = []
 			}

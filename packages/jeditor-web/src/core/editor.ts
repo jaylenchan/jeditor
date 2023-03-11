@@ -7,9 +7,9 @@ import { inject, injectable } from 'shared/utils/dependencyInject'
 
 import AppView from './views/app'
 
-import type BoardService from './board-service'
 import type EditorPluginService from './editor-plugin-service'
 import type PropPanelService from './proppanel-service'
+import type BoardService from './whiteboard-service'
 import type { App } from 'vue'
 
 @injectable()

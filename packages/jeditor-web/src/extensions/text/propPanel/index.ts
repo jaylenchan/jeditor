@@ -1,7 +1,6 @@
 import { h } from 'vue'
 
 import Symbols from 'settings/dependency-type.config'
-import { useService } from 'shared/utils/service'
 
 import FontBlock from './font'
 import LayoutBlock from './layout'
@@ -21,9 +20,9 @@ class TextPanel implements PropPanelPlugin {
 
 		this.addEditBlock('text', this.textBlock())
 
-		// this.addEditBlock('font', this.fontBlock())
+		this.addEditBlock('font', this.fontBlock())
 
-		// this.addEditBlock('layout', this.layoutBlock())
+		this.addEditBlock('layout', this.layoutBlock())
 	}
 
 	textBlock(): VNode {
@@ -31,8 +30,6 @@ class TextPanel implements PropPanelPlugin {
 			text: this.model.props.text,
 			onTextChange: newText => {
 				this.model.props.text = newText
-				const { boardService } = useService()
-				boardService.updateElement(this.model)
 			},
 		})
 	}
@@ -42,8 +39,6 @@ class TextPanel implements PropPanelPlugin {
 			text: this.model.props.text,
 			onLayoutChange: newLayout => {
 				this.model.props.layout = newLayout
-				const { boardService } = useService()
-				boardService.updateElement(this.model)
 			},
 		})
 	}
@@ -52,8 +47,6 @@ class TextPanel implements PropPanelPlugin {
 		return h(FontBlock, {
 			onFontChange: newFont => {
 				this.model.props.font = newFont
-				const { boardService } = useService()
-				boardService.updateElement(this.model)
 			},
 		})
 	}
