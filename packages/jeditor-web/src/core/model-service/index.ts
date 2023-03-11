@@ -72,10 +72,6 @@ class ModelService extends ReactivityModelService {
 	private _typeIdsPool: Map<symbol, Set<string>> = new Map()
 	private _idModelPool: Map<string, ElementModel> = new Map()
 
-	public modelIdPool: Map<symbol, Set<string>> = new Map()
-	public modelPool: Map<symbol, Map<string, ElementModel>> = new Map()
-	public models: Map<string, ElementModel> = new Map()
-
 	public createModel(type: symbol): ReactiveElementModel {
 		if (this.editorPluginService.hasPlugin(type)) {
 			const plugin = this.editorPluginService.getPlugin(type)

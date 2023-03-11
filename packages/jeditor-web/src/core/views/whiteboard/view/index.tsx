@@ -1,16 +1,8 @@
-import {
-	defineComponent,
-	h,
-	resolveComponent,
-	watchEffect,
-	reactive,
-	nextTick,
-} from 'vue'
+import { defineComponent, h, resolveComponent, reactive } from 'vue'
 
 import ElementWrapper from 'shared/ElementWrapper'
 import SelectedElementWrapper from 'shared/SelectedElementWrapper'
 import { ee } from 'shared/utils/event'
-import { useService } from 'shared/utils/service'
 
 import type BoardModel from '../model'
 import type { ElementModel } from 'shared/utils/type'
@@ -25,43 +17,21 @@ const WhiteboardView = defineComponent({
 		},
 	},
 	setup({ model }) {
-		const elements = reactive<ElementModel[]>(model.elements)
-
-		function updateBoard() {
-			const { boardService } = useService()
-			const boardModel = boardService.getBoardModel()
-			if (boardModel) {
-				elements.length = 0
-				nextTick(() => {
-					elements.push(...boardModel.elements)
-				})
-			}
-		}
-
-		watchEffect(() => {
-			ee.on('modelChange', () => {
-				updateBoard()
-			})
-			ee.on('modelUpdate', () => {
-				updateBoard()
-			})
-		})
+		const elementModels = reactive<ElementModel[]>(model.elements)
 
 		return () => (
 			<div class={style.boardContainer} id="whiteboard">
-				{elements.map(el => {
+				{elementModels.map(model => {
 					return (
-						<SelectedElementWrapper elementId={el.id}>
+						<SelectedElementWrapper elementId={model.id}>
 							<ElementWrapper
-								model={el}
+								model={model}
 								onSelected={(model: ElementModel) => {
 									ee.emit('elementSelected', model)
 								}}
-								key={el.id}
+								key={model.id}
 							>
-								{h(resolveComponent(el.type.toString()), {
-									model: el,
-								})}
+								{h(resolveComponent(model.type.toString()), { model })}
 							</ElementWrapper>
 						</SelectedElementWrapper>
 					)
