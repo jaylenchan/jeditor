@@ -6,14 +6,14 @@
 
 // import type PluginService from 'core/editor-plugin-service'
 // import type ModelService from 'core/model-service'
-// import type { ElementModel, EditorPlugin } from 'shared/utils/type'
+// import type { ReactiveElementModel, EditorPlugin } from 'shared/utils/type'
 
 // describe.concurrent('modelService', () => {
 // 	let pluginService: PluginService
 // 	let modelService: ModelService
 // 	// let boardService: BoardService
 // 	let plugin: EditorPlugin
-// 	let model: ElementModel
+// 	let model: ReactiveElementModel
 // 	const validType = Symbol.for('validType')
 // 	const invalidType = Symbol.for('invalidType')
 

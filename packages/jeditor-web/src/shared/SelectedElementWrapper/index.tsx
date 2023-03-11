@@ -7,14 +7,14 @@ import { useRef } from 'shared/utils/render'
 import { createDots, getDotsPositions } from './selectedDots'
 
 import type { DotLayout } from './selectedDots'
-import type { ElementModel } from 'shared/utils/type'
+import type { ReactiveElementModel } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
 const SelectedElementWrapper = defineComponent({
 	props: {
 		model: {
-			type: Object as PropType<ElementModel>,
+			type: Object as PropType<ReactiveElementModel>,
 			required: true,
 		},
 	},
@@ -33,7 +33,7 @@ const SelectedElementWrapper = defineComponent({
 		})
 
 		watchEffect(() => {
-			ee.on('elementSelected', (selectedModel: ElementModel) => {
+			ee.on('elementSelected', (selectedModel: ReactiveElementModel) => {
 				if (model.id == selectedModel.id) {
 					setSelectedActive(true)
 				} else {

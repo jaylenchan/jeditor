@@ -2,15 +2,12 @@ import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 
 import type EditorPluginService from 'core/editor-plugin-service'
-import type { ReactiveObject } from 'core/reactivity-service'
 import type ReactivityService from 'core/reactivity-service'
-import type { ElementModel } from 'shared/utils/type'
+import type { ElementModel, ReactiveElementModel } from 'shared/utils/type'
 
 interface ModelIds {
 	[k: string]: string[]
 }
-
-export type ReactiveElementModel<T = unknown> = ReactiveObject<ElementModel<T>>
 
 @injectable()
 class ReactivityModelService {
@@ -20,9 +17,7 @@ class ReactivityModelService {
 	protected _reactiveModelPool: WeakMap<ElementModel, ReactiveElementModel> =
 		new Map()
 
-	protected $createReactiveModel(
-		rawModel: ElementModel
-	): ReactiveObject<ElementModel> {
+	protected $createReactiveModel(rawModel: ElementModel): ReactiveElementModel {
 		let reactiveModel = this.$getReactiveModel(rawModel)
 
 		if (!reactiveModel) {
@@ -88,11 +83,10 @@ class ModelService extends ReactivityModelService {
 		}
 	}
 
+	// id -> model map
+	// type -> models map
+	// type -> ids map
 	public setModel(model: ElementModel): void {
-		// id -> model map
-		// type -> models map
-		// type -> ids map
-
 		const type = model.type
 		const id = model.id
 

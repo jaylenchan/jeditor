@@ -6,7 +6,7 @@ import { createRenderVNode, renderVNode } from 'shared/utils/render'
 import type WhiteboardModel from '../views/whiteboard/model'
 import type EditorPluginService from 'core/editor-plugin-service'
 import type ModelService from 'core/model-service'
-import type { ElementModel, VNode } from 'shared/utils/type'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { App } from 'vue'
 @injectable()
 class BoardService {
@@ -57,7 +57,7 @@ class BoardService {
 		}
 	}
 
-	public updateElement(newModel: ElementModel): void {
+	public updateElement(newModel: ReactiveElementModel): void {
 		const oldModel = this.modelService.getModelById(newModel.id)
 
 		if (!oldModel) return

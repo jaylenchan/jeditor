@@ -1,13 +1,13 @@
 import { defineComponent } from 'vue'
 
-import type { ElementModel } from 'shared/utils/type'
+import type { ReactiveElementModel } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
 const Wrapper = defineComponent({
 	props: {
 		model: {
-			type: Object as PropType<ElementModel>,
+			type: Object as PropType<ReactiveElementModel>,
 		},
 	},
 	emits: ['selected'],

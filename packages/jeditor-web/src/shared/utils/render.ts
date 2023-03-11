@@ -1,11 +1,16 @@
 import { h, ref, render } from 'vue'
 
-import type { VNode, RenderContainer, SetRefFunc, ElementModel } from './type'
+import type {
+	VNode,
+	RenderContainer,
+	SetRefFunc,
+	ReactiveElementModel,
+} from './type'
 import type { Component, App, UnwrapRef, Ref } from 'vue'
 
 interface RenderComponent {
 	view: Component
-	model: ElementModel
+	model: ReactiveElementModel
 	app: App
 }
 

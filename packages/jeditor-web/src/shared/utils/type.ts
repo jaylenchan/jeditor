@@ -1,3 +1,4 @@
+import type { ReactiveObject } from 'core/reactivity-service'
 import type { h, render, UnwrapRef, Component } from 'vue'
 
 /** 所有class通用的类型就是Class<T> */
@@ -52,3 +53,5 @@ export interface EditorPlugin<T = unknown> {
 	model: ModelClass
 	propPanel: PropPanelClass<T>
 }
+
+export type ReactiveElementModel<T = unknown> = ReactiveObject<ElementModel<T>>

@@ -1,8 +1,13 @@
 import Symbols from 'settings/dependency-type.config'
 
-import type { Border, ElementModel, Position, Size } from 'shared/utils/type'
+import type {
+	Border,
+	ReactiveElementModel,
+	Position,
+	Size,
+} from 'shared/utils/type'
 
-class PropPanelModel implements ElementModel {
+class PropPanelModel implements ReactiveElementModel {
 
 	public readonly id: string
 	public readonly type: symbol

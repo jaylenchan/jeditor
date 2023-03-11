@@ -5,7 +5,7 @@ import { ee } from 'shared/utils/event'
 import { useService } from 'shared/utils/service'
 
 import type PropPanelModel from '../model'
-import type { ElementModel, VNode } from 'shared/utils/type'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import './index.module.scss'
 
@@ -20,7 +20,7 @@ const PropPanelView = defineComponent({
 		const curPanel = reactive<VNode[]>([])
 
 		watchEffect(() => {
-			ee.on('elementSelected', (model: ElementModel) => {
+			ee.on('elementSelected', (model: ReactiveElementModel) => {
 				const { propPanelService } = useService()
 				const panel = propPanelService.usePanel(Symbols.Text, model)
 				if (panel) {

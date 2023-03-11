@@ -1,12 +1,17 @@
 import Symbols from 'settings/dependency-type.config'
 
-import type { Border, ElementModel, Position, Size } from 'shared/utils/type'
+import type {
+	Border,
+	ReactiveElementModel,
+	Position,
+	Size,
+} from 'shared/utils/type'
 
-class WhiteboardModel implements ElementModel {
+class WhiteboardModel implements ReactiveElementModel {
 
 	public readonly id: string
 	public readonly type: symbol
-	public elements: ElementModel[]
+	public elements: ReactiveElementModel[]
 	public props: {
 		position: Position
 		border: Border

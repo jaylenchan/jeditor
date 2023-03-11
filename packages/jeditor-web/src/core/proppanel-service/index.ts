@@ -5,7 +5,11 @@ import { createRenderVNode, renderVNode } from 'shared/utils/render'
 import type EditorPluginService from '../editor-plugin-service'
 import type PropPanelPluginService from '../proppanel-plugin-service'
 import type ModelService from 'core/model-service'
-import type { ElementModel, PropPanelClass, VNode } from 'shared/utils/type'
+import type {
+	ReactiveElementModel,
+	PropPanelClass,
+	VNode,
+} from 'shared/utils/type'
 import type { App } from 'vue'
 
 @injectable()
@@ -79,7 +83,7 @@ class PropPanelService {
 		}
 	}
 
-	public usePanel(type: symbol, initialModel: ElementModel): VNode[] {
+	public usePanel(type: symbol, initialModel: ReactiveElementModel): VNode[] {
 		const pluginClass = this.propPanelPluginService.getPlugin(type)
 		let panel: VNode[] = []
 

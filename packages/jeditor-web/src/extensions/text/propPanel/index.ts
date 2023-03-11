@@ -7,15 +7,19 @@ import LayoutBlock from './layout'
 import TextBlock from './text'
 
 import type { TextModelProps } from '../types'
-import type { ElementModel, PropPanelPlugin, VNode } from 'shared/utils/type'
+import type {
+	ReactiveElementModel,
+	PropPanelPlugin,
+	VNode,
+} from 'shared/utils/type'
 
 class TextPanel implements PropPanelPlugin {
 
 	type = Symbols.Text
 	editBlockPool: Map<string, VNode> = new Map()
-	model: ElementModel<TextModelProps>
+	model: ReactiveElementModel<TextModelProps>
 
-	constructor(initialModel: ElementModel<TextModelProps>) {
+	constructor(initialModel: ReactiveElementModel<TextModelProps>) {
 		this.model = initialModel
 
 		this.addEditBlock('text', this.textBlock())
