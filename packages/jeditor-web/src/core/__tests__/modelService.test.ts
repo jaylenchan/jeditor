@@ -4,8 +4,8 @@ import container from 'settings/dependency-inject.config'
 import Symbols from 'settings/dependency-type.config'
 import { createIdentifier } from 'shared/utils/uuid'
 
-import type PluginService from 'core/editorPluginService'
-import type ModelService from 'core/modelService'
+import type PluginService from 'core/editor-plugin-service'
+import type ModelService from 'core/model-service'
 import type { ElementModel, EditorPlugin } from 'shared/utils/type'
 
 describe.concurrent('modelService', () => {

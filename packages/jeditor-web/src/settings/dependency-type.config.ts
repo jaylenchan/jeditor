@@ -1,11 +1,14 @@
-const Core = {
+const Editor = {
+	JEditor: Symbol.for('JEditor'),
+}
+
+const Services = {
 	EditorPluginService: Symbol.for('EditorPluginService'),
+	ReactivityService: Symbol.for('ReactivityService'),
+	ModelService: Symbol.for('ModelService'),
 	BoardService: Symbol.for('BoardService'),
 	PropPanelService: Symbol.for('PropPanelService'),
 	PropPanelPluginService: Symbol.for('PropPanelPluginService'),
-	ModelService: Symbol.for('ModelService'),
-	AppContainer: Symbol.for('AppContainer'),
-	JEditor: Symbol.for('JEditor'),
 }
 
 const BuiltInPlugins = {
@@ -18,4 +21,4 @@ const Extensions = {
 	Text: Symbol.for('Text'),
 }
 
-export default Object.assign(Core, BuiltInPlugins, Extensions)
+export default Object.assign(Editor, Services, BuiltInPlugins, Extensions)
