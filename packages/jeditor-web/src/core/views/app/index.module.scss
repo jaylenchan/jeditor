@@ -15,7 +15,7 @@
 
 		.leftSide {
 			@include full-in-father();
-			@include bg-color(useColor(info, 2));
+			@include bg-color(transparent);
 			@include pd(15px);
 			@include bd-radius(12px);
 			@include bx-shadow(useShadow(4));

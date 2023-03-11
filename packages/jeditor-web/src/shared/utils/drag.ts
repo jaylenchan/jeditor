@@ -28,6 +28,17 @@ export function useDrag(el: HTMLElement): void {
 			const leftToBoard = newBoundingClientLeft - left
 			const topToBoard = newBoundingClientTop - top
 
+			const whiteboard = document.getElementById('whiteboard')
+			if (leftToBoard < 0 || topToBoard < 0) return
+
+			if (whiteboard) {
+				if (
+					leftToBoard + el.offsetWidth > whiteboard.offsetWidth ||
+					topToBoard + el.offsetHeight > whiteboard.offsetHeight
+				)
+					return
+			}
+
 			el.style.left = leftToBoard + 'px'
 			el.style.top = topToBoard + 'px'
 		}
