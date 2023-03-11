@@ -4,8 +4,7 @@ import { ee } from 'shared/utils/event'
 import { merge } from 'shared/utils/object'
 import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
-import WhiteboardModel from './views/whiteboard/model'
-
+import type WhiteboardModel from './views/whiteboard/model'
 import type EditorPluginService from 'core/editorPluginService'
 import type ModelService from 'core/modelService'
 import type { ElementModel, VNode } from 'shared/utils/type'

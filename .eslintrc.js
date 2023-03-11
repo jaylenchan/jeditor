@@ -64,5 +64,6 @@ module.exports = {
 				'newlines-between': 'always',
 			},
 		],
+		'@typescript-eslint/consistent-type-imports': 'error', // force use import type when import a var just use it's type
 	},
 }

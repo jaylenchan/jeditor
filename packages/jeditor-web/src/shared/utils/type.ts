@@ -1,6 +1,4 @@
-import { h, render } from 'vue'
-
-import type { UnwrapRef, Component } from 'vue'
+import type { h, render, UnwrapRef, Component } from 'vue'
 
 /** 所有class通用的类型就是Class<T> */
 export interface Class<T> extends Function {

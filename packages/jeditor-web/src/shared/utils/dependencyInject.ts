@@ -2,7 +2,7 @@ import { injectable, inject, decorate, Container } from 'inversify'
 import { Mixin } from 'ts-mixer'
 import 'reflect-metadata'
 
-import { Class } from './type'
+import type { Class } from './type'
 
 /**
  * @description 一个实现多继承的injectable装饰器

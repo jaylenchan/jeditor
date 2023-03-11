@@ -1,6 +1,6 @@
 import { Mixin } from 'ts-mixer'
 
-import { Class } from './type'
+import type { Class } from './type'
 
 /**
  * @description 一个用于多继承的装饰器
