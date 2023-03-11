@@ -23,7 +23,7 @@ const WhiteboardView = defineComponent({
 			<div class={style.boardContainer} id="whiteboard">
 				{elementModels.map(model => {
 					return (
-						<SelectedElementWrapper elementId={model.id}>
+						<SelectedElementWrapper model={model}>
 							<ElementWrapper
 								model={model}
 								onSelected={(model: ElementModel) => {
