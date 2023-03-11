@@ -64,3 +64,14 @@
 @mixin pd-left($val) {
 	padding-left: $val !important;
 }
+
+@mixin display($val, $direction: column, $justify: center, $align: center) {
+	display: $val;
+	justify-content: $justify;
+	align-items: $align;
+	flex-direction: column;
+}
+
+@mixin flex($val) {
+	flex: 1;
+}

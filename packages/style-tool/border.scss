@@ -24,3 +24,7 @@
 @mixin bd-color($val) {
 	border-color: $val !important;
 }
+
+@mixin bd-radius($val) {
+	border-radius: $val;
+}

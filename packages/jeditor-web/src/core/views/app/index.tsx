@@ -9,32 +9,29 @@ import style from './index.module.scss'
 const App = defineComponent({
 	setup() {
 		return (): VNode => (
-			<el-container class={style.container} direction="vertical">
-				<el-row>
-					<el-header class={style.header}>头部区域</el-header>
-				</el-row>
-				<el-row class={style.bottom}>
-					<el-col span={3}>
-						<el-aside class={style.componentPanel}>
-							<el-button
-								type={'primary'}
-								onClick={(): void => {
-									const { boardService } = useService()
-									boardService.addElement(Symbols.Text)
-								}}
-							>
-								点击新增文本元素
-							</el-button>
+			<el-container class={style.container}>
+				<el-row class={style.wrapper}>
+					<el-col span={4}>
+						<el-aside class={style.leftSide}>
+							<el-header class={style.header}>头部区域</el-header>
+							<div id="prop-panel-container"></div>
 						</el-aside>
 					</el-col>
-					<el-col span={16}>
-						<el-main class={style.whiteboard} id="board-container"></el-main>
-					</el-col>
-					<el-col span={5}>
-						<el-aside
-							class={style.propPanel}
-							id="prop-panel-container"
-						></el-aside>
+					<el-col span={20}>
+						<el-main class={style.main}>
+							<div id="board-container" class={style.boardContainer}></div>
+							<div class={style.componentPanel}>
+								<el-button
+									type={'primary'}
+									onClick={(): void => {
+										const { boardService } = useService()
+										boardService.addElement(Symbols.Text)
+									}}
+								>
+									点击新增文本元素
+								</el-button>
+							</div>
+						</el-main>
 					</el-col>
 				</el-row>
 			</el-container>
@@ -43,3 +40,31 @@ const App = defineComponent({
 })
 
 export default App
+
+const a = (
+	<el-row class={style.wrapper}>
+		<el-col span={19}>
+			<el-main class={style.main}>
+				<div id="board-container" class={style.boardContainer}></div>
+				<el-aside class={style.componentPanel}>
+					<el-button
+						type={'primary'}
+						onClick={(): void => {
+							const { boardService } = useService()
+							boardService.addElement(Symbols.Text)
+						}}
+					>
+						点击新增文本元素
+					</el-button>
+				</el-aside>
+			</el-main>
+		</el-col>
+		<el-col span={5}>
+			<el-aside class={style.leftSide}>
+				<el-header class={style.header}>头部区域</el-header>
+				<div id="prop-panel-container"></div>
+			</el-aside>
+		</el-col>
+	</el-row>
+)
+a

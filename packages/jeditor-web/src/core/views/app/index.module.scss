@@ -4,35 +4,55 @@
 @include define-color-var($colors);
 @include define-color-status-var($typeStatusMap);
 @include define-component-color-var($components);
+@include define-box-shadow($shadows);
 
 .container {
 	@include full-in-father();
-	.header {
+	@include bg-color(useColor(info, 1));
+
+	.wrapper {
 		@include width(100%);
-		@include bg-color(useColor(info, 1));
-		@include bd-bottom(1px solid useColor(info, 3));
-	}
 
-	.bottom {
-		@include full-in-father();
-
-		.componentPanel {
-			@include full-in-father();
-			@include bg-color(useColor(info, 1));
-			@include bd-right(1px solid useColor(info, 3));
-			@include pd(16px);
-		}
-
-		.whiteboard {
+		.leftSide {
 			@include full-in-father();
 			@include bg-color(useColor(info, 2));
+			@include pd(15px);
+			@include bd-radius(12px);
+			@include bx-shadow(useShadow(4));
+			@include height(90%);
+			@include width(95%);
+			@include mg-left(10px);
+			@include mg-top(30px);
+
+			.header {
+				@include width(100%);
+				@include height(50px);
+				@include bg-color(useColor(info, 1));
+				@include bd-bottom(1px solid useColor(info, 3));
+			}
 		}
 
-		.propPanel {
+		.main {
 			@include full-in-father();
 			@include bg-color(useColor(info, 1));
-			@include bd-left(1px solid useColor(info, 3));
-			@include pd(15px);
+			@include pd(20px);
+			@include pd-top(10px);
+			@include display(flex);
+
+			.boardContainer {
+				@include full-in-father();
+				@include flex(1);
+			}
+
+			.componentPanel {
+				@include full-in-father();
+				@include bg-color(useColor(white, 1));
+				@include bd-right(1px solid useColor(info, 3));
+				@include pd(16px);
+				@include height(60px);
+				@include bd-radius(12px);
+				@include bx-shadow(useShadow(2));
+			}
 		}
 	}
 }
