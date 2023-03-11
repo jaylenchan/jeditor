@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 
-import type { ReactiveElementModel } from 'shared/utils/type'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
@@ -12,11 +12,11 @@ const Wrapper = defineComponent({
 	},
 	emits: ['selected'],
 	setup({ model }, { slots, emit }) {
-		return () => {
+		return (): VNode => {
 			return (
 				<div
 					class={style.elementWrapper}
-					onClick={() => {
+					onClick={(): void => {
 						emit('selected', model)
 					}}
 				>

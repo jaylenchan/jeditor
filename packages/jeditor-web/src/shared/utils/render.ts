@@ -22,7 +22,10 @@ export function createRenderVNode(renderCompoennt: RenderComponent): VNode {
 	return renderNode
 }
 
-export function renderVNode(renderNode: VNode, container: RenderContainer) {
+export function renderVNode(
+	renderNode: VNode,
+	container: RenderContainer
+): void {
 	render(renderNode, container)
 }
 

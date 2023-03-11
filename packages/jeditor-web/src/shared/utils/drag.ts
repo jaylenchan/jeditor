@@ -1,11 +1,11 @@
-export function useDrag(el: HTMLElement) {
+export function useDrag(el: HTMLElement): void {
 	// the distance of mouse to element[left|top]
 	const distanceOfMouseToElement = {
 		left: 0,
 		top: 0,
 	}
 
-	function handleMousedown(e: MouseEvent) {
+	function handleMousedown(e: MouseEvent): void {
 		const { left, top } = el.getBoundingClientRect()
 
 		distanceOfMouseToElement.left = e.clientX - left
@@ -15,7 +15,7 @@ export function useDrag(el: HTMLElement) {
 		document.addEventListener('mouseup', handleMouseup)
 	}
 
-	function handleMousemove(e: MouseEvent) {
+	function handleMousemove(e: MouseEvent): void {
 		const board = document.getElementById('whiteboard')
 		if (board) {
 			const { clientX, clientY } = e
@@ -33,17 +33,17 @@ export function useDrag(el: HTMLElement) {
 		}
 	}
 
-	function handleMouseup() {
+	function handleMouseup(): void {
 		document.removeEventListener('mousemove', handleMousemove)
 		document.removeEventListener('mouseup', handleMouseup)
 	}
 
-	function handleMouseenter() {
+	function handleMouseenter(): void {
 		el.style.cursor = 'move'
 		el.style.userSelect = 'none'
 	}
 
-	function handleMouseleave() {
+	function handleMouseleave(): void {
 		el.style.cursor = 'move'
 		el.style.userSelect = 'initial'
 	}

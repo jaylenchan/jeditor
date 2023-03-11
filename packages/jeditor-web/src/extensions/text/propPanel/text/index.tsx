@@ -2,6 +2,7 @@ import { defineComponent, ref } from 'vue'
 
 import EditBlockWrapper from 'shared/EditBlockWrapper'
 
+import type { VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
@@ -19,7 +20,7 @@ const TextBlock = defineComponent({
 	setup({ text, onTextChange }) {
 		const curText = ref(text)
 
-		return () => (
+		return (): VNode => (
 			<EditBlockWrapper blockName="内容">
 				<div>
 					<el-input
@@ -27,7 +28,7 @@ const TextBlock = defineComponent({
 						type="textarea"
 						resize="none"
 						vModel={curText.value}
-						onInput={(newText: string) => {
+						onInput={(newText: string): void => {
 							curText.value = newText
 							onTextChange(newText)
 						}}

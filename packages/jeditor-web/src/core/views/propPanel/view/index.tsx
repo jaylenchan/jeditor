@@ -32,7 +32,7 @@ const PropPanelView = defineComponent({
 			})
 		})
 
-		return () => <div id="proppanel-wrapper">{curPanel}</div>
+		return (): VNode => <div id="proppanel-wrapper">{curPanel}</div>
 	},
 })
 

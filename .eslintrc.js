@@ -65,5 +65,11 @@ module.exports = {
 			},
 		],
 		'@typescript-eslint/consistent-type-imports': 'error', // force use import type when import a var just use it's type
+		'@typescript-eslint/explicit-function-return-type': [
+			'error',
+			{
+				allowTypedFunctionExpressions: true,
+			},
+		],
 	},
 }

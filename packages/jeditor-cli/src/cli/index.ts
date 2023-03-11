@@ -8,13 +8,13 @@ class JEditorCli extends Command {
 		super()
 	}
 
-	public useCommands(commands: Commands) {
+	public useCommands(commands: Commands): void {
 		commands.forEach(cmd => {
 			cmd(this)
 		})
 	}
 
-	public run(commands: Commands) {
+	public run(commands: Commands): void {
 		this.useCommands(commands)
 		this.parse()
 	}

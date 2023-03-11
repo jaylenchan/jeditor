@@ -1,4 +1,4 @@
-import type { SetRefFunc } from 'shared/utils/type'
+import type { SetRefFunc, VNode } from 'shared/utils/type'
 import type { StyleValue } from 'vue'
 
 export enum Cursor {
@@ -132,8 +132,8 @@ export function createDots(
 	dotLayoutList: DotLayout[],
 	selectedElementWrapper: HTMLDivElement,
 	setDotPositions: SetRefFunc<DotLayout[]>
-) {
-	if (!dotLayoutList || !dotLayoutList.length) return
+): VNode[] {
+	if (!dotLayoutList || !dotLayoutList.length) return []
 
 	return dotLayoutList.map(dotLayout => {
 		const { width, height } = selectedElementWrapper.getBoundingClientRect()
@@ -146,7 +146,7 @@ export function createDots(
 			originLeft: 0,
 		}
 
-		function handleMousedown(e: MouseEvent) {
+		function handleMousedown(e: MouseEvent): void {
 			layout.originClientX = e.clientX
 			layout.originClientY = e.clientY
 			layout.originTop = selectedElementWrapper.offsetTop
@@ -156,7 +156,7 @@ export function createDots(
 			document.addEventListener('mouseup', handleMouseup)
 		}
 
-		function handleMousemove(e: MouseEvent) {
+		function handleMousemove(e: MouseEvent): void {
 			const { clientX, clientY } = e
 
 			switch (dotLayout.dragPosition) {
@@ -285,7 +285,7 @@ export function createDots(
 			}
 		}
 
-		function handleMouseup() {
+		function handleMouseup(): void {
 			document.removeEventListener('mousemove', handleMousemove)
 			document.removeEventListener('mouseup', handleMouseup)
 		}

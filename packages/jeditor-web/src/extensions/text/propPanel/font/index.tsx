@@ -3,6 +3,7 @@ import { defineComponent } from 'vue'
 import EditBlockWrapper from 'shared/EditBlockWrapper'
 
 import type { Font } from 'extensions/text/types'
+import type { VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
 const FontBlock = defineComponent({
@@ -21,10 +22,10 @@ const FontBlock = defineComponent({
 		// 	},
 		// ]
 
-		return () => (
+		return (): VNode => (
 			<EditBlockWrapper blockName="字体">
 				<el-row
-					onClick={() => {
+					onClick={(): void => {
 						onFontChange({ size: 18, family: '正楷' })
 					}}
 				>

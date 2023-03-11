@@ -32,7 +32,7 @@ class ReactivityModelService {
 	protected $setReactiveModel(
 		rawModel: ElementModel,
 		reactiveModel: ReactiveElementModel
-	) {
+	): void {
 		this._reactiveModelPool.set(rawModel, reactiveModel)
 	}
 

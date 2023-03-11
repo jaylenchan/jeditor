@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue'
 
 import type { TextModelProps } from '../types'
-import type { ReactiveElementModel } from 'shared/utils/type'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
@@ -13,7 +13,7 @@ const TextView = defineComponent({
 		},
 	},
 	setup({ model }) {
-		return () => (
+		return (): VNode => (
 			<div
 				class={style.text}
 				style={{

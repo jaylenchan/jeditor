@@ -7,7 +7,7 @@ import { useRef } from 'shared/utils/render'
 import { createDots, getDotsPositions } from './selectedDots'
 
 import type { DotLayout } from './selectedDots'
-import type { ReactiveElementModel } from 'shared/utils/type'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
@@ -42,7 +42,7 @@ const SelectedElementWrapper = defineComponent({
 			})
 		})
 
-		return () => {
+		return (): VNode => {
 			return (
 				<div
 					class={[
@@ -53,7 +53,7 @@ const SelectedElementWrapper = defineComponent({
 				>
 					<div
 						class={style.selectedEelementWrapperDots}
-						onMousedown={e => e.stopPropagation()}
+						onMousedown={(e: MouseEvent): void => e.stopPropagation()}
 					>
 						{selectedActive.value &&
 							dotPositions.value.length > 0 &&

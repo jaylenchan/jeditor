@@ -3,11 +3,12 @@ import { defineComponent } from 'vue'
 import Symbols from 'settings/dependency-type.config'
 import { useService } from 'shared/utils/service'
 
+import type { VNode } from 'shared/utils/type'
 import style from './index.module.scss'
 
 const App = defineComponent({
 	setup() {
-		return () => (
+		return (): VNode => (
 			<el-container class={style.container} direction="vertical">
 				<el-row>
 					<el-header class={style.header}>头部区域</el-header>
@@ -17,7 +18,7 @@ const App = defineComponent({
 						<el-aside class={style.componentPanel}>
 							<el-button
 								type={'primary'}
-								onClick={() => {
+								onClick={(): void => {
 									const { boardService } = useService()
 									boardService.addElement(Symbols.Text)
 								}}

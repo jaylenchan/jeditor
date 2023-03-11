@@ -7,7 +7,8 @@ import type { Class } from './type'
  * @use inherit(baseClass1, baseClass2,...more)
  */
 export function inherit<T>(...inheritClasses: Class<unknown>[]) {
-	return (target: Class<T>) => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return (target: Class<T>): any => {
 		const newTarget = inheritClasses.reduce((newClass, curClass) => {
 			return Mixin(newClass, curClass)
 		}, target) as Class<T>

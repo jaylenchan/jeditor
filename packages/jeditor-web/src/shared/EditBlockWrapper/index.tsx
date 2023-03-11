@@ -1,5 +1,6 @@
 import { defineComponent } from 'vue'
 
+import type { VNode } from 'shared/utils/type'
 import style from './index.module.scss'
 
 const EditBlockWrapper = defineComponent({
@@ -10,7 +11,7 @@ const EditBlockWrapper = defineComponent({
 		},
 	},
 	setup({ blockName }, { slots }) {
-		return () => (
+		return (): VNode => (
 			<div class={style.editBlockWrapper}>
 				<div class={style.blockName}>{blockName}</div>
 				{slots.default?.()}

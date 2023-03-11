@@ -2,6 +2,7 @@ import { defineComponent, ref, watch } from 'vue'
 
 import { useDrag } from 'shared/utils/drag'
 
+import type { VNode } from 'shared/utils/type'
 import style from './index.module.scss'
 
 const DragElementWrapper = defineComponent({
@@ -14,7 +15,7 @@ const DragElementWrapper = defineComponent({
 			}
 		})
 
-		return () => (
+		return (): VNode => (
 			<div class={style.dragElementWrapper} ref={dragRef}>
 				{slots.default?.()}
 			</div>

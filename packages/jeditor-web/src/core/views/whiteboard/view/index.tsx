@@ -5,7 +5,7 @@ import SelectedElementWrapper from 'shared/SelectedElementWrapper'
 import { ee } from 'shared/utils/event'
 
 import type BoardModel from '../model'
-import type { ReactiveElementModel } from 'shared/utils/type'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
@@ -19,14 +19,14 @@ const WhiteboardView = defineComponent({
 	setup({ model }) {
 		const elementModels = reactive<ReactiveElementModel[]>(model.elements)
 
-		return () => (
+		return (): VNode => (
 			<div class={style.boardContainer} id="whiteboard">
 				{elementModels.map(model => {
 					return (
 						<SelectedElementWrapper model={model}>
 							<ElementWrapper
 								model={model}
-								onSelected={(model: ReactiveElementModel) => {
+								onSelected={(model: ReactiveElementModel): void => {
 									ee.emit('elementSelected', model)
 								}}
 								key={model.id}

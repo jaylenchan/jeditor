@@ -2,9 +2,9 @@ import path from 'path'
 
 import { app, BrowserWindow } from 'electron'
 
-const ui = () => path.resolve(__dirname, './index.html')
+const ui = (): string => path.resolve(__dirname, './index.html')
 
-const createWindow = () => {
+const createWindow = (): void => {
 	const win = new BrowserWindow({
 		width: 800,
 		height: 600,
@@ -13,6 +13,6 @@ const createWindow = () => {
 	win.loadFile(ui())
 }
 
-app.whenReady().then(() => {
+app.whenReady().then((): void => {
 	createWindow()
 })

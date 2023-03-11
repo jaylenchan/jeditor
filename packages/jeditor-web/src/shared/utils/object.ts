@@ -15,7 +15,6 @@ type UnionToIntersection<U> = (
 export function merge<T, K extends Array<unknown>>(
 	srcObject: T,
 	...dstObjects: K
-) {
-	return lodash.merge(srcObject, ...dstObjects) as T &
-		UnionToIntersection<Spread<K>>
+): T & UnionToIntersection<Spread<K>> {
+	return lodash.merge(srcObject, ...dstObjects)
 }

@@ -4,18 +4,22 @@ import path from 'path'
 import { execa } from 'execa'
 import * as fse from 'fs-extra'
 
-import type { Options as ExecaOptions } from 'execa'
+import type { Options as ExecaOptions, ExecaChildProcess } from 'execa'
 
 const web = (): string => path.resolve(__dirname, '../packages', 'jeditor-web')
 const app = (): string => path.resolve(__dirname, '../packages', 'jeditor-app')
 
-const isDirectory = (path: string) => fs.statSync(path).isDirectory()
-const pathExist = (path: string) => fse.pathExistsSync(path)
-const run = (bin: string, args: string[], opts: ExecaOptions<string> = {}) => {
+const isDirectory = (path: string): boolean => fs.statSync(path).isDirectory()
+const pathExist = (path: string): boolean => fse.pathExistsSync(path)
+const run = (
+	bin: string,
+	args: string[],
+	opts: ExecaOptions<string> = {}
+): ExecaChildProcess<string> => {
 	return execa(bin, args, { stdio: 'inherit', ...opts })
 }
 
-const clearOldDist = async (src: string) => {
+const clearOldDist = async (src: string): Promise<void> => {
 	src = path.resolve(src, 'dist')
 
 	if (pathExist(src) && isDirectory(src)) {
@@ -35,7 +39,7 @@ const moveDistTo = async (src: string, des: string): Promise<void> => {
 	fse.moveSync(src, des)
 }
 
-async function main() {
+async function main(): Promise<void> {
 	clearOldDist(web())
 	clearOldDist(app())
 	await run('pnpm', ['-r', '--filter', '@jeditor/web', 'run', 'build'])

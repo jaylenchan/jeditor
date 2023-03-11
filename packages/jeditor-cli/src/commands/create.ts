@@ -6,15 +6,15 @@ import type JEditorCli from '../cli'
 
 type Options = { plugin: boolean }
 
-function createPluginTemplate() {
-	const pluginTemplatePath = () => {
+function createPluginTemplate(): void {
+	const pluginTemplatePath = (): string => {
 		return path.resolve(__dirname, '../../src/templates/plugin-template')
 	}
 
 	fs.copy(pluginTemplatePath(), process.cwd())
 }
 
-function useTemplate(options: Options) {
+function useTemplate(options: Options): void {
 	const templates = {
 		plugin: createPluginTemplate,
 	}
@@ -24,7 +24,7 @@ function useTemplate(options: Options) {
 	})
 }
 
-function useTypeAction(type: string, options: Options) {
+function useTypeAction(type: string, options: Options): void {
 	const actionTypes = {
 		template: useTemplate(options),
 	}
@@ -32,7 +32,7 @@ function useTypeAction(type: string, options: Options) {
 	actionTypes[type as keyof typeof actionTypes]
 }
 
-const create = (cli: JEditorCli) => {
+const create = (cli: JEditorCli): void => {
 	cli
 		.command('create <type>')
 		.option('--plugin', 'create plugin template')
