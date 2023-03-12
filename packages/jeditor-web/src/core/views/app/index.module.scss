@@ -9,7 +9,8 @@
 .container {
 	@include full-in-father();
 	@include bg-color(useColor(info, 1));
-	@include pd(12px);
+	@include pd(0 12px);
+	@include pd-left(0);
 
 	.wrapper {
 		@include width(100%);
@@ -31,7 +32,7 @@
 				@include bg-color(useColor(white, 1));
 				@include bd-right(1px solid useColor(info, 3));
 				@include pd(16px);
-				@include height(60px);
+				@include height(50px);
 				@include width(70%);
 				@include bd-radius(12px);
 				@include bx-shadow(useShadow(2));
@@ -46,7 +47,8 @@
 			@include bd-radius(12px);
 			@include bx-shadow(useShadow(4));
 			@include height(90%);
-			@include width(95%);
+			@include width(100%);
+			@include mg-top(10px);
 
 			.header {
 				@include width(100%);
