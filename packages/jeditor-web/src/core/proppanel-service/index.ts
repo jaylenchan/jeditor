@@ -68,7 +68,7 @@ class PropPanelService {
 			throw new Error('can not init propPanel, editor init failed!')
 
 		const propPanelView = propPanelPlugin.view
-		const propPanelContainer = document.getElementById('prop-panel-container')
+		const propPanelContainer = document.getElementById('proppanel-container')
 
 		if (propPanelContainer) {
 			const propPanelModel = this.modelService.createModel(Symbols.PropPanel)

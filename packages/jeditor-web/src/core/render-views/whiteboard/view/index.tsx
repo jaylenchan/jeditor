@@ -1,7 +1,7 @@
 import { defineComponent, h, resolveComponent, reactive } from 'vue'
 
-import ElementWrapper from 'shared/ElementWrapper'
-import SelectedElementWrapper from 'shared/SelectedElementWrapper'
+import ElementWrapper from 'core/render-views/whiteboard/view/ElementWrapper'
+import SelectedElementWrapper from 'core/render-views/whiteboard/view/SelectedElementWrapper'
 import { ee } from 'shared/utils/event'
 
 import type BoardModel from '../model'

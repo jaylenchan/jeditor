@@ -3,7 +3,7 @@ import { inject, injectable } from 'shared/utils/dependencyInject'
 import { merge } from 'shared/utils/object'
 import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
-import type WhiteboardModel from '../views/whiteboard/model'
+import type WhiteboardModel from '../render-views/whiteboard/model'
 import type EditorPluginService from 'core/editor-plugin-service'
 import type ModelService from 'core/model-service'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'

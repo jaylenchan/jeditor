@@ -5,7 +5,7 @@ import Symbols from 'settings/dependency-type.config'
 import plugins from 'settings/plugin.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 
-import AppView from './views/app'
+import AppView from './render-views/app'
 
 import type EditorPluginService from './editor-plugin-service'
 import type PropPanelService from './proppanel-service'

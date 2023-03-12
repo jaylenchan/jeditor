@@ -1,6 +1,6 @@
 import { defineComponent, ref } from 'vue'
 
-import EditBlockWrapper from 'shared/EditBlockWrapper'
+import EditBlockWrapper from 'shared/components/EditBlockWrapper'
 
 import type { VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'

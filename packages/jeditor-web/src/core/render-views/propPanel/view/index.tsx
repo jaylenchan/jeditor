@@ -7,7 +7,6 @@ import { useService } from 'shared/utils/service'
 import type PropPanelModel from '../model'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
-import './index.module.scss'
 
 const PropPanelView = defineComponent({
 	props: {
@@ -32,7 +31,7 @@ const PropPanelView = defineComponent({
 			})
 		})
 
-		return (): VNode => <div id="proppanel-wrapper">{curPanel}</div>
+		return (): VNode => <>{curPanel}</>
 	},
 })
 

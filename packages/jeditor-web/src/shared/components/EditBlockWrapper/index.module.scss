@@ -1,6 +1,6 @@
 .editBlockWrapper {
 	@include bd-bottom(1px solid useColor(info, 3));
-	@include pd-bottom(16px);
+	@include pd-bottom(10px);
 	.blockName {
 		@include ft-sz(12px);
 		@include ft-fy(
@@ -21,7 +21,7 @@
 		);
 		@include ft-wt(700);
 		@include height(32px);
-		@include mg(8px 0);
+		@include mg-bottom(8px);
 		@include display(flex);
 	}
 }

@@ -27,7 +27,7 @@
 				@include pd(0);
 			}
 
-			.componentPanel {
+			.toolPanelContainer {
 				@include full-in-father();
 				@include bg-color(useColor(white, 1));
 				@include bd-right(1px solid useColor(info, 3));
@@ -49,13 +49,6 @@
 			@include height(90%);
 			@include width(100%);
 			@include mg-top(10px);
-
-			.header {
-				@include width(100%);
-				@include height(50px);
-				@include bg-color(useColor(info, 1));
-				@include bd-bottom(1px solid useColor(info, 3));
-			}
 		}
 	}
 }
