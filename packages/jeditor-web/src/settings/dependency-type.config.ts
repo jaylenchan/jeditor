@@ -3,17 +3,19 @@ const Editor = {
 }
 
 const Services = {
-	EditorPluginService: Symbol.for('EditorPluginService'),
 	ReactivityService: Symbol.for('ReactivityService'),
 	ModelService: Symbol.for('ModelService'),
 	WhiteboardService: Symbol.for('WhiteboardService'),
+	EditorPluginService: Symbol.for('EditorPluginService'),
 	PropPanelService: Symbol.for('PropPanelService'),
 	PropPanelPluginService: Symbol.for('PropPanelPluginService'),
+	ToolPanelService: Symbol.for('ToolPanelService'),
 }
 
 const BuiltInPlugins = {
 	Whiteboard: Symbol.for('Whiteboard'),
 	PropPanel: Symbol.for('PropPanel'),
+	ToolPanel: Symbol.for('ToolPanel'),
 }
 
 const Extensions = {
@@ -21,4 +23,6 @@ const Extensions = {
 	Text: Symbol.for('Text'),
 }
 
-export default Object.assign(Editor, Services, BuiltInPlugins, Extensions)
+const Symbols = Object.assign(Editor, Services, BuiltInPlugins, Extensions)
+
+export default Symbols

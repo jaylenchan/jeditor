@@ -2,9 +2,9 @@ import Symbols from 'settings/dependency-type.config'
 import { injectable, inject } from 'shared/utils/dependencyInject'
 import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
-import type EditorPluginService from '../editor-plugin-service'
-import type PropPanelPluginService from '../propPanel-plugin-service'
-import type ModelService from 'core/model-service'
+import type EditorPluginService from '../editorPluginService'
+import type PropPanelPluginService from '../propPanelPluginService'
+import type ModelService from 'core/modelService'
 import type {
 	ReactiveElementModel,
 	PropPanelClass,

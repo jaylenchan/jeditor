@@ -3,16 +3,19 @@ import { inject, injectable } from 'shared/utils/dependencyInject'
 import { merge } from 'shared/utils/object'
 import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
-import type WhiteboardModel from '../render-views/whiteboard/model'
-import type EditorPluginService from 'core/editor-plugin-service'
-import type ModelService from 'core/model-service'
+import type WhiteboardModel from '../renderViews/whiteboard/model'
+import type EditorPluginService from 'core/editorPluginService'
+import type ModelService from 'core/modelService'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { App } from 'vue'
 @injectable()
 class WhiteboardService {
 
-	@inject(Symbols.ModelService) modelService!: ModelService
-	@inject(Symbols.EditorPluginService) editorPluginService!: EditorPluginService
+	@inject(Symbols.ModelService)
+	modelService!: ModelService
+
+	@inject(Symbols.EditorPluginService)
+	editorPluginService!: EditorPluginService
 
 	private boardVNode!: VNode
 

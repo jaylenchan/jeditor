@@ -3,6 +3,7 @@ import { injectable } from 'shared/utils/dependencyInject'
 
 import Model from './model'
 import PropPanel from './propPanel'
+import Trigger from './trigger'
 import View from './view'
 
 import type { TextModelProps } from './types'
@@ -15,6 +16,7 @@ class TextPlugin implements EditorPlugin<TextModelProps> {
 	view = View
 	model = Model
 	propPanel = PropPanel
+	trigger = Trigger
 
 }
 
