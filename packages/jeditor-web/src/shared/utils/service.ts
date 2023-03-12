@@ -6,10 +6,10 @@ import type EditorPluginService from 'core/editor-plugin-service'
 import type ModelService from 'core/model-service'
 import type PropPanelPluginService from 'core/propPanel-plugin-service'
 import type PropPanelService from 'core/propPanel-service'
-import type BoardService from 'core/whiteboard-service'
+import type WhiteboardService from 'core/whiteboard-service'
 
 type Services = {
-	boardService: BoardService
+	whiteboardService: WhiteboardService
 	editorPluginService: EditorPluginService
 	modelService: ModelService
 	propPanelService: PropPanelService
@@ -18,7 +18,9 @@ type Services = {
 
 export function useService(): Services {
 	return {
-		boardService: container.get<BoardService>(Symbols.BoardService),
+		whiteboardService: container.get<WhiteboardService>(
+			Symbols.WhiteboardService
+		),
 		editorPluginService: container.get<EditorPluginService>(
 			Symbols.EditorPluginService
 		),

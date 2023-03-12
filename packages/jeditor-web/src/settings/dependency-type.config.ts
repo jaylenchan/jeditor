@@ -6,7 +6,7 @@ const Services = {
 	EditorPluginService: Symbol.for('EditorPluginService'),
 	ReactivityService: Symbol.for('ReactivityService'),
 	ModelService: Symbol.for('ModelService'),
-	BoardService: Symbol.for('BoardService'),
+	WhiteboardService: Symbol.for('WhiteboardService'),
 	PropPanelService: Symbol.for('PropPanelService'),
 	PropPanelPluginService: Symbol.for('PropPanelPluginService'),
 }

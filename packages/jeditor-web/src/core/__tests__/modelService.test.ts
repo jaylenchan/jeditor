@@ -9,9 +9,9 @@
 // import type { ReactiveElementModel, EditorPlugin } from 'shared/utils/type'
 
 // describe.concurrent('modelService', () => {
-// 	let pluginService: PluginService
+// 	let editorPluginService: PluginService
 // 	let modelService: ModelService
-// 	// let boardService: BoardService
+// 	// let whiteboardService: WhiteboardService
 // 	let plugin: EditorPlugin
 // 	let model: ReactiveElementModel
 // 	const validType = Symbol.for('validType')
@@ -28,9 +28,9 @@
 // 			}
 // 		})
 
-// 		pluginService = container.get<PluginService>(Symbols.EditorPluginService)
+// 		editorPluginService = container.get<PluginService>(Symbols.EditorPluginService)
 // 		modelService = container.get<ModelService>(Symbols.ModelService)
-// 		// boardService = container.get<BoardService>(Symbols.BoardService)
+// 		// whiteboardService = container.get<WhiteboardService>(Symbols.WhiteboardService)
 
 // 		plugin = {
 // 			type: validType,
@@ -63,7 +63,7 @@
 // 			propPanel: vi.fn(),
 // 		}
 
-// 		pluginService.usePlugin(plugin)
+// 		editorPluginService.usePlugin(plugin)
 
 // 		model = modelService.createModel(validType)
 // 	})
@@ -150,11 +150,11 @@
 
 // 	it('should get the whiteboard model if Whiteboard Plugin used', () => {
 // 		const whiteboard = container.get<Whiteboard>(Symbols.Whiteboard)
-// 		pluginService.usePlugin(whiteboard)
+// 		editorPluginService.usePlugin(whiteboard)
 
 // 		modelService.createModel(Symbols.Whiteboard)
 
-// 		const boardModel = boardService.getBoardModel()
+// 		const boardModel = whiteboardService.getBoardModel()
 
 // 		expect(boardModel).not.toBeNull()
 // 		expect(isArray(boardModel?.elements)).toBe(true)
@@ -163,7 +163,7 @@
 // 	})
 
 // 	it('should get null if Whiteboard Plugin not used', () => {
-// 		const boardModel = boardService.getBoardModel()
+// 		const boardModel = whiteboardService.getBoardModel()
 
 // 		expect(boardModel).toBeNull()
 // 	})

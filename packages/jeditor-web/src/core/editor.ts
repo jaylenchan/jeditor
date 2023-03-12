@@ -9,17 +9,17 @@ import LayoutView from './render-views/layout'
 
 import type EditorPluginService from './editor-plugin-service'
 import type PropPanelService from './propPanel-service'
-import type BoardService from './whiteboard-service'
+import type WhiteboardService from './whiteboard-service'
 import type { App } from 'vue'
 
 @injectable()
 class JEditor {
 
 	@inject(Symbols.EditorPluginService)
-	pluginService!: EditorPluginService
+	editorPluginService!: EditorPluginService
 
-	@inject(Symbols.BoardService)
-	boardService!: BoardService
+	@inject(Symbols.WhiteboardService)
+	whiteboardService!: WhiteboardService
 
 	@inject(Symbols.PropPanelService)
 	propPanelService!: PropPanelService
@@ -29,13 +29,13 @@ class JEditor {
 	public run(appContainer: string): void {
 		this.app.mount(appContainer)
 
-		this.pluginService
+		this.editorPluginService
 			.usePlugin(container.get(Symbols.Whiteboard))
 			.usePlugin(container.get(Symbols.PropPanel))
 			.usePlugins(plugins())
 			.applyPlugins(this.app)
 
-		this.boardService.initBoard(this.app)
+		this.whiteboardService.initBoard(this.app)
 		this.propPanelService.initPanel(this.app)
 	}
 

@@ -6,7 +6,7 @@ import PropPanelService from 'core/propPanel-service'
 import ReactivityService from 'core/reactivity-service'
 import PropPanel from 'core/render-views/propPanel'
 import Whiteboard from 'core/render-views/whiteboard'
-import BoardService from 'core/whiteboard-service'
+import WhiteboardService from 'core/whiteboard-service'
 import { TextPlugin } from 'extensions/index'
 import Symbols from 'settings/dependency-type.config'
 import { container } from 'shared/utils/dependencyInject'
@@ -17,8 +17,8 @@ container
 	.inSingletonScope()
 
 container
-	.bind<BoardService>(Symbols.BoardService)
-	.to(BoardService)
+	.bind<WhiteboardService>(Symbols.WhiteboardService)
+	.to(WhiteboardService)
 	.inSingletonScope()
 
 container

@@ -9,16 +9,16 @@ import type ModelService from 'core/model-service'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { App } from 'vue'
 @injectable()
-class BoardService {
+class WhiteboardService {
 
 	@inject(Symbols.ModelService) modelService!: ModelService
-	@inject(Symbols.EditorPluginService) pluginService!: EditorPluginService
+	@inject(Symbols.EditorPluginService) editorPluginService!: EditorPluginService
 
 	private boardVNode!: VNode
 
 	/** 初始化whiteboard */
 	public initBoard(app: App): void {
-		const boardPlugin = this.pluginService.getPlugin(Symbols.Whiteboard)
+		const boardPlugin = this.editorPluginService.getPlugin(Symbols.Whiteboard)
 		if (!boardPlugin) throw new Error('can not init board, editor init failed!')
 
 		const boardView = boardPlugin.view
@@ -73,4 +73,4 @@ class BoardService {
 
 }
 
-export default BoardService
+export default WhiteboardService

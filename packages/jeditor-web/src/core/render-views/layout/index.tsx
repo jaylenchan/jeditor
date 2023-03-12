@@ -20,8 +20,8 @@ const LayoutView = defineComponent({
 							<el-button
 								type={'primary'}
 								onClick={(): void => {
-									const { boardService } = useService()
-									boardService.addElement(Symbols.Text)
+									const { whiteboardService } = useService()
+									whiteboardService.addElement(Symbols.Text)
 								}}
 							>
 								点击新增文本元素
