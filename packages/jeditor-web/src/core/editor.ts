@@ -8,7 +8,7 @@ import { inject, injectable } from 'shared/utils/dependencyInject'
 import LayoutView from './render-views/layout'
 
 import type EditorPluginService from './editor-plugin-service'
-import type PropPanelService from './proppanel-service'
+import type PropPanelService from './propPanel-service'
 import type BoardService from './whiteboard-service'
 import type { App } from 'vue'
 

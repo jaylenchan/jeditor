@@ -13,7 +13,7 @@
 			"settings/*": ["src/settings/*"]
 		}
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+	"include": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
 	"types": ["reflect-metadata"],
 	"references": [
 		{

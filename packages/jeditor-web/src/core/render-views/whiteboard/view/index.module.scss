@@ -1,4 +1,4 @@
-.boardContainer {
+.whiteboardContainer {
 	@include pos(relative);
 	@include text-color(useColor(success, 7));
 	@include bg-color(useColor(white, 1));

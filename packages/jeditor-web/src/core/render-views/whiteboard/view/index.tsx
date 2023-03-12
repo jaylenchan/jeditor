@@ -20,7 +20,7 @@ const WhiteboardView = defineComponent({
 		const elementModels = reactive<ReactiveElementModel[]>(model.elements)
 
 		return (): VNode => (
-			<div class={style.boardContainer} id="whiteboard">
+			<div class={style.whiteboardContainer} id="whiteboard">
 				{elementModels.map(model => {
 					return (
 						<SelectedElementWrapper model={model}>

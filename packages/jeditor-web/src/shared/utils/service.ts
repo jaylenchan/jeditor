@@ -4,8 +4,8 @@ import { container } from './dependencyInject'
 
 import type EditorPluginService from 'core/editor-plugin-service'
 import type ModelService from 'core/model-service'
-import type PropPanelPluginService from 'core/proppanel-plugin-service'
-import type PropPanelService from 'core/proppanel-service'
+import type PropPanelPluginService from 'core/propPanel-plugin-service'
+import type PropPanelService from 'core/propPanel-service'
 import type BoardService from 'core/whiteboard-service'
 
 type Services = {

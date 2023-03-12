@@ -18,13 +18,13 @@
 		@include display(flex);
 		@include pd(10px);
 
-		.boardContainer {
+		.whiteboardContainer {
 			@include full-in-father();
 			@include flex(1);
 			@include pd(0);
 		}
 
-		.toolpanelContainer {
+		.toolPanelContainer {
 			@include full-in-father();
 			@include bg-color(useColor(white, 1));
 			@include bd-right(1px solid useColor(info, 3));
@@ -41,7 +41,7 @@
 		@include full-in-father();
 		@include pd-top(10px);
 
-		.proppanelContainer {
+		.propPanelContainer {
 			@include pd(10px);
 			@include bg-color(useColor(white, 1));
 			@include bd-radius(12px);

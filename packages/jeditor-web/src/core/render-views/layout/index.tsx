@@ -12,8 +12,11 @@ const LayoutView = defineComponent({
 			<el-row class={style.layout}>
 				<el-col span={20}>
 					<el-main class={style.main}>
-						<div id="board-container" class={style.boardContainer}></div>
-						<div id="toolpanel-container" class={style.toolpanelContainer}>
+						<div
+							id="whiteboard-container"
+							class={style.whiteboardContainer}
+						></div>
+						<div id="toolPanel-container" class={style.toolPanelContainer}>
 							<el-button
 								type={'primary'}
 								onClick={(): void => {
@@ -29,8 +32,8 @@ const LayoutView = defineComponent({
 				<el-col span={4}>
 					<el-aside class={style.rightSide}>
 						<div
-							id="proppanel-container"
-							class={style.proppanelContainer}
+							id="propPanel-container"
+							class={style.propPanelContainer}
 						></div>
 					</el-aside>
 				</el-col>

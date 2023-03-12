@@ -3,7 +3,7 @@ import { injectable, inject } from 'shared/utils/dependencyInject'
 import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
 import type EditorPluginService from '../editor-plugin-service'
-import type PropPanelPluginService from '../proppanel-plugin-service'
+import type PropPanelPluginService from '../propPanel-plugin-service'
 import type ModelService from 'core/model-service'
 import type {
 	ReactiveElementModel,
@@ -68,7 +68,7 @@ class PropPanelService {
 			throw new Error('can not init propPanel, editor init failed!')
 
 		const propPanelView = propPanelPlugin.view
-		const propPanelContainer = document.getElementById('proppanel-container')
+		const propPanelContainer = document.getElementById('propPanel-container')
 
 		if (propPanelContainer) {
 			const propPanelModel = this.modelService.createModel(Symbols.PropPanel)

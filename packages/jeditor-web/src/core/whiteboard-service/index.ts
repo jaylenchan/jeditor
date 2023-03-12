@@ -22,9 +22,9 @@ class BoardService {
 		if (!boardPlugin) throw new Error('can not init board, editor init failed!')
 
 		const boardView = boardPlugin.view
-		const boardContainer = document.getElementById('board-container')
+		const whiteboardContainer = document.getElementById('whiteboard-container')
 
-		if (boardContainer) {
+		if (whiteboardContainer) {
 			const boardModel = this.modelService.createModel(Symbols.Whiteboard)
 			this.boardVNode = createRenderVNode({
 				view: boardView,
@@ -32,7 +32,7 @@ class BoardService {
 				app,
 			})
 
-			renderVNode(this.boardVNode, boardContainer)
+			renderVNode(this.boardVNode, whiteboardContainer)
 		}
 	}
 
