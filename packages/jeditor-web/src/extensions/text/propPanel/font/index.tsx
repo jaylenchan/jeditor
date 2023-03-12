@@ -2,70 +2,43 @@ import { defineComponent } from 'vue'
 
 import EditBlockWrapper from 'shared/components/EditBlockWrapper'
 
-import type { Font } from 'extensions/text/types'
-import type { VNode } from 'shared/utils/type'
+import type { TextModelProps } from 'extensions/text/types'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
 const FontBlock = defineComponent({
 	props: {
-		onFontChange: {
-			type: Function as PropType<(newFont: Font) => void>,
+		model: {
+			type: Object as PropType<ReactiveElementModel<TextModelProps>>,
 			required: true,
 		},
 	},
-	setup({ onFontChange }) {
-		// const selectedFont = ref('')
-		// const options = [
-		// 	{
-		// 		label: '正楷',
-		// 		value: 'zhengkai',
-		// 	},
-		// ]
+	setup({ model }) {
+		const fontOptions = [
+			{
+				label: '正楷',
+				value: '',
+			},
+		]
 
 		return (): VNode => (
 			<EditBlockWrapper blockName="字体">
 				<el-row
 					onClick={(): void => {
-						onFontChange({ size: 18, family: '正楷' })
+						model
 					}}
 				>
-					{/* <el-row justify="space-between">
-						<el-select vModel={selectedFont.value} size="small">
-							{options.map((fontItem, index) => (
+					<el-select size="small">
+						{fontOptions.map(
+							(font: { label: string; value: string }, index: number) => (
 								<el-option
+									label={font.label}
+									value={font.value}
 									key={index}
-									label={fontItem.label}
-									value={fontItem.value}
-								/>
-							))}
-						</el-select>
-						<el-select vModel={selectedFont.value} size="small">
-							{options.map((fontItem, index) => (
-								<el-option
-									key={index}
-									label={fontItem.label}
-									value={fontItem.value}
-								/>
-							))}
-						</el-select>
-					</el-row>
-					<el-row>
-						<el-select vModel={selectedFont.value} size="small">
-							{options.map((fontItem, index) => (
-								<el-option
-									key={index}
-									label={fontItem.label}
-									value={fontItem.value}
-								/>
-							))}
-						</el-select>
-						<el-button-group>
-							<el-button type="primary" icon="Edit" />
-							<el-button type="primary" icon="Share" />
-							<el-button type="primary" icon="Delete" />
-						</el-button-group>
-						<el-button></el-button>
-					</el-row> */}
+								></el-option>
+							)
+						)}
+					</el-select>
 				</el-row>
 			</EditBlockWrapper>
 		)

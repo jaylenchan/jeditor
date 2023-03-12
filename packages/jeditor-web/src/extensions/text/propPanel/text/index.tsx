@@ -23,9 +23,6 @@ const TextBlock = defineComponent({
 						type="textarea"
 						resize="none"
 						vModel={model.props.text}
-						onInput={(newText: string): void => {
-							model.props.text = newText
-						}}
 					/>
 				</div>
 			</EditBlockWrapper>

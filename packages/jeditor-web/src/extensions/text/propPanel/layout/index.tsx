@@ -17,22 +17,15 @@ const LayoutBlock = defineComponent({
 		return (): VNode => (
 			<EditBlockWrapper blockName="布局">
 				<div class={style.layout}>
-					{JSON.stringify(model.props.layout)}
 					<el-input-number
 						vModel={model.props.layout.x}
 						size="small"
 						controls-position="right"
-						onChange={(newX: number): void => {
-							model.props.layout.x = newX
-						}}
 					/>
 					<el-input-number
 						vModel={model.props.layout.y}
 						size="small"
 						controls-position="right"
-						onChange={(newY: number): void => {
-							model.props.layout.y = newY
-						}}
 					/>
 				</div>
 			</EditBlockWrapper>

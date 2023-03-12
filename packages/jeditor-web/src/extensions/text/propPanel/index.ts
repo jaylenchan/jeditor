@@ -38,11 +38,7 @@ class TextPanel implements PropPanelPlugin {
 	}
 
 	fontBlock(): VNode {
-		return h(FontBlock, {
-			onFontChange: newFont => {
-				this.model.props.font = newFont
-			},
-		})
+		return h(FontBlock, { model: this.model })
 	}
 
 	public addEditBlock(blockName: string, block: VNode): void {
