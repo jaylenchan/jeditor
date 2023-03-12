@@ -1,4 +1,4 @@
 .input {
-	@include text-color(useColor(info, 9));
-	@include ft-sz(14px);
+	color: useColor(info, 9);
+	font-size: 14px;
 }

@@ -1,0 +1,5 @@
+.toolPanel {
+	@include full-in-father();
+	@include display(flex, row, flex-start);
+	padding: 4px;
+}

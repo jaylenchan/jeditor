@@ -69,7 +69,7 @@
 	display: $val;
 	justify-content: $justify;
 	align-items: $align;
-	flex-direction: column;
+	flex-direction: $direction;
 }
 
 @mixin flex($val) {

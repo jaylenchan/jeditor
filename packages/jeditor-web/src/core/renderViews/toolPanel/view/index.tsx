@@ -3,6 +3,7 @@ import { defineComponent, ref } from 'vue'
 import type ToolPanelModel from '../model'
 import type { VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
+import style from './index.module.scss'
 
 const ToolPanelView = defineComponent({
 	props: {
@@ -14,7 +15,11 @@ const ToolPanelView = defineComponent({
 	setup({ model }) {
 		const tools = ref(model.tools)
 
-		return (): VNode => <div id="toolPanel">{tools.value}</div>
+		return (): VNode => (
+			<div id="toolPanel" class={style.toolPanel}>
+				{tools.value}
+			</div>
+		)
 	},
 })
 

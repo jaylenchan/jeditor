@@ -1,5 +1,4 @@
 .text {
-	@include height(100%);
-	@include width(100%);
-	@include bg-color(useColor(success, 2));
+	@include full-in-father();
+	background-color: useColor(success, 2);
 }

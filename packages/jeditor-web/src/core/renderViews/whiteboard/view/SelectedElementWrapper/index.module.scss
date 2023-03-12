@@ -1,13 +1,13 @@
 .selectedElementWrapper {
-	@include pos(absolute);
-	@include bd(2px dashed rgb(0, 170, 255));
-	@include pd(8px);
+	position: absolute;
+	border: 2px dashed rgb(0, 170, 255);
+	padding: 8px;
 }
 
 .selectedElementWrapper.notSelected {
-	@include bd-color(transparent);
+	border-color: transparent;
 }
 
 .selectedEelementWrapperDots {
-	@include pos(static);
+	position: static;
 }

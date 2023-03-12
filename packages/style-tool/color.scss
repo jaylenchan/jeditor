@@ -174,3 +174,23 @@ $shadows: (
 @function useShadow($level) {
 	@return var(#{createVarName((shadow, $level))});
 }
+
+$radiuslist: (
+	1: 4px,
+	2: 7px,
+	3: 9px,
+	4: 12px,
+	5: 16px,
+);
+
+@mixin define-radius($radiuslist) {
+	:root {
+		@each $level, $radius in $radiuslist {
+			#{createVarName((radius,$level))}: $radius;
+		}
+	}
+}
+
+@function useRadius($level) {
+	@return var(#{createVarName((radius, $level))});
+}

@@ -1,9 +1,8 @@
 .whiteboardContainer {
-	@include pos(relative);
-	@include text-color(useColor(success, 7));
-	@include bg-color(useColor(white, 1));
-	@include width(100%);
-	@include height(100%);
-	@include bd-radius(12px);
-	@include bx-shadow(useShadow(3));
+	@include full-in-father();
+	position: relative;
+	color: useColor(success, 7);
+	background-color: useColor(white, 1);
+	border-radius: useRadius(3);
+	box-shadow: useShadow(3);
 }
