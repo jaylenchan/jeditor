@@ -5,7 +5,7 @@ import Symbols from 'settings/dependency-type.config'
 import plugins from 'settings/plugin.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
 
-import AppView from './render-views/app'
+import LayoutView from './render-views/layout'
 
 import type EditorPluginService from './editor-plugin-service'
 import type PropPanelService from './proppanel-service'
@@ -24,7 +24,7 @@ class JEditor {
 	@inject(Symbols.PropPanelService)
 	propPanelService!: PropPanelService
 
-	public app: App = createApp(AppView)
+	public app: App = createApp(LayoutView)
 
 	public run(appContainer: string): void {
 		this.app.mount(appContainer)
