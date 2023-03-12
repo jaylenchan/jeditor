@@ -1,8 +1,5 @@
 import { defineComponent } from 'vue'
 
-// import Symbols from 'settings/dependency-type.config'
-// import { useService } from 'shared/utils/service'
-
 import type { VNode } from 'shared/utils/type'
 import style from './index.module.scss'
 

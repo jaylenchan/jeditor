@@ -16,7 +16,7 @@ module.exports = {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
-	plugins: ['@typescript-eslint'],
+	plugins: ['@typescript-eslint', 'unused-imports'],
 	settings: {
 		'import/parsers': {
 			'@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -31,7 +31,6 @@ module.exports = {
 	},
 	rules: {
 		'padded-blocks': ['error', { classes: 'always' }],
-		'@typescript-eslint/no-unused-vars': 'error',
 		'@typescript-eslint/no-explicit-any': 'error',
 		'no-console': 'error',
 		'import/no-unresolved': 'error',
@@ -69,6 +68,17 @@ module.exports = {
 			'error',
 			{
 				allowTypedFunctionExpressions: true,
+			},
+		],
+		'@typescript-eslint/no-unused-vars': 'off',
+		'unused-imports/no-unused-imports': 'error',
+		'unused-imports/no-unused-vars': [
+			'error',
+			{
+				vars: 'all',
+				varsIgnorePattern: '^_',
+				args: 'after-used',
+				argsIgnorePattern: '^_',
 			},
 		],
 	},
