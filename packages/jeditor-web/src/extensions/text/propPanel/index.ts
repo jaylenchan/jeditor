@@ -30,18 +30,11 @@ class TextPanel implements PropPanelPlugin {
 	}
 
 	textBlock(): VNode {
-		return h(TextBlock, {
-			text: this.model.props.text,
-			onTextChange: newText => {
-				this.model.props.text = newText
-			},
-		})
+		return h(TextBlock, { model: this.model })
 	}
 
 	layoutBlock(): VNode {
-		return h(LayoutBlock, {
-			model: this.model,
-		})
+		return h(LayoutBlock, { model: this.model })
 	}
 
 	fontBlock(): VNode {

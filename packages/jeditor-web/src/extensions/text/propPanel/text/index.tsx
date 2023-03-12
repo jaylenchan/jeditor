@@ -1,25 +1,20 @@
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 import EditBlockWrapper from 'shared/components/EditBlockWrapper'
 
-import type { VNode } from 'shared/utils/type'
+import type { TextModelProps } from 'extensions/text/types'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 import style from './index.module.scss'
 
 const TextBlock = defineComponent({
 	props: {
-		text: {
-			type: String,
-			required: true,
-		},
-		onTextChange: {
-			type: Function as PropType<(newText: string) => void>,
+		model: {
+			type: Object as PropType<ReactiveElementModel<TextModelProps>>,
 			required: true,
 		},
 	},
-	setup({ text, onTextChange }) {
-		const curText = ref(text)
-
+	setup({ model }) {
 		return (): VNode => (
 			<EditBlockWrapper blockName="内容">
 				<div>
@@ -27,10 +22,9 @@ const TextBlock = defineComponent({
 						class={style.input}
 						type="textarea"
 						resize="none"
-						vModel={curText.value}
+						vModel={model.props.text}
 						onInput={(newText: string): void => {
-							curText.value = newText
-							onTextChange(newText)
+							model.props.text = newText
 						}}
 					/>
 				</div>
