@@ -1,7 +1,5 @@
 import { defineComponent, ref, watch } from 'vue'
 
-import { useDrag } from 'shared/utils/drag'
-
 import type { VNode } from 'shared/utils/type'
 import style from './index.module.scss'
 
@@ -11,7 +9,8 @@ const DragElementWrapper = defineComponent({
 
 		watch(dragRef, dom => {
 			if (dom) {
-				useDrag(dom)
+				// useDrag(dom)
+				dom
 			}
 		})
 

@@ -25,7 +25,7 @@ const SelectedElementWrapper = defineComponent({
 
 		watch(selectedElementWrapperRef, selectedElementWrapper => {
 			if (selectedElementWrapper) {
-				useDrag(selectedElementWrapper)
+				useDrag(selectedElementWrapper, model)
 
 				const { width, height } = selectedElementWrapper.getBoundingClientRect()
 				setDotPositions(getDotsPositions({ width, height }))
@@ -50,6 +50,10 @@ const SelectedElementWrapper = defineComponent({
 						!selectedActive.value && style.notSelected,
 					]}
 					ref={selectedElementWrapperRef}
+					style={{
+						left: model.props.layout.x + 'px',
+						top: model.props.layout.y + 'px',
+					}}
 				>
 					<div
 						class={style.selectedEelementWrapperDots}

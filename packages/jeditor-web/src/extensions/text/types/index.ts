@@ -1,9 +1,4 @@
-import type { Size } from 'shared/utils/type'
-
-export interface Layout {
-	x: number
-	y: number
-}
+import type { Layout, Size } from 'shared/utils/type'
 
 export interface Font {
 	size: number

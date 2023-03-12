@@ -12,11 +12,6 @@ export type RenderContainer = Parameters<typeof render>[1]
 
 export type SetRefFunc<T> = (value: UnwrapRef<T>) => void
 
-export interface Position {
-	x: number
-	y: number
-}
-
 export interface Border {
 	type: string
 	color: string
@@ -28,10 +23,16 @@ export interface Size {
 	width: number
 	height: number
 }
+
+export interface Layout {
+	x: number
+	y: number
+}
+
 export interface ElementModel<T = unknown> {
 	readonly id: string
 	readonly type: symbol
-	props: T & { size: Size }
+	props: T & { size: Size; layout: Layout }
 }
 
 export interface ModelClass<T = unknown> extends Function {

@@ -1,4 +1,6 @@
-export function useDrag(el: HTMLElement): void {
+import type { ReactiveElementModel } from './type'
+
+export function useDrag(el: HTMLElement, model: ReactiveElementModel): void {
 	// the distance of mouse to element[left|top]
 	const distanceOfMouseToElement = {
 		left: 0,
@@ -39,8 +41,8 @@ export function useDrag(el: HTMLElement): void {
 					return
 			}
 
-			el.style.left = leftToBoard + 'px'
-			el.style.top = topToBoard + 'px'
+			model.props.layout.x = leftToBoard
+			model.props.layout.y = topToBoard
 		}
 	}
 

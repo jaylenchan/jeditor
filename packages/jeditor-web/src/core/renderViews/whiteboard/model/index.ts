@@ -3,7 +3,7 @@ import Symbols from 'settings/dependency-type.config'
 import type {
 	Border,
 	ReactiveElementModel,
-	Position,
+	Layout,
 	Size,
 } from 'shared/utils/type'
 
@@ -13,10 +13,10 @@ class WhiteboardModel implements ReactiveElementModel {
 	public readonly type: symbol
 	public elements: ReactiveElementModel[]
 	public props: {
-		position: Position
 		border: Border
 		opacity: number
 		size: Size
+		layout: Layout
 	}
 
 	constructor() {
@@ -24,7 +24,7 @@ class WhiteboardModel implements ReactiveElementModel {
 		this.type = Symbols.Whiteboard
 		this.elements = []
 		this.props = {
-			position: {
+			layout: {
 				x: 0,
 				y: 0,
 			},

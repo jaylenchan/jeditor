@@ -3,7 +3,7 @@ import Symbols from 'settings/dependency-type.config'
 import type {
 	Border,
 	ReactiveElementModel,
-	Position,
+	Layout,
 	Size,
 } from 'shared/utils/type'
 
@@ -12,7 +12,7 @@ class PropPanelModel implements ReactiveElementModel {
 	public readonly id: string
 	public readonly type: symbol
 	public props: {
-		position: Position
+		layout: Layout
 		border: Border
 		opacity: number
 		size: Size
@@ -22,7 +22,7 @@ class PropPanelModel implements ReactiveElementModel {
 		this.id = Symbols.PropPanel.toString()
 		this.type = Symbols.PropPanel
 		this.props = {
-			position: {
+			layout: {
 				x: 0,
 				y: 0,
 			},

@@ -1,12 +1,17 @@
 import Symbols from 'settings/dependency-type.config'
 
-import type { ReactiveElementModel, VNode } from 'shared/utils/type'
+import type {
+	Layout,
+	ReactiveElementModel,
+	Size,
+	VNode,
+} from 'shared/utils/type'
 
 class ToolPanelModel implements ReactiveElementModel {
 
 	id: string
 	type: symbol
-	props: { size: { width: number; height: number } }
+	props: { size: Size; layout: Layout }
 	tools: VNode[]
 
 	constructor() {
@@ -16,6 +21,10 @@ class ToolPanelModel implements ReactiveElementModel {
 			size: {
 				width: 0,
 				height: 0,
+			},
+			layout: {
+				x: 0,
+				y: 0,
 			},
 		}
 		this.tools = []

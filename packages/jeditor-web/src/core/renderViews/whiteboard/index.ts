@@ -1,8 +1,8 @@
 import Symbols from 'settings/dependency-type.config'
 import { injectable } from 'shared/utils/dependencyInject'
 
-import Model from './model'
-import View from './view'
+import WhiteboardModel from './model'
+import WhiteboardView from './view'
 
 import type { BuiltInPlugin } from 'core/type'
 
@@ -10,8 +10,8 @@ import type { BuiltInPlugin } from 'core/type'
 class Whiteboard implements BuiltInPlugin {
 
 	type = Symbols.Whiteboard
-	view = View
-	model = Model
+	view = WhiteboardView
+	model = WhiteboardModel
 
 }
 
