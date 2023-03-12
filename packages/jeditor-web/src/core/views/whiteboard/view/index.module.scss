@@ -3,7 +3,7 @@
 	@include text-color(useColor(success, 7));
 	@include bg-color(useColor(white, 1));
 	@include width(100%);
-	@include height(95%);
+	@include height(100%);
 	@include bd-radius(12px);
 	@include bx-shadow(useShadow(3));
 }

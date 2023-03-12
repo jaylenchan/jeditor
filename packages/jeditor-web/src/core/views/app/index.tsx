@@ -11,12 +11,6 @@ const App = defineComponent({
 		return (): VNode => (
 			<el-container class={style.container}>
 				<el-row class={style.wrapper}>
-					<el-col span={4}>
-						<el-aside class={style.leftSide}>
-							<el-header class={style.header}>头部区域</el-header>
-							<div id="prop-panel-container"></div>
-						</el-aside>
-					</el-col>
 					<el-col span={20}>
 						<el-main class={style.main}>
 							<div id="board-container" class={style.boardContainer}></div>
@@ -33,6 +27,12 @@ const App = defineComponent({
 							</div>
 						</el-main>
 					</el-col>
+					<el-col span={4}>
+						<el-aside class={style.rightSide}>
+							<el-header class={style.header}>头部区域</el-header>
+							<div id="prop-panel-container"></div>
+						</el-aside>
+					</el-col>
 				</el-row>
 			</el-container>
 		)
@@ -40,31 +40,3 @@ const App = defineComponent({
 })
 
 export default App
-
-const a = (
-	<el-row class={style.wrapper}>
-		<el-col span={19}>
-			<el-main class={style.main}>
-				<div id="board-container" class={style.boardContainer}></div>
-				<el-aside class={style.componentPanel}>
-					<el-button
-						type={'primary'}
-						onClick={(): void => {
-							const { boardService } = useService()
-							boardService.addElement(Symbols.Text)
-						}}
-					>
-						点击新增文本元素
-					</el-button>
-				</el-aside>
-			</el-main>
-		</el-col>
-		<el-col span={5}>
-			<el-aside class={style.leftSide}>
-				<el-header class={style.header}>头部区域</el-header>
-				<div id="prop-panel-container"></div>
-			</el-aside>
-		</el-col>
-	</el-row>
-)
-a
