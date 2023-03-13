@@ -2,44 +2,27 @@ import { defineComponent } from 'vue'
 
 import EditBlockWrapper from 'shared/components/EditBlockWrapper'
 
-import type { TextModelProps } from 'extensions/text/types'
-import type { ReactiveElementModel, VNode } from 'shared/utils/type'
+import { FontFamily } from './fontFamily'
+import FontSize from './fontSize'
+
+import type { TextReactiveElementModel } from 'extensions/text/types'
+import type { VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
 
 const FontBlock = defineComponent({
 	props: {
 		model: {
-			type: Object as PropType<ReactiveElementModel<TextModelProps>>,
+			type: Object as PropType<TextReactiveElementModel>,
 			required: true,
 		},
 	},
 	setup({ model }) {
-		const fontOptions = [
-			{
-				label: '正楷',
-				value: '',
-			},
-		]
-
 		return (): VNode => (
 			<EditBlockWrapper blockName="字体">
-				<el-row
-					onClick={(): void => {
-						model
-					}}
-				>
-					<el-select size="small">
-						{fontOptions.map(
-							(font: { label: string; value: string }, index: number) => (
-								<el-option
-									label={font.label}
-									value={font.value}
-									key={index}
-								></el-option>
-							)
-						)}
-					</el-select>
+				<el-row>
+					<FontFamily model={model} />
+					<FontSize model={model} />
 				</el-row>
 			</EditBlockWrapper>
 		)

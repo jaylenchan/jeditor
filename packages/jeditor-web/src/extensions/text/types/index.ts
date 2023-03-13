@@ -20,5 +20,7 @@ export interface TextModelProps {
 }
 
 export type TextReactiveElementModel = ReactiveElementModel<TextModelProps>
+
 export type TextEditBlockGenerator = EditBlockGenerator<TextModelProps>
+
 export type TextPropPanelPlugin = PropPanelPlugin<TextModelProps>
