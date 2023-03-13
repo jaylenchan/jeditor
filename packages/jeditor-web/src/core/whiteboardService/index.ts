@@ -8,6 +8,7 @@ import type EditorPluginService from 'core/editorPluginService'
 import type ModelService from 'core/modelService'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { App } from 'vue'
+
 @injectable()
 class WhiteboardService {
 

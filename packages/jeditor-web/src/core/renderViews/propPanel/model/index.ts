@@ -7,7 +7,7 @@ import type {
 	Size,
 } from 'shared/utils/type'
 
-class PropPanelModel implements ReactiveElementModel {
+class Model implements ReactiveElementModel {
 
 	public readonly id: string
 	public readonly type: symbol
@@ -42,4 +42,4 @@ class PropPanelModel implements ReactiveElementModel {
 
 }
 
-export default PropPanelModel
+export default Model

@@ -7,7 +7,7 @@ import type {
 	Size,
 } from 'shared/utils/type'
 
-class WhiteboardModel implements ReactiveElementModel {
+class Model implements ReactiveElementModel {
 
 	public readonly id: string
 	public readonly type: symbol
@@ -44,4 +44,4 @@ class WhiteboardModel implements ReactiveElementModel {
 
 }
 
-export default WhiteboardModel
+export default Model

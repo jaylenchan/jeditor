@@ -4,9 +4,9 @@ import Symbols from 'settings/dependency-type.config'
 import { useService } from 'shared/utils/service'
 
 import Icon from './icon.svg'
+import style from './index.module.scss'
 
 import type { VNode } from 'shared/utils/type'
-import style from './index.module.scss'
 
 const Trigger = defineComponent({
 	setup() {

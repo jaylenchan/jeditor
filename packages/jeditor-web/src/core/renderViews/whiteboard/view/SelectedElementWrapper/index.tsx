@@ -4,12 +4,12 @@ import { useDrag } from 'shared/utils/drag'
 import { ee } from 'shared/utils/event'
 import { useRef } from 'shared/utils/render'
 
+import style from './index.module.scss'
 import { createDots, getDotsPositions } from './selectedDots'
 
 import type { DotLayout } from './selectedDots'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
-import style from './index.module.scss'
 
 const SelectedElementWrapper = defineComponent({
 	props: {

@@ -13,8 +13,8 @@ import type { EditorPlugin } from 'shared/utils/type'
 class TextPlugin implements EditorPlugin<TextModelProps> {
 
 	type = Symbols.Text
-	view = View
 	model = Model
+	view = View
 	propPanel = PropPanel
 	trigger = Trigger
 

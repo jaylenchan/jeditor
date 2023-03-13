@@ -8,7 +8,7 @@ import type PropPanelModel from '../model'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
-const PropPanelView = defineComponent({
+const View = defineComponent({
 	props: {
 		model: {
 			type: Object as PropType<PropPanelModel>,
@@ -35,4 +35,4 @@ const PropPanelView = defineComponent({
 	},
 })
 
-export default PropPanelView
+export default View

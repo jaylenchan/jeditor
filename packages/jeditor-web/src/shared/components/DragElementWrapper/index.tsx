@@ -1,7 +1,8 @@
 import { defineComponent, ref, watch } from 'vue'
 
-import type { VNode } from 'shared/utils/type'
 import style from './index.module.scss'
+
+import type { VNode } from 'shared/utils/type'
 
 const DragElementWrapper = defineComponent({
 	setup(_, { slots }) {

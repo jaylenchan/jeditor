@@ -7,7 +7,7 @@ import type {
 	VNode,
 } from 'shared/utils/type'
 
-class ToolPanelModel implements ReactiveElementModel {
+class Model implements ReactiveElementModel {
 
 	id: string
 	type: symbol
@@ -32,4 +32,4 @@ class ToolPanelModel implements ReactiveElementModel {
 
 }
 
-export default ToolPanelModel
+export default Model

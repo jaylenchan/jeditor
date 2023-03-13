@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue'
 
+import style from './index.module.scss'
+
 import type { TextModelProps } from '../types'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
-import style from './index.module.scss'
 
 const TextView = defineComponent({
 	props: {

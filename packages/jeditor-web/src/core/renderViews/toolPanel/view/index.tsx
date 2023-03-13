@@ -1,11 +1,12 @@
 import { defineComponent, ref } from 'vue'
 
+import style from './index.module.scss'
+
 import type ToolPanelModel from '../model'
 import type { VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
-import style from './index.module.scss'
 
-const ToolPanelView = defineComponent({
+const View = defineComponent({
 	props: {
 		model: {
 			type: Object as PropType<ToolPanelModel>,
@@ -23,4 +24,4 @@ const ToolPanelView = defineComponent({
 	},
 })
 
-export default ToolPanelView
+export default View

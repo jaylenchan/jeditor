@@ -2,9 +2,10 @@ import { defineComponent } from 'vue'
 
 import EditBlockWrapper from 'shared/components/EditBlockWrapper'
 
+import style from './index.module.scss'
+
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
-import style from './index.module.scss'
 
 const LayoutBlock = defineComponent({
 	props: {

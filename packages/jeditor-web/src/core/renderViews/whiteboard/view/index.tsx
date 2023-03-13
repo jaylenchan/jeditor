@@ -4,12 +4,13 @@ import ElementWrapper from 'core/renderViews/whiteboard/view/ElementWrapper'
 import SelectedElementWrapper from 'core/renderViews/whiteboard/view/SelectedElementWrapper'
 import { ee } from 'shared/utils/event'
 
+import style from './index.module.scss'
+
 import type BoardModel from '../model'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
-import style from './index.module.scss'
 
-const WhiteboardView = defineComponent({
+const View = defineComponent({
 	props: {
 		model: {
 			type: Object as PropType<BoardModel>,
@@ -41,6 +42,4 @@ const WhiteboardView = defineComponent({
 	},
 })
 
-export default WhiteboardView
-
-export type IWhiteboardView = typeof WhiteboardView
+export default View
