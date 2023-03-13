@@ -8,11 +8,7 @@ import type EditorPluginService from '../editorPluginService'
 import type PropPanelPluginService from '../propPanelPluginService'
 import type PropPanelModel from '../renderViews/propPanel/model'
 import type ModelService from 'core/modelService'
-import type {
-	EditBlockGenerator,
-	ReactiveElementModel,
-	VNode,
-} from 'shared/utils/type'
+import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { App } from 'vue'
 
 
@@ -29,7 +25,6 @@ class PropPanelService {
 	private _propPanelPluginService!: PropPanelPluginService
 
 	private _propPanelVNode!: VNode
-	private _editBlocksGeneratorPool: Map<string, EditBlockGenerator> = new Map()
 
 	public initPanel(app: App): void {
 		this._propPanelPluginService.usePlugins()
@@ -42,19 +37,12 @@ class PropPanelService {
 		const editBlocks: VNode[] = []
 
 		if (panelPlugin) {
-			const curPanelEditBlockGenerators = panelPlugin.getEditBlockGenerators()
+			const curPanelEditBlockGenerators = panelPlugin
+				.getEditBlockGenerators()
+				.values()
 
-			for (const [
-				editBlockType,
-				editBlockGenerator,
-			] of curPanelEditBlockGenerators) {
-				const exsitGenerator = this._editBlocksGeneratorPool.get(editBlockType)
-				if (exsitGenerator) {
-					editBlocks.push(exsitGenerator(initialModel))
-				} else {
-					this._editBlocksGeneratorPool.set(editBlockType, editBlockGenerator)
-					editBlocks.push(editBlockGenerator(initialModel))
-				}
+			for (const editBlockGenerator of curPanelEditBlockGenerators) {
+				editBlocks.push(editBlockGenerator(initialModel))
 			}
 		}
 
