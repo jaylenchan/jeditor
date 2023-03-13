@@ -9,14 +9,15 @@ import type ModelService from 'core/modelService'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { App } from 'vue'
 
+
 @injectable()
 class WhiteboardService {
 
 	@inject(Symbols.ModelService)
-	modelService!: ModelService
+	public modelService!: ModelService
 
 	@inject(Symbols.EditorPluginService)
-	editorPluginService!: EditorPluginService
+	public editorPluginService!: EditorPluginService
 
 	private boardVNode!: VNode
 

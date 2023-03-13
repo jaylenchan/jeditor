@@ -8,6 +8,7 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import Checker from 'vite-plugin-checker'
 
+
 export default defineConfig({
 	plugins: [
 		vue(),

@@ -17,6 +17,7 @@ import { container } from 'shared/utils/dependencyInject'
 
 import type { interfaces } from 'inversify'
 
+
 const Editor = new ContainerModule((bind: interfaces.Bind) => {
 	bind<JEditor>(Symbols.JEditor).to(JEditor).inSingletonScope()
 })

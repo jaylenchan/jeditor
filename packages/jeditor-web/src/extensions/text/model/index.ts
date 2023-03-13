@@ -3,6 +3,8 @@ import { createIdentifier } from 'shared/utils/uuid'
 
 import type { TextModelProps, Font } from '../types'
 import type { Layout, ReactiveElementModel, Size } from 'shared/utils/type'
+
+
 class TextModel implements ReactiveElementModel<TextModelProps> {
 
 	public readonly id: string

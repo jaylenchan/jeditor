@@ -13,11 +13,12 @@ import type {
 	VNode,
 } from 'shared/utils/type'
 
+
 class TextPanel implements PropPanelPlugin {
 
-	type = Symbols.Text
-	editBlockPool: Map<string, VNode> = new Map()
-	model: ReactiveElementModel<TextModelProps>
+	public type = Symbols.Text
+	public editBlockPool: Map<string, VNode> = new Map()
+	public model: ReactiveElementModel<TextModelProps>
 
 	constructor(initialModel: ReactiveElementModel<TextModelProps>) {
 		this.model = initialModel
@@ -29,20 +30,20 @@ class TextPanel implements PropPanelPlugin {
 		this.addEditBlock('layout', this.layoutBlock())
 	}
 
-	textBlock(): VNode {
+	private addEditBlock(blockName: string, block: VNode): void {
+		this.editBlockPool.set(blockName, block)
+	}
+
+	private textBlock(): VNode {
 		return h(TextBlock, { model: this.model })
 	}
 
-	layoutBlock(): VNode {
+	private layoutBlock(): VNode {
 		return h(LayoutBlock, { model: this.model })
 	}
 
-	fontBlock(): VNode {
+	private fontBlock(): VNode {
 		return h(FontBlock, { model: this.model })
-	}
-
-	public addEditBlock(blockName: string, block: VNode): void {
-		this.editBlockPool.set(blockName, block)
 	}
 
 }

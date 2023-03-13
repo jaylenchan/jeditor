@@ -4,6 +4,7 @@ import { injectable } from 'shared/utils/dependencyInject'
 
 import type { Ref, UnwrapRef, UnwrapNestedRefs } from 'vue'
 
+
 export type ReactiveObject<T> = UnwrapNestedRefs<T>
 
 @injectable()

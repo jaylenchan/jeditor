@@ -4,6 +4,7 @@ import * as fs from 'fs-extra'
 
 import type JEditorCli from '../cli'
 
+
 type Options = { plugin: boolean }
 
 function createPluginTemplate(): void {

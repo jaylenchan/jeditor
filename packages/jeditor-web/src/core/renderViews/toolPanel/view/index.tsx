@@ -6,6 +6,7 @@ import type ToolPanelModel from '../model'
 import type { VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
+
 const View = defineComponent({
 	props: {
 		model: {

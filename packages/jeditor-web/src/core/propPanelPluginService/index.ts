@@ -2,6 +2,7 @@ import { injectable } from 'shared/utils/dependencyInject'
 
 import type { PropPanelClass } from 'shared/utils/type'
 
+
 @injectable()
 class PropPanelPluginService {
 

@@ -5,6 +5,7 @@ import type EditorPluginService from 'core/editorPluginService'
 import type ReactivityService from 'core/reactivityService'
 import type { ElementModel, ReactiveElementModel } from 'shared/utils/type'
 
+
 interface ModelIds {
 	[k: string]: string[]
 }
@@ -12,7 +13,8 @@ interface ModelIds {
 @injectable()
 class ReactivityModelService {
 
-	@inject(Symbols.ReactivityService) reactivityService!: ReactivityService
+	@inject(Symbols.ReactivityService)
+	public reactivityService!: ReactivityService
 
 	protected _reactiveModelPool: WeakMap<ElementModel, ReactiveElementModel> =
 		new Map()
@@ -61,7 +63,8 @@ class ReactivityModelService {
 @injectable()
 class ModelService extends ReactivityModelService {
 
-	@inject(Symbols.EditorPluginService) editorPluginService!: EditorPluginService
+	@inject(Symbols.EditorPluginService)
+	public editorPluginService!: EditorPluginService
 
 	private _typeModelsPool: Map<symbol, Set<ElementModel>> = new Map()
 	private _typeIdsPool: Map<symbol, Set<string>> = new Map()

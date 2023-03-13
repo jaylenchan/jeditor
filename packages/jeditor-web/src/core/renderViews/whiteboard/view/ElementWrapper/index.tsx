@@ -5,6 +5,7 @@ import style from './index.module.scss'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
+
 const Wrapper = defineComponent({
 	props: {
 		model: {

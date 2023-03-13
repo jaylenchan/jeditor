@@ -1,5 +1,6 @@
 import lodash from 'lodash'
 
+
 type Spread<T> = T extends Array<infer P>
 	? {
 			[K in keyof P]: P[K]

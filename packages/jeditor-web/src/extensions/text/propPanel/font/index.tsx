@@ -6,6 +6,7 @@ import type { TextModelProps } from 'extensions/text/types'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
+
 const FontBlock = defineComponent({
 	props: {
 		model: {

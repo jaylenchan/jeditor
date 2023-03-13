@@ -10,6 +10,7 @@ import type BoardModel from '../model'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
+
 const View = defineComponent({
 	props: {
 		model: {

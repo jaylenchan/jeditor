@@ -6,12 +6,13 @@ import View from './view'
 
 import type { BuiltInPlugin } from 'core/type'
 
+
 @injectable()
 class Whiteboard implements BuiltInPlugin {
 
-	type = Symbols.Whiteboard
-	model = Model
-	view = View
+	public type = Symbols.Whiteboard
+	public model = Model
+	public view = View
 
 }
 

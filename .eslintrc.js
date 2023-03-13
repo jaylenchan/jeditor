@@ -9,6 +9,7 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:import/recommended',
+		'plugin:import/typescript',
 		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
@@ -30,9 +31,9 @@ module.exports = {
 		},
 	},
 	rules: {
-		'padded-blocks': ['error', { classes: 'always' }],
-		'@typescript-eslint/no-explicit-any': 'error',
 		'no-console': 'error',
+		'padded-blocks': ['error', { classes: 'always' }],
+		'import/newline-after-import': ['error', { count: 2 }],
 		'import/no-unresolved': 'error',
 		'import/order': [
 			'error',
@@ -58,7 +59,9 @@ module.exports = {
 				'newlines-between': 'always',
 			},
 		],
-		'@typescript-eslint/consistent-type-imports': 'error', // force use import type when import a var just use it's type
+		'@typescript-eslint/member-ordering': 'error',
+		'@typescript-eslint/no-explicit-any': 'error',
+		'@typescript-eslint/consistent-type-imports': 'error',
 		'@typescript-eslint/explicit-function-return-type': [
 			'error',
 			{
@@ -76,5 +79,31 @@ module.exports = {
 				argsIgnorePattern: '^_',
 			},
 		],
+		'lines-between-class-members': [
+			'error',
+			'always',
+			{ exceptAfterSingleLine: true },
+		],
+		'@typescript-eslint/explicit-member-accessibility': 'off',
 	},
+	overrides: [
+		{
+			files: ['*.ts', '*.tsx'],
+			rules: {
+				'@typescript-eslint/explicit-member-accessibility': [
+					'error',
+					{
+						accessibility: 'explicit',
+						overrides: {
+							accessors: 'explicit',
+							constructors: 'no-public',
+							methods: 'explicit',
+							properties: 'explicit',
+							parameterProperties: 'explicit',
+						},
+					},
+				],
+			},
+		},
+	],
 }

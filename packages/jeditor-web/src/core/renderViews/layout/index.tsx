@@ -4,6 +4,7 @@ import style from './index.module.scss'
 
 import type { VNode } from 'shared/utils/type'
 
+
 const LayoutView = defineComponent({
 	setup() {
 		return (): VNode => (

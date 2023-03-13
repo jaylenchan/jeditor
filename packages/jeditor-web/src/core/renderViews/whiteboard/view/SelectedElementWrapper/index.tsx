@@ -11,6 +11,7 @@ import type { DotLayout } from './selectedDots'
 import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
+
 const SelectedElementWrapper = defineComponent({
 	props: {
 		model: {

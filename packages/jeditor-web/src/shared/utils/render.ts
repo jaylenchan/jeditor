@@ -8,6 +8,7 @@ import type {
 } from './type'
 import type { Component, App, UnwrapRef, Ref } from 'vue'
 
+
 interface RenderComponent {
 	view: Component
 	model: ReactiveElementModel

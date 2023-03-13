@@ -1,5 +1,6 @@
 import type JEditorCli from '../cli'
 
+
 const introduce = (cli: JEditorCli): void => {
 	cli
 		.name('jeditor-cli')

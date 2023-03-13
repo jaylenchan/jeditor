@@ -2,6 +2,7 @@ import { Command } from 'commander'
 
 import type { Commands } from '../commands'
 
+
 class JEditorCli extends Command {
 
 	constructor() {

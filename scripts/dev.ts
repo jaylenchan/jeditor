@@ -6,6 +6,7 @@ import * as fse from 'fs-extra'
 
 import type { Options as ExecaOptions, ExecaChildProcess } from 'execa'
 
+
 const web = (): string => path.resolve(__dirname, '../packages', 'jeditor-web')
 const app = (): string => path.resolve(__dirname, '../packages', 'jeditor-app')
 

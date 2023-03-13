@@ -7,6 +7,7 @@ import type {
 	Size,
 } from 'shared/utils/type'
 
+
 class Model implements ReactiveElementModel {
 
 	public readonly id: string

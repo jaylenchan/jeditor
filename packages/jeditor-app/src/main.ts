@@ -2,6 +2,7 @@ import path from 'path'
 
 import { app, BrowserWindow } from 'electron'
 
+
 const ui = (): string => path.resolve(__dirname, './index.html')
 
 const createWindow = (): void => {

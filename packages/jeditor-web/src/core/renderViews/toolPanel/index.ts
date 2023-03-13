@@ -6,12 +6,13 @@ import View from './view'
 
 import type { BuiltInPlugin } from 'core/type'
 
+
 @injectable()
 class ToolPanel implements BuiltInPlugin {
 
-	type = Symbols.ToolPanel
-	model = Model
-	view = View
+	public type = Symbols.ToolPanel
+	public model = Model
+	public view = View
 
 }
 

@@ -13,20 +13,21 @@ import type ToolPanelService from './toolPanelService'
 import type WhiteboardService from './whiteboardService'
 import type { App } from 'vue'
 
+
 @injectable()
 class JEditor {
 
 	@inject(Symbols.EditorPluginService)
-	editorPluginService!: EditorPluginService
+	public editorPluginService!: EditorPluginService
 
 	@inject(Symbols.WhiteboardService)
-	whiteboardService!: WhiteboardService
+	public whiteboardService!: WhiteboardService
 
 	@inject(Symbols.PropPanelService)
-	propPanelService!: PropPanelService
+	public propPanelService!: PropPanelService
 
 	@inject(Symbols.ToolPanelService)
-	toolPanelService!: ToolPanelService
+	public toolPanelService!: ToolPanelService
 
 	public app: App = createApp(LayoutView)
 

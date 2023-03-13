@@ -12,17 +12,18 @@ import type {
 } from 'shared/utils/type'
 import type { App } from 'vue'
 
+
 @injectable()
 class PropPanelService {
 
 	@inject(Symbols.ModelService)
-	modelService!: ModelService
+	public modelService!: ModelService
 
 	@inject(Symbols.EditorPluginService)
-	editorPluginService!: EditorPluginService
+	public editorPluginService!: EditorPluginService
 
 	@inject(Symbols.PropPanelPluginService)
-	propPanelPluginService!: PropPanelPluginService
+	public propPanelPluginService!: PropPanelPluginService
 
 	private propPanelVNode!: VNode
 

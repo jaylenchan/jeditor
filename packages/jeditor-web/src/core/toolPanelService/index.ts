@@ -9,24 +9,25 @@ import type ToolPanelModel from 'core/renderViews/toolPanel/model'
 import type { VNode } from 'shared/utils/type'
 import type { App } from 'vue'
 
+
 @injectable()
 class ToolPanelService {
 
 	@inject(Symbols.ModelService)
-	modelService!: ModelService
+	public modelService!: ModelService
 
 	@inject(Symbols.EditorPluginService)
-	editorPluginService!: EditorPluginService
+	public editorPluginService!: EditorPluginService
 
 	private toolPool: Map<symbol, VNode> = new Map()
 	private toolPanelVNode!: VNode
 
-	initPanel(app: App): void {
+	public initPanel(app: App): void {
 		this.useTools()
 		this.renderPanel(app)
 	}
 
-	useTools(): void {
+	public useTools(): void {
 		const allPlugins = this.editorPluginService.getAllPlugins()
 
 		for (const plugin of allPlugins) {
@@ -38,7 +39,7 @@ class ToolPanelService {
 		}
 	}
 
-	renderPanel(app: App): void {
+	public renderPanel(app: App): void {
 		const toolPanelContainer = document.getElementById('toolPanel-container')
 
 		if (!toolPanelContainer) {

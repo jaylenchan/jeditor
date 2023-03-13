@@ -7,12 +7,13 @@ import type {
 	VNode,
 } from 'shared/utils/type'
 
+
 class Model implements ReactiveElementModel {
 
-	id: string
-	type: symbol
-	props: { size: Size; layout: Layout }
-	tools: VNode[]
+	public id: string
+	public type: symbol
+	public props: { size: Size; layout: Layout }
+	public tools: VNode[]
 
 	constructor() {
 		this.id = Symbols.ToolPanel.toString()

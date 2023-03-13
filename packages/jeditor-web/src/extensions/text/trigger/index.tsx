@@ -8,6 +8,7 @@ import style from './index.module.scss'
 
 import type { VNode } from 'shared/utils/type'
 
+
 const Trigger = defineComponent({
 	setup() {
 		return (): VNode => (

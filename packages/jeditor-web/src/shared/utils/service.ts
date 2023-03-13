@@ -8,6 +8,7 @@ import type PropPanelPluginService from 'core/propPanelPluginService'
 import type PropPanelService from 'core/propPanelService'
 import type WhiteboardService from 'core/whiteboardService'
 
+
 type Services = {
 	whiteboardService: WhiteboardService
 	editorPluginService: EditorPluginService
