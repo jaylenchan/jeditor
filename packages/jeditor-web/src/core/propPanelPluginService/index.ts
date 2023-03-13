@@ -1,36 +1,51 @@
-import { injectable } from 'shared/utils/dependencyInject'
+import Symbols from 'settings/dependency-type.config'
+import { inject, injectable } from 'shared/utils/dependencyInject'
 
+import type EditorPluginService from 'core/editorPluginService'
 import type { PropPanelClass } from 'shared/utils/type'
 
 
 @injectable()
 class PropPanelPluginService {
 
-	private _pluginPool: Map<symbol, PropPanelClass> = new Map()
+	@inject(Symbols.EditorPluginService)
+	private _editorPluginService!: EditorPluginService
 
-	public usePlugin(
-		type: symbol,
-		plugin: PropPanelClass
-	): PropPanelPluginService {
-		if (plugin) {
-			this._pluginPool.set(type, plugin)
+	private _pluginClassPool: Map<symbol, PropPanelClass> = new Map()
+	private _pluginInstancePool: Map<symbol, InstanceType<PropPanelClass>> =
+		new Map()
+
+	public usePlugins(): void {
+		const allPanelPluginsClasses = this._extractAllPanelPluginClasses()
+
+		for (const [type, panelPluginClass] of allPanelPluginsClasses) {
+			if (!this.hasPlugin(type)) {
+				this._usePlugin(type, panelPluginClass)
+			}
 		}
-
-		return this
 	}
 
-	public getPlugin(type: symbol): PropPanelClass | null {
-		const propPanelClass = this._pluginPool.get(type)
+	public applyPlugins(): void {
+		for (const [type, pluginClass] of this._pluginClassPool) {
+			if (!this._pluginInstancePool.has(type)) {
+				const pluginInstance = new pluginClass()
+				this._pluginInstancePool.set(type, pluginInstance)
+			}
+		}
+	}
 
-		if (propPanelClass) return propPanelClass
+	public getPlugin(type: symbol): InstanceType<PropPanelClass> | null {
+		const propPanelInstance = this._pluginInstancePool.get(type)
+
+		if (propPanelInstance) return propPanelInstance
 
 		return null
 	}
 
-	public getAllPlugins(): PropPanelClass[] {
-		const allPlugins: PropPanelClass[] = []
+	public getAllPlugins(): InstanceType<PropPanelClass>[] {
+		const allPlugins: InstanceType<PropPanelClass>[] = []
 
-		for (const plugin of this._pluginPool.values()) {
+		for (const plugin of this._pluginInstancePool.values()) {
 			allPlugins.push(plugin)
 		}
 
@@ -38,7 +53,31 @@ class PropPanelPluginService {
 	}
 
 	public hasPlugin(type: symbol): boolean {
-		return this._pluginPool.has(type)
+		return this._pluginInstancePool.has(type)
+	}
+
+	private _usePlugin(
+		type: symbol,
+		plugin: PropPanelClass
+	): PropPanelPluginService {
+		if (plugin) {
+			this._pluginClassPool.set(type, plugin)
+		}
+
+		return this
+	}
+
+	private _extractAllPanelPluginClasses(): [symbol, PropPanelClass][] {
+		const allPanelPluginsClasses: [symbol, PropPanelClass][] = []
+		const allPlugins = this._editorPluginService.getAllPlugins()
+
+		for (const plugin of allPlugins) {
+			if (plugin.propPanel) {
+				allPanelPluginsClasses.push([plugin.type, plugin.propPanel])
+			}
+		}
+
+		return allPanelPluginsClasses
 	}
 
 }

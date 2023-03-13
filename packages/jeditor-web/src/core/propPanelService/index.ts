@@ -1,13 +1,16 @@
+import { nextTick } from 'vue'
+
 import Symbols from 'settings/dependency-type.config'
 import { injectable, inject } from 'shared/utils/dependencyInject'
 import { createRenderVNode, renderVNode } from 'shared/utils/render'
 
 import type EditorPluginService from '../editorPluginService'
 import type PropPanelPluginService from '../propPanelPluginService'
+import type PropPanelModel from '../renderViews/propPanel/model'
 import type ModelService from 'core/modelService'
 import type {
+	EditBlockGenerator,
 	ReactiveElementModel,
-	PropPanelClass,
 	VNode,
 } from 'shared/utils/type'
 import type { App } from 'vue'
@@ -26,49 +29,55 @@ class PropPanelService {
 	private _propPanelPluginService!: PropPanelPluginService
 
 	private _propPanelVNode!: VNode
+	private _editBlocksGeneratorPool: Map<string, EditBlockGenerator> = new Map()
 
 	public initPanel(app: App): void {
-		this._useAllPanelPlugins()
+		this._propPanelPluginService.usePlugins()
+		this._propPanelPluginService.applyPlugins()
 		this._renderPanel(app)
 	}
 
-	public usePanel(type: symbol, initialModel: ReactiveElementModel): VNode[] {
-		const pluginClass = this._propPanelPluginService.getPlugin(type)
-		let panel: VNode[] = []
+	public usePanel(type: symbol, initialModel: ReactiveElementModel): void {
+		const panelPlugin = this._propPanelPluginService.getPlugin(type)
+		const editBlocks: VNode[] = []
 
-		if (pluginClass) {
-			panel = new pluginClass(initialModel).getEditBlocks()
-		}
+		if (panelPlugin) {
+			const curPanelEditBlockGenerators = panelPlugin.getEditBlockGenerators()
 
-		return panel
-	}
-
-	private _useAllPanelPlugins(): void {
-		const allPanelConstructor = this._extractAllPanelConstructors()
-		for (const [
-			panelPluginType,
-			panelPluginConstructor,
-		] of allPanelConstructor) {
-			if (!this._propPanelPluginService.hasPlugin(panelPluginType)) {
-				this._propPanelPluginService.usePlugin(
-					panelPluginType,
-					panelPluginConstructor
-				)
-			}
-		}
-	}
-
-	private _extractAllPanelConstructors(): [symbol, PropPanelClass][] {
-		const allPanelConstructor: [symbol, PropPanelClass][] = []
-		const allPlugins = this._editorPluginService.getAllPlugins()
-
-		for (const plugin of allPlugins) {
-			if (plugin.propPanel) {
-				allPanelConstructor.push([plugin.type, plugin.propPanel])
+			for (const [
+				editBlockType,
+				editBlockGenerator,
+			] of curPanelEditBlockGenerators) {
+				const exsitGenerator = this._editBlocksGeneratorPool.get(editBlockType)
+				if (exsitGenerator) {
+					editBlocks.push(exsitGenerator(initialModel))
+				} else {
+					this._editBlocksGeneratorPool.set(editBlockType, editBlockGenerator)
+					editBlocks.push(editBlockGenerator(initialModel))
+				}
 			}
 		}
 
-		return allPanelConstructor
+		const propPanelModel = this.getPropPanelModel()
+
+		propPanelModel.editBlocks.length = 0
+		nextTick(() => {
+			propPanelModel.editBlocks.push(...editBlocks)
+		})
+	}
+
+	public getPropPanelModel(): PropPanelModel {
+		const propPanelModel = this._modelService.getModelById(
+			Symbols.PropPanel.toString()
+		)
+
+		if (propPanelModel) {
+			return propPanelModel as PropPanelModel
+		} else {
+			throw new Error(
+				'can not found propPanelModel, please use `modelService` to create the proPanelModel!'
+			)
+		}
 	}
 
 	private _renderPanel(app: App): void {

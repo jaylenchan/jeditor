@@ -3,6 +3,7 @@ import { defineComponent, h, resolveComponent, reactive } from 'vue'
 import ElementWrapper from 'core/renderViews/whiteboard/view/ElementWrapper'
 import SelectedElementWrapper from 'core/renderViews/whiteboard/view/SelectedElementWrapper'
 import { ee } from 'shared/utils/event'
+import { useService } from 'shared/utils/service'
 
 import style from './index.module.scss'
 
@@ -30,6 +31,9 @@ const View = defineComponent({
 								model={model}
 								onSelected={(model: ReactiveElementModel): void => {
 									ee.emit('elementSelected', model)
+									// use selected model.type propPanel
+									const { propPanelService } = useService()
+									propPanelService.usePanel(model.type, model)
 								}}
 								key={model.id}
 							>

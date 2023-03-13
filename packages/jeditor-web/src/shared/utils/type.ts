@@ -39,13 +39,16 @@ export interface ModelClass<T = unknown> extends Function {
 	new (...args: unknown[]): ElementModel<T>
 }
 
-export interface PropPanelPlugin {
+export type EditBlockGenerator<T = unknown> = (
+	initialModel: ReactiveElementModel<T>
+) => VNode
+export interface PropPanelPlugin<T = unknown> {
 	type: symbol
-	getEditBlocks(): VNode[]
+	getEditBlockGenerators(): Map<string, EditBlockGenerator<T>>
 }
 
 export interface PropPanelClass<T = unknown> extends Function {
-	new (initialModel: ElementModel<T>): PropPanelPlugin
+	new (): PropPanelPlugin<T>
 }
 
 export interface EditorPlugin<T = unknown> {

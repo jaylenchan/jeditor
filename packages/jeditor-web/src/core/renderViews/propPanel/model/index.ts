@@ -5,6 +5,7 @@ import type {
 	ReactiveElementModel,
 	Layout,
 	Size,
+	VNode,
 } from 'shared/utils/type'
 
 
@@ -18,6 +19,8 @@ class Model implements ReactiveElementModel {
 		opacity: number
 		size: Size
 	}
+
+	public editBlocks: VNode[]
 
 	constructor() {
 		this.id = Symbols.PropPanel.toString()
@@ -39,6 +42,7 @@ class Model implements ReactiveElementModel {
 				height: 0,
 			},
 		}
+		this.editBlocks = []
 	}
 
 }

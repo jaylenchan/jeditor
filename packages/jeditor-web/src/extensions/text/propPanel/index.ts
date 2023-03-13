@@ -8,46 +8,51 @@ import TextBlock from './text'
 
 import type { TextModelProps } from '../types'
 import type {
+	EditBlockGenerator,
 	ReactiveElementModel,
 	PropPanelPlugin,
 	VNode,
 } from 'shared/utils/type'
 
 
-class TextPanel implements PropPanelPlugin {
+type TextReactiveElementModel = ReactiveElementModel<TextModelProps>
+type TextEditBlockGenerator = EditBlockGenerator<TextModelProps>
+
+class TextPanel implements PropPanelPlugin<TextModelProps> {
 
 	public readonly type = Symbols.Text
-	private _editBlockPool: Map<string, VNode> = new Map()
-	private _model: ReactiveElementModel<TextModelProps>
+	private _editBlockGeneratorPool: Map<string, TextEditBlockGenerator> =
+		new Map()
 
-	constructor(initialModel: ReactiveElementModel<TextModelProps>) {
-		this._model = initialModel
+	constructor() {
+		this._addEditBlock('text', this._textBlock)
 
-		this._addEditBlock('text', this._textBlock())
+		this._addEditBlock('font', this._fontBlock)
 
-		this._addEditBlock('font', this._fontBlock())
-
-		this._addEditBlock('layout', this._layoutBlock())
+		this._addEditBlock('layout', this._layoutBlock)
 	}
 
-	public getEditBlocks(): VNode[] {
-		return Array.from(this._editBlockPool.values())
+	public getEditBlockGenerators(): Map<string, TextEditBlockGenerator> {
+		return this._editBlockGeneratorPool
 	}
 
-	private _addEditBlock(blockName: string, block: VNode): void {
-		this._editBlockPool.set(blockName, block)
+	private _addEditBlock(
+		blockName: string,
+		editBlockGenerator: TextEditBlockGenerator
+	): void {
+		this._editBlockGeneratorPool.set(blockName, editBlockGenerator)
 	}
 
-	private _textBlock(): VNode {
-		return h(TextBlock, { model: this._model })
+	private _textBlock(initialModel: TextReactiveElementModel): VNode {
+		return h(TextBlock, { model: initialModel })
 	}
 
-	private _layoutBlock(): VNode {
-		return h(LayoutBlock, { model: this._model })
+	private _layoutBlock(initialModel: TextReactiveElementModel): VNode {
+		return h(LayoutBlock, { model: initialModel })
 	}
 
-	private _fontBlock(): VNode {
-		return h(FontBlock, { model: this._model })
+	private _fontBlock(initialModel: TextReactiveElementModel): VNode {
+		return h(FontBlock, { model: initialModel })
 	}
 
 }
