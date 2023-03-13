@@ -17,29 +17,40 @@ import type { App } from 'vue'
 class PropPanelService {
 
 	@inject(Symbols.ModelService)
-	public modelService!: ModelService
+	private _modelService!: ModelService
 
 	@inject(Symbols.EditorPluginService)
-	public editorPluginService!: EditorPluginService
+	private _editorPluginService!: EditorPluginService
 
 	@inject(Symbols.PropPanelPluginService)
-	public propPanelPluginService!: PropPanelPluginService
+	private _propPanelPluginService!: PropPanelPluginService
 
-	private propPanelVNode!: VNode
+	private _propPanelVNode!: VNode
 
 	public initPanel(app: App): void {
-		this.useAllPanelPlugins()
-		this.renderPanel(app)
+		this._useAllPanelPlugins()
+		this._renderPanel(app)
 	}
 
-	public useAllPanelPlugins(): void {
-		const allPanelConstructor = this.extractAllPanelConstructors()
+	public usePanel(type: symbol, initialModel: ReactiveElementModel): VNode[] {
+		const pluginClass = this._propPanelPluginService.getPlugin(type)
+		let panel: VNode[] = []
+
+		if (pluginClass) {
+			panel = new pluginClass(initialModel).getEditBlocks()
+		}
+
+		return panel
+	}
+
+	private _useAllPanelPlugins(): void {
+		const allPanelConstructor = this._extractAllPanelConstructors()
 		for (const [
 			panelPluginType,
 			panelPluginConstructor,
 		] of allPanelConstructor) {
-			if (!this.propPanelPluginService.hasPlugin(panelPluginType)) {
-				this.propPanelPluginService.usePlugin(
+			if (!this._propPanelPluginService.hasPlugin(panelPluginType)) {
+				this._propPanelPluginService.usePlugin(
 					panelPluginType,
 					panelPluginConstructor
 				)
@@ -47,9 +58,9 @@ class PropPanelService {
 		}
 	}
 
-	public extractAllPanelConstructors(): [symbol, PropPanelClass][] {
+	private _extractAllPanelConstructors(): [symbol, PropPanelClass][] {
 		const allPanelConstructor: [symbol, PropPanelClass][] = []
-		const allPlugins = this.editorPluginService.getAllPlugins()
+		const allPlugins = this._editorPluginService.getAllPlugins()
 
 		for (const plugin of allPlugins) {
 			if (plugin.propPanel) {
@@ -60,8 +71,8 @@ class PropPanelService {
 		return allPanelConstructor
 	}
 
-	public renderPanel(app: App): void {
-		const propPanelPlugin = this.editorPluginService.getPlugin(
+	private _renderPanel(app: App): void {
+		const propPanelPlugin = this._editorPluginService.getPlugin(
 			Symbols.PropPanel
 		)
 
@@ -72,27 +83,16 @@ class PropPanelService {
 		const propPanelContainer = document.getElementById('propPanel-container')
 
 		if (propPanelContainer) {
-			const propPanelModel = this.modelService.createModel(Symbols.PropPanel)
+			const propPanelModel = this._modelService.createModel(Symbols.PropPanel)
 
-			this.propPanelVNode = createRenderVNode({
+			this._propPanelVNode = createRenderVNode({
 				view: propPanelView,
 				model: propPanelModel,
 				app,
 			})
 
-			renderVNode(this.propPanelVNode, propPanelContainer)
+			renderVNode(this._propPanelVNode, propPanelContainer)
 		}
-	}
-
-	public usePanel(type: symbol, initialModel: ReactiveElementModel): VNode[] {
-		const pluginClass = this.propPanelPluginService.getPlugin(type)
-		let panel: VNode[] = []
-
-		if (pluginClass) {
-			panel = Array.from(new pluginClass(initialModel).editBlockPool.values())
-		}
-
-		return panel
 	}
 
 }

@@ -18,32 +18,32 @@ import type { App } from 'vue'
 class JEditor {
 
 	@inject(Symbols.EditorPluginService)
-	public editorPluginService!: EditorPluginService
+	private _editorPluginService!: EditorPluginService
 
 	@inject(Symbols.WhiteboardService)
-	public whiteboardService!: WhiteboardService
+	private _whiteboardService!: WhiteboardService
 
 	@inject(Symbols.PropPanelService)
-	public propPanelService!: PropPanelService
+	private _propPanelService!: PropPanelService
 
 	@inject(Symbols.ToolPanelService)
-	public toolPanelService!: ToolPanelService
+	private _toolPanelService!: ToolPanelService
 
-	public app: App = createApp(LayoutView)
+	private _app: App = createApp(LayoutView)
 
 	public run(appContainer: string): void {
-		this.app.mount(appContainer)
+		this._app.mount(appContainer)
 
-		this.editorPluginService
+		this._editorPluginService
 			.usePlugin(container.get(Symbols.Whiteboard))
 			.usePlugin(container.get(Symbols.PropPanel))
 			.usePlugin(container.get(Symbols.ToolPanel))
 			.usePlugins(plugins())
-			.applyPlugins(this.app)
+			.applyPlugins(this._app)
 
-		this.whiteboardService.initBoard(this.app)
-		this.propPanelService.initPanel(this.app)
-		this.toolPanelService.initPanel(this.app)
+		this._whiteboardService.initBoard(this._app)
+		this._propPanelService.initPanel(this._app)
+		this._toolPanelService.initPanel(this._app)
 	}
 
 }

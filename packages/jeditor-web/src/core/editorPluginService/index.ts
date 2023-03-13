@@ -7,11 +7,11 @@ import type { App } from 'vue'
 @injectable()
 class EditorPluginService {
 
-	public pluginPool: Map<symbol, EditorPlugin> = new Map()
+	private _pluginPool: Map<symbol, EditorPlugin> = new Map()
 
 	public usePlugin(plugin: EditorPlugin): EditorPluginService {
-		if (!this.pluginPool.has(plugin.type)) {
-			this.pluginPool.set(plugin.type, plugin)
+		if (!this._pluginPool.has(plugin.type)) {
+			this._pluginPool.set(plugin.type, plugin)
 		}
 
 		return this
@@ -26,13 +26,13 @@ class EditorPluginService {
 	}
 
 	public applyPlugins(app: App): void {
-		for (const plugin of this.pluginPool.values()) {
+		for (const plugin of this._pluginPool.values()) {
 			app.component(plugin.type.toString(), plugin.view)
 		}
 	}
 
 	public getPlugin(type: symbol): EditorPlugin | null {
-		const plugin = this.pluginPool.get(type)
+		const plugin = this._pluginPool.get(type)
 
 		if (plugin) return plugin
 
@@ -42,7 +42,7 @@ class EditorPluginService {
 	public getAllPlugins(): EditorPlugin[] {
 		const allPlugins: EditorPlugin[] = []
 
-		for (const plugin of this.pluginPool.values()) {
+		for (const plugin of this._pluginPool.values()) {
 			allPlugins.push(plugin)
 		}
 
@@ -50,7 +50,7 @@ class EditorPluginService {
 	}
 
 	public hasPlugin(type: symbol): boolean {
-		return this.pluginPool.has(type)
+		return this._pluginPool.has(type)
 	}
 
 }

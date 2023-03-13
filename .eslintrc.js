@@ -84,6 +84,7 @@ module.exports = {
 			'always',
 			{ exceptAfterSingleLine: true },
 		],
+		'@typescript-eslint/naming-convention': 'off',
 		'@typescript-eslint/explicit-member-accessibility': 'off',
 	},
 	overrides: [
@@ -101,6 +102,35 @@ module.exports = {
 							properties: 'explicit',
 							parameterProperties: 'explicit',
 						},
+					},
+				],
+				'@typescript-eslint/naming-convention': [
+					'error',
+					{
+						selector: 'memberLike',
+						modifiers: ['public'],
+						format: ['camelCase', 'PascalCase'],
+						leadingUnderscore: 'forbid',
+						filter: {
+							regex: '^(-webkit)',
+							match: false,
+						},
+					},
+					{
+						selector: 'memberLike',
+						modifiers: ['protected'],
+						format: ['camelCase', 'PascalCase'],
+						leadingUnderscore: 'require',
+					},
+					{
+						selector: 'memberLike',
+						modifiers: ['private'],
+						format: ['camelCase', 'PascalCase'],
+						leadingUnderscore: 'require',
+					},
+					{
+						selector: 'typeLike',
+						format: ['PascalCase'],
 					},
 				],
 			},

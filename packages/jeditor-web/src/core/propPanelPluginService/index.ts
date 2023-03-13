@@ -6,21 +6,21 @@ import type { PropPanelClass } from 'shared/utils/type'
 @injectable()
 class PropPanelPluginService {
 
-	public pluginPool: Map<symbol, PropPanelClass> = new Map()
+	private _pluginPool: Map<symbol, PropPanelClass> = new Map()
 
 	public usePlugin(
 		type: symbol,
 		plugin: PropPanelClass
 	): PropPanelPluginService {
 		if (plugin) {
-			this.pluginPool.set(type, plugin)
+			this._pluginPool.set(type, plugin)
 		}
 
 		return this
 	}
 
 	public getPlugin(type: symbol): PropPanelClass | null {
-		const propPanelClass = this.pluginPool.get(type)
+		const propPanelClass = this._pluginPool.get(type)
 
 		if (propPanelClass) return propPanelClass
 
@@ -30,7 +30,7 @@ class PropPanelPluginService {
 	public getAllPlugins(): PropPanelClass[] {
 		const allPlugins: PropPanelClass[] = []
 
-		for (const plugin of this.pluginPool.values()) {
+		for (const plugin of this._pluginPool.values()) {
 			allPlugins.push(plugin)
 		}
 
@@ -38,7 +38,7 @@ class PropPanelPluginService {
 	}
 
 	public hasPlugin(type: symbol): boolean {
-		return this.pluginPool.has(type)
+		return this._pluginPool.has(type)
 	}
 
 }

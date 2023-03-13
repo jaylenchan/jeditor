@@ -41,7 +41,7 @@ export interface ModelClass<T = unknown> extends Function {
 
 export interface PropPanelPlugin {
 	type: symbol
-	editBlockPool: Map<string, VNode>
+	getEditBlocks(): VNode[]
 }
 
 export interface PropPanelClass<T = unknown> extends Function {

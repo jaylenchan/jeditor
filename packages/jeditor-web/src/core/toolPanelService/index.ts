@@ -14,52 +14,52 @@ import type { App } from 'vue'
 class ToolPanelService {
 
 	@inject(Symbols.ModelService)
-	public modelService!: ModelService
+	private _modelService!: ModelService
 
 	@inject(Symbols.EditorPluginService)
-	public editorPluginService!: EditorPluginService
+	private _editorPluginService!: EditorPluginService
 
-	private toolPool: Map<symbol, VNode> = new Map()
-	private toolPanelVNode!: VNode
+	private _toolPool: Map<symbol, VNode> = new Map()
+	private _toolPanelVNode!: VNode
 
 	public initPanel(app: App): void {
-		this.useTools()
-		this.renderPanel(app)
+		this._useTools()
+		this._renderPanel(app)
 	}
 
-	public useTools(): void {
-		const allPlugins = this.editorPluginService.getAllPlugins()
+	private _useTools(): void {
+		const allPlugins = this._editorPluginService.getAllPlugins()
 
 		for (const plugin of allPlugins) {
 			const trigger = plugin.trigger
 
-			if (trigger && !this.toolPool.has(plugin.type)) {
-				this.toolPool.set(plugin.type, trigger)
+			if (trigger && !this._toolPool.has(plugin.type)) {
+				this._toolPool.set(plugin.type, trigger)
 			}
 		}
 	}
 
-	public renderPanel(app: App): void {
+	private _renderPanel(app: App): void {
 		const toolPanelContainer = document.getElementById('toolPanel-container')
 
 		if (!toolPanelContainer) {
 			throw new Error('render toolPanel failed!')
 		} else {
-			const toolPanelModel = this.modelService.createModel(
+			const toolPanelModel = this._modelService.createModel(
 				Symbols.ToolPanel
 			) as ToolPanelModel
 
-			for (const tool of this.toolPool.values()) {
+			for (const tool of this._toolPool.values()) {
 				toolPanelModel.tools.push(tool)
 			}
 
-			this.toolPanelVNode = createRenderVNode({
+			this._toolPanelVNode = createRenderVNode({
 				view: ToolPanelView,
 				model: toolPanelModel,
 				app,
 			})
 
-			renderVNode(this.toolPanelVNode, toolPanelContainer)
+			renderVNode(this._toolPanelVNode, toolPanelContainer)
 		}
 	}
 

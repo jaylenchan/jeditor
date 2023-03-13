@@ -16,34 +16,38 @@ import type {
 
 class TextPanel implements PropPanelPlugin {
 
-	public type = Symbols.Text
-	public editBlockPool: Map<string, VNode> = new Map()
-	public model: ReactiveElementModel<TextModelProps>
+	public readonly type = Symbols.Text
+	private _editBlockPool: Map<string, VNode> = new Map()
+	private _model: ReactiveElementModel<TextModelProps>
 
 	constructor(initialModel: ReactiveElementModel<TextModelProps>) {
-		this.model = initialModel
+		this._model = initialModel
 
-		this.addEditBlock('text', this.textBlock())
+		this._addEditBlock('text', this._textBlock())
 
-		this.addEditBlock('font', this.fontBlock())
+		this._addEditBlock('font', this._fontBlock())
 
-		this.addEditBlock('layout', this.layoutBlock())
+		this._addEditBlock('layout', this._layoutBlock())
 	}
 
-	private addEditBlock(blockName: string, block: VNode): void {
-		this.editBlockPool.set(blockName, block)
+	public getEditBlocks(): VNode[] {
+		return Array.from(this._editBlockPool.values())
 	}
 
-	private textBlock(): VNode {
-		return h(TextBlock, { model: this.model })
+	private _addEditBlock(blockName: string, block: VNode): void {
+		this._editBlockPool.set(blockName, block)
 	}
 
-	private layoutBlock(): VNode {
-		return h(LayoutBlock, { model: this.model })
+	private _textBlock(): VNode {
+		return h(TextBlock, { model: this._model })
 	}
 
-	private fontBlock(): VNode {
-		return h(FontBlock, { model: this.model })
+	private _layoutBlock(): VNode {
+		return h(LayoutBlock, { model: this._model })
+	}
+
+	private _fontBlock(): VNode {
+		return h(FontBlock, { model: this._model })
 	}
 
 }

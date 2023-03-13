@@ -14,35 +14,35 @@ interface ModelIds {
 class ReactivityModelService {
 
 	@inject(Symbols.ReactivityService)
-	public reactivityService!: ReactivityService
+	private _reactivityService!: ReactivityService
 
 	protected _reactiveModelPool: WeakMap<ElementModel, ReactiveElementModel> =
 		new Map()
 
-	protected $createReactiveModel(rawModel: ElementModel): ReactiveElementModel {
-		let reactiveModel = this.$getReactiveModel(rawModel)
+	protected _createReactiveModel(rawModel: ElementModel): ReactiveElementModel {
+		let reactiveModel = this._getReactiveModel(rawModel)
 
 		if (!reactiveModel) {
-			reactiveModel = this.reactivityService.toReactive(rawModel)
+			reactiveModel = this._reactivityService.toReactive(rawModel)
 
-			this.$setReactiveModel(rawModel, reactiveModel)
+			this._setReactiveModel(rawModel, reactiveModel)
 		}
 
 		return reactiveModel
 	}
 
-	protected $setReactiveModel(
+	protected _setReactiveModel(
 		rawModel: ElementModel,
 		reactiveModel: ReactiveElementModel
 	): void {
 		this._reactiveModelPool.set(rawModel, reactiveModel)
 	}
 
-	protected $hasReactiveModel(rawModel: ElementModel): boolean {
+	protected _hasReactiveModel(rawModel: ElementModel): boolean {
 		return this._reactiveModelPool.has(rawModel)
 	}
 
-	protected $getReactiveModel(
+	protected _getReactiveModel(
 		rawModel: ElementModel
 	): ReactiveElementModel | null {
 		const reactiveModel = this._reactiveModelPool.get(rawModel)
@@ -52,8 +52,8 @@ class ReactivityModelService {
 		return reactiveModel
 	}
 
-	protected $removeReactiveModel(rawModel: ElementModel): void {
-		if (!this.$hasReactiveModel(rawModel)) return
+	protected _removeReactiveModel(rawModel: ElementModel): void {
+		if (!this._hasReactiveModel(rawModel)) return
 
 		this._reactiveModelPool.delete(rawModel)
 	}
@@ -64,55 +64,25 @@ class ReactivityModelService {
 class ModelService extends ReactivityModelService {
 
 	@inject(Symbols.EditorPluginService)
-	public editorPluginService!: EditorPluginService
+	private _editorPluginService!: EditorPluginService
 
 	private _typeModelsPool: Map<symbol, Set<ElementModel>> = new Map()
 	private _typeIdsPool: Map<symbol, Set<string>> = new Map()
 	private _idModelPool: Map<string, ElementModel> = new Map()
 
 	public createModel(type: symbol): ReactiveElementModel {
-		if (this.editorPluginService.hasPlugin(type)) {
-			const plugin = this.editorPluginService.getPlugin(type)
+		if (this._editorPluginService.hasPlugin(type)) {
+			const plugin = this._editorPluginService.getPlugin(type)
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const modelConstructor = plugin!.model
 			const model = new modelConstructor()
 
-			this.setModel(model)
-			return this.$createReactiveModel(model)
+			this._setModel(model)
+			return this._createReactiveModel(model)
 		} else {
 			throw new Error(
-				`try to create unknown plugin type model : type is ${type.toString()}!`
+				`try to create unknown plugin type model : type is _{type.toString()}!`
 			)
-		}
-	}
-
-	// id -> model map
-	// type -> models map
-	// type -> ids map
-	public setModel(model: ElementModel): void {
-		const type = model.type
-		const id = model.id
-
-		if (this._idModelPool.get(id)) {
-			return
-		} else {
-			this._idModelPool.set(id, model)
-		}
-
-		let typeModels = this._typeModelsPool.get(type)
-		if (!typeModels) {
-			typeModels = new Set<ElementModel>()
-			this._typeModelsPool.set(type, typeModels)
-		} else {
-			typeModels.add(model)
-		}
-
-		let typeIds = this._typeIdsPool.get(type)
-		if (!typeIds) {
-			typeIds = new Set<string>()
-			this._typeIdsPool.set(type, typeIds)
-		} else {
-			typeIds.add(id)
 		}
 	}
 
@@ -121,7 +91,7 @@ class ModelService extends ReactivityModelService {
 
 		if (!rawModel) return null
 
-		return this.$getReactiveModel(rawModel)
+		return this._getReactiveModel(rawModel)
 	}
 
 	public getModelsByType(type: symbol): ReactiveElementModel[] {
@@ -130,7 +100,7 @@ class ModelService extends ReactivityModelService {
 
 		if (rawModels && rawModels.size > 0) {
 			for (const model of rawModels) {
-				const reactiveModel = this.$getReactiveModel(model)
+				const reactiveModel = this._getReactiveModel(model)
 
 				if (!reactiveModel) continue
 
@@ -168,6 +138,36 @@ class ModelService extends ReactivityModelService {
 		}
 
 		return modelIds
+	}
+
+	// id -> model map
+	// type -> models map
+	// type -> ids map
+	private _setModel(model: ElementModel): void {
+		const type = model.type
+		const id = model.id
+
+		if (this._idModelPool.get(id)) {
+			return
+		} else {
+			this._idModelPool.set(id, model)
+		}
+
+		let typeModels = this._typeModelsPool.get(type)
+		if (!typeModels) {
+			typeModels = new Set<ElementModel>()
+			this._typeModelsPool.set(type, typeModels)
+		} else {
+			typeModels.add(model)
+		}
+
+		let typeIds = this._typeIdsPool.get(type)
+		if (!typeIds) {
+			typeIds = new Set<string>()
+			this._typeIdsPool.set(type, typeIds)
+		} else {
+			typeIds.add(id)
+		}
 	}
 
 }
