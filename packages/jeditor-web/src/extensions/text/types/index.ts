@@ -1,4 +1,10 @@
-import type { Layout, Size } from 'shared/utils/type'
+import type {
+	EditBlockGenerator,
+	Layout,
+	PropPanelPlugin,
+	ReactiveElementModel,
+	Size,
+} from 'shared/utils/type'
 
 
 export interface Font {
@@ -12,3 +18,7 @@ export interface TextModelProps {
 	font: Font
 	size: Size
 }
+
+export type TextReactiveElementModel = ReactiveElementModel<TextModelProps>
+export type TextEditBlockGenerator = EditBlockGenerator<TextModelProps>
+export type TextPropPanelPlugin = PropPanelPlugin<TextModelProps>

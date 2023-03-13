@@ -1,3 +1,5 @@
+import { h } from 'vue'
+
 import ToolPanelView from 'core/renderViews/toolPanel/view'
 import Symbols from 'settings/dependency-type.config'
 import { inject, injectable } from 'shared/utils/dependencyInject'
@@ -34,7 +36,7 @@ class ToolPanelService {
 			const trigger = plugin.trigger
 
 			if (trigger && !this._toolPool.has(plugin.type)) {
-				this._toolPool.set(plugin.type, trigger)
+				this._toolPool.set(plugin.type, h(trigger))
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 
 import Symbols from 'settings/dependency-type.config'
 import { useService } from 'shared/utils/service'
@@ -36,4 +36,4 @@ const Trigger = defineComponent({
 	},
 })
 
-export default h(Trigger)
+export default Trigger

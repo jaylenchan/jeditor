@@ -1,11 +1,11 @@
 import Symbols from 'settings/dependency-type.config'
 import { createIdentifier } from 'shared/utils/uuid'
 
-import type { TextModelProps, Font } from '../types'
-import type { Layout, ReactiveElementModel, Size } from 'shared/utils/type'
+import type { Font, TextReactiveElementModel } from '../types'
+import type { Layout, Size } from 'shared/utils/type'
 
 
-class TextModel implements ReactiveElementModel<TextModelProps> {
+class Model implements TextReactiveElementModel {
 
 	public readonly id: string
 	public readonly type: symbol
@@ -39,4 +39,4 @@ class TextModel implements ReactiveElementModel<TextModelProps> {
 
 }
 
-export default TextModel
+export default Model

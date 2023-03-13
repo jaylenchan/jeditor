@@ -7,7 +7,7 @@ import type { ReactiveElementModel, VNode } from 'shared/utils/type'
 import type { PropType } from 'vue'
 
 
-const TextView = defineComponent({
+const View = defineComponent({
 	props: {
 		model: {
 			type: Object as PropType<ReactiveElementModel<TextModelProps>>,
@@ -33,6 +33,4 @@ const TextView = defineComponent({
 	},
 })
 
-export default TextView
-
-export type ITextView = typeof TextView
+export default View

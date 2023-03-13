@@ -6,19 +6,15 @@ import FontBlock from './font'
 import LayoutBlock from './layout'
 import TextBlock from './text'
 
-import type { TextModelProps } from '../types'
 import type {
-	EditBlockGenerator,
-	ReactiveElementModel,
-	PropPanelPlugin,
-	VNode,
-} from 'shared/utils/type'
+	TextEditBlockGenerator,
+	TextPropPanelPlugin,
+	TextReactiveElementModel,
+} from '../types'
+import type { VNode } from 'shared/utils/type'
 
 
-type TextReactiveElementModel = ReactiveElementModel<TextModelProps>
-type TextEditBlockGenerator = EditBlockGenerator<TextModelProps>
-
-class TextPanel implements PropPanelPlugin<TextModelProps> {
+class TextPanel implements TextPropPanelPlugin {
 
 	public readonly type = Symbols.Text
 	private _editBlockGeneratorPool: Map<string, TextEditBlockGenerator> =
