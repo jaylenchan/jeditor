@@ -1,6 +1,5 @@
+import container from 'settings/dependency-inject.config'
 import Symbols from 'settings/dependency-type.config'
-
-import { container } from './dependencyInject'
 
 import type EditorPluginService from 'core/editorPluginService'
 import type ModelService from 'core/modelService'

@@ -1,4 +1,4 @@
-import { ContainerModule } from 'inversify'
+import { Container, ContainerModule } from 'inversify'
 
 import JEditor from 'core/editor'
 import EditorPluginService from 'core/editorPluginService'
@@ -13,58 +13,65 @@ import ToolPanelService from 'core/toolPanelService'
 import WhiteboardService from 'core/whiteboardService'
 import { TextPlugin } from 'extensions/index'
 import Symbols from 'settings/dependency-type.config'
-import { container } from 'shared/utils/dependencyInject'
 
 import type { interfaces } from 'inversify'
 
 
-const Editor = new ContainerModule((bind: interfaces.Bind) => {
-	bind<JEditor>(Symbols.JEditor).to(JEditor).inSingletonScope()
-})
+const container = new Container()
 
-const Services = new ContainerModule((bind: interfaces.Bind) => {
-	bind<EditorPluginService>(Symbols.EditorPluginService)
-		.to(EditorPluginService)
-		.inSingletonScope()
+export function createEditor(): JEditor {
+	const Editor = new ContainerModule((bind: interfaces.Bind) => {
+		bind<JEditor>(Symbols.JEditor).to(JEditor).inSingletonScope()
+	})
 
-	bind<WhiteboardService>(Symbols.WhiteboardService)
-		.to(WhiteboardService)
-		.inSingletonScope()
+	const Services = new ContainerModule((bind: interfaces.Bind) => {
+		bind<EditorPluginService>(Symbols.EditorPluginService)
+			.to(EditorPluginService)
+			.inSingletonScope()
 
-	bind<ReactivityService>(Symbols.ReactivityService)
-		.to(ReactivityService)
-		.inSingletonScope()
+		bind<WhiteboardService>(Symbols.WhiteboardService)
+			.to(WhiteboardService)
+			.inSingletonScope()
 
-	bind<ModelService>(Symbols.ModelService).to(ModelService).inSingletonScope()
+		bind<ReactivityService>(Symbols.ReactivityService)
+			.to(ReactivityService)
+			.inSingletonScope()
 
-	bind<PropPanelPluginService>(Symbols.PropPanelPluginService)
-		.to(PropPanelPluginService)
-		.inSingletonScope()
+		bind<ModelService>(Symbols.ModelService).to(ModelService).inSingletonScope()
 
-	bind<PropPanelService>(Symbols.PropPanelService)
-		.to(PropPanelService)
-		.inSingletonScope()
+		bind<PropPanelPluginService>(Symbols.PropPanelPluginService)
+			.to(PropPanelPluginService)
+			.inSingletonScope()
 
-	bind<ToolPanelService>(Symbols.ToolPanelService)
-		.to(ToolPanelService)
-		.inSingletonScope()
-})
+		bind<PropPanelService>(Symbols.PropPanelService)
+			.to(PropPanelService)
+			.inSingletonScope()
 
-const BuiltInPlugins = new ContainerModule((bind: interfaces.Bind) => {
-	bind<Whiteboard>(Symbols.Whiteboard).to(Whiteboard).inSingletonScope()
+		bind<ToolPanelService>(Symbols.ToolPanelService)
+			.to(ToolPanelService)
+			.inSingletonScope()
+	})
 
-	bind<PropPanel>(Symbols.PropPanel).to(PropPanel).inSingletonScope()
+	const BuiltInPlugins = new ContainerModule((bind: interfaces.Bind) => {
+		bind<Whiteboard>(Symbols.Whiteboard).to(Whiteboard).inSingletonScope()
 
-	bind<ToolPanel>(Symbols.ToolPanel).to(ToolPanel).inSingletonScope()
-})
+		bind<PropPanel>(Symbols.PropPanel).to(PropPanel).inSingletonScope()
 
-const Extensions = new ContainerModule((bind: interfaces.Bind) => {
-	bind<TextPlugin>(Symbols.Text).to(TextPlugin).inSingletonScope()
-})
+		bind<ToolPanel>(Symbols.ToolPanel).to(ToolPanel).inSingletonScope()
+	})
 
-container.load(Editor)
-container.load(Services)
-container.load(BuiltInPlugins)
-container.load(Extensions)
+	const Extensions = new ContainerModule((bind: interfaces.Bind) => {
+		bind<TextPlugin>(Symbols.Text).to(TextPlugin).inSingletonScope()
+	})
+
+	container.load(Editor)
+	container.load(Services)
+	container.load(BuiltInPlugins)
+	container.load(Extensions)
+
+	const editor = container.get<JEditor>(Symbols.JEditor)
+
+	return editor
+}
 
 export default container

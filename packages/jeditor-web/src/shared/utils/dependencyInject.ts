@@ -1,4 +1,4 @@
-import { injectable, inject, decorate, Container } from 'inversify'
+import { injectable, inject, decorate } from 'inversify'
 import { Mixin } from 'ts-mixer'
 import 'reflect-metadata'
 
@@ -21,7 +21,5 @@ export function injectableInherit<T>(...inheritClasses: Class<unknown>[]) {
 		return newTarget as any
 	}
 }
-
-export const container = new Container()
 
 export { injectable, inject }
